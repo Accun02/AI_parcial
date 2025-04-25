@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyStateIdle : MonoBehaviour
+public class EnemyStateIdle : State<States>
 {
     // Start is called before the first frame update
     void Start()

@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    FSM<StateEnum> fsm;
+    FSM<States> fsm;
     [SerializeField] List<Vector3> Waypoints = new List<Vector3>();
 
     void Start()
     {
-        var patrol = new EnemyStatePatrol(Waypoints,this.transform);
-        // var idle
+
+        InitialilzeFSM();
+    }
+    void InitialilzeFSM()
+    {
+        var patrol = new EnemyStatePatrol(Waypoints, this.transform);
+        var idle = new EnemyStateIdle();
         // var Attack
         // var RunAway
+        patrol.Transition(States.Idle,idle);
+
+        idle.Transition(States.Patrol, patrol);
+
     }
 
     // Update is called once per frame

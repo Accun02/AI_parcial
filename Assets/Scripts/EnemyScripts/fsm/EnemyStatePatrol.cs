@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -5,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-public class EnemyStatePatrol: State<StateEnum>
+public class EnemyStatePatrol: State<States>
 {
     List<Vector3> _waypoints = new List <Vector3> ();
     Transform Enemy;
@@ -55,4 +56,5 @@ public class EnemyStatePatrol: State<StateEnum>
     {
 
     }
+
 }

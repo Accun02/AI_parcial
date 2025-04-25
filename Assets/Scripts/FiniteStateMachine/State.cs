@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class State<T> : Istate<T>
 {
-    Dictionary<T, Istate<T>> _transitions = new Dictionary<T, Istate<T>>();
+    Dictionary<T, Istate <T>> _transitions = new Dictionary<T, Istate<T>>();
     public virtual void OnEnter()
     {
  
@@ -20,9 +20,9 @@ public class State<T> : Istate<T>
  
     }
 
-    public Istate<T> Transition(T input)
+
+    public void Transition(T input, Istate<T> state)
     {
-        if (!_transitions.ContainsKey(input)) return null;
-        return _transitions[input];
+        _transitions[input] = state;
     }
 }
