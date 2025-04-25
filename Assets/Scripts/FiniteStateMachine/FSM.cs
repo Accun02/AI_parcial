@@ -27,7 +27,7 @@ public class FSM<T>
         }
 
     }
-    public void Transition(T input)
+    public void OnTransition(T input)
     {
         Istate<T> newState = current.Transition(input);
         if (newState == null) return;

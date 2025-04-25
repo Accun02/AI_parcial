@@ -9,6 +9,6 @@ public interface Istate<T>
     void Execute();
     void OnExit();
 
-    void Transition(T input, Istate<T> state);
+    void Transition(T input);
     
 }
