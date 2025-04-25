@@ -16,11 +16,15 @@ public class EnemyController : MonoBehaviour
     {
         var patrol = new EnemyStatePatrol(Waypoints, this.transform);
         var idle = new EnemyStateIdle();
-        // var Attack
-        // var RunAway
+        var Attack = new EnemyStateAttack();
+        var RunAway = new EnemyStateRun();
+
         patrol.Transition(States.Idle,idle);
+        patrol.Transition(States.Attack,Attack);
+        patrol.Transition(States.RunAway, RunAway);
 
         idle.Transition(States.Patrol, patrol);
+        idle.Transition(States.RunAway,RunAway);
 
     }
 

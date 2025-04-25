@@ -6,10 +6,9 @@ using UnityEngine;
     {
         Idle,
         Walk,
-        Spin,
-        Alert,
         Attack,
         Chase,
         Patrol,
+        RunAway,
     }
 

@@ -29,12 +29,12 @@ public class FSM<T>
     }
     public void OnTransition(T input)
     {
-        Istate<T> newState = current.Transition(input);
-        if (newState == null) return;
-        var previous = current;
-        current.OnExit();
-        current = newState;
-        current.OnEnter();
+        //Istate<T> newState = input;
+        //if (newState == null) return;
+        //var previous = current;
+        //current.OnExit();
+        //current = newState;
+        //current.OnEnter();
 
     }
 }

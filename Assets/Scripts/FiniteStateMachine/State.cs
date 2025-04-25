@@ -21,8 +21,10 @@ public class State<T> : Istate<T>
     }
 
 
-    public void Transition(T input, Istate<T> state)
+    public  virtual void Transition(T input, Istate<T> state)
     {
         _transitions[input] = state;
     }
+
+  
 }
