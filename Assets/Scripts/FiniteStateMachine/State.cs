@@ -26,5 +26,13 @@ public class State<T> : Istate<T>
         _transitions[input] = state;
     }
 
-  
+    public void AddTransition(T input, Istate<T> state)
+    {
+      
+    }
+
+    public Istate<T> GetTransition(T input)
+    {
+   
+    }
 }

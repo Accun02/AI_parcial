@@ -6,12 +6,13 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     FSM<States> fsm;
+    int life = 4;
+    int Life { get { return life; } set { Life = value; } }
     float timer = 0;
     [SerializeField] List<Vector3> Waypoints = new List<Vector3>();
 
     void Start()
     {
-
         InitialilzeFSM();
     }
     void InitialilzeFSM()
@@ -48,7 +49,6 @@ public class EnemyController : MonoBehaviour
         }
         return false;
     }
-    // Update is called once per frame
     void Update()
     {
         
