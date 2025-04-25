@@ -1,43 +1,52 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    FSM<States> fsm;
-    int life = 4;
-    int Life { get { return life; } set { Life = value; } }
-    float timer = 0;
-    [SerializeField] List<Vector3> Waypoints = new List<Vector3>();
+    private FSM<States> fsm;
+
+    private int life = 4;
+
+    private int Life
+    {
+        get { return life; }
+        set { life = value; }
+    }
+
+    private float timer = 0f;
+
+    [SerializeField] private List<Vector3> Waypoints = new List<Vector3>();
 
     void Start()
     {
         InitialilzeFSM();
     }
+
     void InitialilzeFSM()
     {
         var patrol = new EnemyStatePatrol(Waypoints, this.transform);
         var idle = new EnemyStateIdle();
-        var Attack = new EnemyStateAttack();
-        var RunAway = new EnemyStateRun();
-        var Chase = new EnemyStateChase();
+        var attack = new EnemyStateAttack();
+        var runAway = new EnemyStateRun();
+        var chase = new EnemyStateChase();
 
-        patrol.Transition(States.Idle,idle);
-        patrol.Transition(States.Attack,Attack);
-        patrol.Transition(States.RunAway, RunAway);
-        patrol.Transition(States.Chase, Chase);
+        // Transiciones entre estados
+        patrol.Transition(States.Idle, idle);
+        patrol.Transition(States.Attack, attack);
+        patrol.Transition(States.RunAway, runAway);
+        patrol.Transition(States.Chase, chase);
 
         idle.Transition(States.Patrol, patrol);
-        idle.Transition(States.RunAway,RunAway);
-        idle.Transition(States.Chase,Chase);
+        idle.Transition(States.RunAway, runAway);
+        idle.Transition(States.Chase, chase);
 
-        Attack.Transition(States.RunAway,RunAway);
-        Attack.Transition(States.Patrol,patrol);
+        attack.Transition(States.RunAway, runAway);
+        attack.Transition(States.Patrol, patrol);
 
-
+        // Estado inicial
         fsm = new FSM<States>(idle);
     }
+
     bool StandTime()
     {
         timer += Time.deltaTime;
@@ -45,13 +54,13 @@ public class EnemyController : MonoBehaviour
         {
             timer = 0;
             return true;
-
         }
         return false;
     }
+
     void Update()
     {
-        
         fsm.Execute();
     }
 }
+

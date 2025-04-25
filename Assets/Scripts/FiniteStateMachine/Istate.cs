@@ -4,7 +4,6 @@ using UnityEngine;
 
 public interface Istate<T>  
 {
-
     void OnEnter();
     void Execute();
     void OnExit();
@@ -12,5 +11,4 @@ public interface Istate<T>
     void AddTransition(T input, Istate<T> state);
 
     Istate<T> GetTransition(T input);
-    
 }
