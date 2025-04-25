@@ -6,7 +6,6 @@ using UnityEngine;
 public class FSM<T> 
 {
     Istate<T> current;
-    public Istate<T> GetCurrent => current;
     public Action<T,Istate<T>> action;
     public FSM() { }
     public FSM(Istate<T> initial)
@@ -29,12 +28,12 @@ public class FSM<T>
     }
     public void OnTransition(T input)
     {
-        //Istate<T> newState = input;
-        //if (newState == null) return;
-        //var previous = current;
-        //current.OnExit();
-        //current = newState;
-        //current.OnEnter();
+        Istate<T> newState = current.GetTransition(input);
+        if (newState == null) return;
+        var previous = current;
+        current.OnExit();
+        current = newState;
+        current.OnEnter();
 
     }
 }

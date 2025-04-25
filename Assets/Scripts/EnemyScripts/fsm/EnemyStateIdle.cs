@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class EnemyStateIdle : State<States>
 {
-    // Start is called before the first frame update
-    void Start()
+    public EnemyStateIdle()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
