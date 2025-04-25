@@ -6,7 +6,8 @@ public class EnemyController : MonoBehaviour
     private FSM<States> fsm;
 
     private int life = 4;
-
+  
+    private GameObject player;
     private int Life
     {
         get { return life; }
@@ -26,13 +27,13 @@ public class EnemyController : MonoBehaviour
     {
         var patrol = new EnemyStatePatrol(Waypoints, this.transform);
         var idle = new EnemyStateIdle();
-        var attack = new EnemyStateAttack();
+       // var attack = new EnemyStateAttack(CanAttack());
         var runAway = new EnemyStateRun();
         var chase = new EnemyStateChase();
 
         // Transiciones entre estados
         patrol.Transition(States.Idle, idle);
-        patrol.Transition(States.Attack, attack);
+    //    patrol.Transition(States.Attack, attack);
         patrol.Transition(States.RunAway, runAway);
         patrol.Transition(States.Chase, chase);
 
@@ -40,8 +41,8 @@ public class EnemyController : MonoBehaviour
         idle.Transition(States.RunAway, runAway);
         idle.Transition(States.Chase, chase);
 
-        attack.Transition(States.RunAway, runAway);
-        attack.Transition(States.Patrol, patrol);
+        //attack.Transition(States.RunAway, runAway);
+        //attack.Transition(States.Patrol, patrol);
 
         // Estado inicial
         fsm = new FSM<States>(idle);
@@ -57,6 +58,10 @@ public class EnemyController : MonoBehaviour
         }
         return false;
     }
+
+    //bool CanAttack()
+    //{
+    //}
 
     void Update()
     {

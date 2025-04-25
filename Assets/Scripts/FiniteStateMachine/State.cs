@@ -12,12 +12,12 @@ public class State<T> : Istate<T>
 
     public virtual void Execute()
     {
-        // Código que se ejecuta mientras esté en este estado
+        // Código que se ejecuta mientras estEen este estado
     }
 
     public virtual void OnExit()
     {
-        // Código al salir del estado
+
     }
 
     public void AddTransition(T input, Istate<T> state)
@@ -32,7 +32,7 @@ public class State<T> : Istate<T>
         }
     }
 
-    public Istate<T> GetTransition(T input)
+    public  virtual Istate<T> GetTransition(T input)
     {
         if (_transitions.TryGetValue(input, out Istate<T> state))
         {
