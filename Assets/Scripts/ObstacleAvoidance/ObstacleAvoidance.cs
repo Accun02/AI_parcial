@@ -41,7 +41,7 @@ public class ObstacleAvoidance : MonoBehaviour
         // Normaliza la dirección y aplica la fuerza de evasión
         Vector3 avoidDir = directionAway.normalized * avoidForce;
 
-        // Aplica atenuación según qué tan cerca está del obstáculo
+        // Aplica atenuación según quEtan cerca estEdel obstáculo
         float distanceFactor = Mathf.Lerp(1, 0, minDist / detectionRange);
 
         avoidDir *= distanceFactor;

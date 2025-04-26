@@ -12,23 +12,27 @@ public class EnemyStatePatrol: State<States>
     Transform Enemy;
     bool returntopos;
     bool patrolcicle;
+    int positions = 0;
     // Start is called before the first frame update
 
     public EnemyStatePatrol( List<Vector3> Waypoints, Transform enemytrans)
     {
         Enemy = enemytrans;
         _waypoints = Waypoints;
+
+        Debug.Log(_waypoints.Count);
     }
 
     public override void OnEnter()
     {
         patrolcicle = true;
+        positions = 0;
     }
     public override void Execute()
     {
         do
         {
-            int positions = 0;
+       
 
             if (positions <= _waypoints.Count && returntopos == false)
             {

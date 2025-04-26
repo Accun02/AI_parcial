@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    Vector3 distance = Vector3.zero;
-    float angle;
-    LayerMask playermask;
+   
     void Start()
     {
         
@@ -15,6 +13,9 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray raycast = GetComponent<Ray>(); 
+   
+        
     }
+
+
 }

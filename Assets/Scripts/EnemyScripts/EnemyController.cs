@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
 
     private int life = 4;
   
-    private GameObject player;
+     [SerializeField] private Transform player;
     private int Life
     {
         get { return life; }
@@ -27,13 +27,13 @@ public class EnemyController : MonoBehaviour
     {
         var patrol = new EnemyStatePatrol(Waypoints, this.transform);
         var idle = new EnemyStateIdle();
-       // var attack = new EnemyStateAttack(CanAttack());
+     //  var attack = new EnemyStateAttack(CanAttack());
         var runAway = new EnemyStateRun();
         var chase = new EnemyStateChase();
 
-        // Transiciones entre estados
+         //Transiciones entre estados
         patrol.Transition(States.Idle, idle);
-    //    patrol.Transition(States.Attack, attack);
+     //patrol.Transition(States.Attack, attack);
         patrol.Transition(States.RunAway, runAway);
         patrol.Transition(States.Chase, chase);
 
@@ -45,7 +45,7 @@ public class EnemyController : MonoBehaviour
         //attack.Transition(States.Patrol, patrol);
 
         // Estado inicial
-        fsm = new FSM<States>(idle);
+        fsm = new FSM<States>(patrol);
     }
 
     bool StandTime()
@@ -61,11 +61,14 @@ public class EnemyController : MonoBehaviour
 
     //bool CanAttack()
     //{
+    //    return Vector3.Distance(player.transform.position, transform.position) <= 10; 
     //}
 
     void Update()
     {
         fsm.Execute();
+
+     
     }
 }
 
