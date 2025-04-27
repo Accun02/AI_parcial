@@ -163,11 +163,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0a4dcbeae93c04492c6943582f1c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 2
-  angle: 3
+  distance: 5
+  angle: 80
+  isOnRange: 0
+  objective: {fileID: 349407899}
   playermask:
     serializedVersion: 2
-    m_Bits: 17
+    m_Bits: 8
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &169469871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -179,6 +184,10 @@ PrefabInstance:
     - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_Name
       value: Wall (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
@@ -335,6 +344,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524025718599195273, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: feeb6ad4934fa2c45b383705c2f9c775, type: 2}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
       value: 12.347375
@@ -405,6 +422,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524025718599195273, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: feeb6ad4934fa2c45b383705c2f9c775, type: 2}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
       value: 18.587353
@@ -470,7 +495,7 @@ GameObject:
   - component: {fileID: 349407899}
   - component: {fileID: 349407898}
   - component: {fileID: 349407897}
-  m_Layer: 4
+  m_Layer: 3
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,6 +575,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
       value: 22.760271
@@ -615,6 +644,10 @@ PrefabInstance:
     - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_Name
       value: Wall (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
@@ -682,7 +715,7 @@ GameObject:
   - component: {fileID: 434004923}
   - component: {fileID: 434004922}
   - component: {fileID: 434004921}
-  m_Layer: 4
+  m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -899,6 +932,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
       value: 5.806264
@@ -964,6 +1001,10 @@ PrefabInstance:
     - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_Name
       value: Wall (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
@@ -1034,6 +1075,10 @@ PrefabInstance:
     - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_Name
       value: Wall (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
@@ -1195,7 +1240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 883434154}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1246,6 +1291,10 @@ PrefabInstance:
     - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_Name
       value: Wall (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
@@ -1317,6 +1366,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
       value: 10.684066
@@ -1386,6 +1439,10 @@ PrefabInstance:
     - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_Name
       value: Wall (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
@@ -1534,6 +1591,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
       value: 11.265147
@@ -1599,6 +1660,10 @@ PrefabInstance:
     - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_Name
       value: Wall (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
@@ -1666,6 +1731,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524025718599195273, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: feeb6ad4934fa2c45b383705c2f9c775, type: 2}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
       value: 35.89391
@@ -1731,7 +1804,7 @@ GameObject:
   - component: {fileID: 1563365527}
   - component: {fileID: 1563365526}
   - component: {fileID: 1563365525}
-  m_Layer: 4
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1876,7 +1949,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 713410d25a3aa7749b88b9c331489da2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1954,6 +2027,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
       value: 5.806264
@@ -2019,6 +2096,10 @@ PrefabInstance:
     - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_Name
       value: Wall (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
@@ -2089,6 +2170,10 @@ PrefabInstance:
     - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_Name
       value: Wall (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
@@ -2190,6 +2275,10 @@ PrefabInstance:
     - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_Name
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350812285732526013, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
       propertyPath: m_LocalScale.x
