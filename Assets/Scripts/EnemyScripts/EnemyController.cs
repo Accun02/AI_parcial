@@ -45,7 +45,7 @@ public class EnemyController : MonoBehaviour
         //attack.Transition(States.Patrol, patrol);
 
         // Estado inicial
-        fsm = new FSM<States>(patrol);
+        fsm = new FSM<States>(idle);
     }
 
     bool StandTime()
