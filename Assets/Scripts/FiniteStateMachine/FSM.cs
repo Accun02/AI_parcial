@@ -18,10 +18,11 @@ public class FSM<T>
      current = initial;
         current.OnEnter();
     }
-    public void Execute() //update del state
+    public void OnExecute() //update del state
     {
         if (current != null)
         {
+          
             current.Execute();
         }
 

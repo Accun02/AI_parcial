@@ -59,6 +59,7 @@ public class lineofsight : MonoBehaviour
         {
             isOnRange = false;
         }
+        OnRange();
     }
 
     private void OnDrawGizmos()

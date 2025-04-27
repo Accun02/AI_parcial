@@ -27,7 +27,7 @@ public class PlayerStateController : MonoBehaviour
 
     private void Update()
     {
-        fsm.Execute();
+        fsm.OnExecute();
 
         // Transiciones automáticas según input
         if (IsMoving())
