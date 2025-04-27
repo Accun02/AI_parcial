@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
     private FSM<States> fsm;
-
+    private lineofsight LOS;
     private int life = 4;
   
      [SerializeField] private Transform player;
@@ -48,6 +49,22 @@ public class EnemyController : MonoBehaviour
         fsm = new FSM<States>(idle);
     }
 
+    private void OnServerInitialized()
+    {
+        var patrol = new ActionTree(() => fsm.OnTransition(States.Patrol));
+        var idle = new ActionTree(() => fsm.OnTransition(States.Idle));
+        var attack = new ActionTree(() => fsm.OnTransition(States.Attack));
+        var chase = new ActionTree(() => fsm.OnTransition(States.Chase));
+        var runAway = new ActionTree(() => fsm.OnTransition(States.RunAway));
+
+        var qdistance = new QuestionTree(CanAttack,attack,chase);
+        var qseepalyer = new QuestionTree(LOS.OnRange,qdistance,idle);
+        var qisidle = new QuestionTree(StandTime,qseepalyer,patrol);
+
+    }
+
+
+
     bool StandTime()
     {
         timer += Time.deltaTime;
@@ -59,10 +76,10 @@ public class EnemyController : MonoBehaviour
         return false;
     }
 
-    //bool CanAttack()
-    //{
-    //    return Vector3.Distance(player.transform.position, transform.position) <= 10; 
-    //}
+    bool CanAttack()
+    {
+        return Vector3.Distance(player.transform.position, transform.position) <= 10; 
+    }
 
     void Update()
     {

@@ -13,6 +13,11 @@ public class lineofsight : MonoBehaviour
     public LayerMask playermask;
     public LayerMask obstacleMask;
 
+
+    public bool OnRange()
+    {
+        return  isOnRange ? true : false;
+    }
     void Update()
     {
         RaycastHit hit;
