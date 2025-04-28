@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private lineofsight LOS;
     [SerializeField] private Transform player;
-    [SerializeField] private Transform enemy;
+    [SerializeField] private Enemy enemy;
     [SerializeField] private List<Transform> Waypoints = new List<Transform>();
     public Rigidbody body;
     public Rigidbody playerbody;
@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
     {
         IIAmove iAmove = GetComponent<IIAmove>();
 
-        var patrol = new EnemyStatePatrol(iAmove, Waypoints, enemy);
+        var patrol = new EnemyStatePatrol(iAmove, Waypoints, enemy.transform);
         var idle = new EnemyStateIdle();
         var attack = new EnemyStateAttack(this.GetComponent<Enemy>());
 
@@ -82,7 +82,7 @@ public class EnemyController : MonoBehaviour
 
     bool CanAttack()
     {
-        return Vector3.Distance(player.transform.position, transform.position) <= 1; 
+        return Vector3.Distance(player.transform.position, transform.position) <= enemy.AttackRange; 
     }
 
     void Update()

@@ -11,7 +11,7 @@ public class EnemyStateAttack : State<States>
 
     public override void Execute()
     {
-        enemyattack.attack();
+        enemyattack.Attack();
     }
 
     public override void OnExit() { }

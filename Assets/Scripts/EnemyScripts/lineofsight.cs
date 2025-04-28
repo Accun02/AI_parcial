@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class lineofsight : MonoBehaviour
 {
-    [SerializeField] float distance;
+    public float distance;
     [SerializeField] float angle;
     public bool isOnRange;
     public Transform objective;

@@ -7,20 +7,31 @@ public class Enemy : BaseClassEnemy
 {
     [SerializeField] private Transform center;
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] lineofsight AttackLOS;
     int damage = 2;
+
+    public float AttackRange => AttackLOS.distance;
     protected override void Awake()
     {
         base.Awake();
     }
 
 
-    public void attack()
+    public override void Attack()
     {
-        Collider[] hits = Physics.OverlapBox(center.position,Vector3.forward,Quaternion.identity,layerMask);
+        Collider[] hits = Physics.OverlapSphere(center.position,AttackLOS.distance,layerMask);
 
         if (hits != null ) 
         {
             GameManager.Instance.Damage(damage);
         }
+       
     }
+
+    private void OnDrawGizmos()
+    {
+        
+   
+    }
+
 }
