@@ -9,9 +9,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Enemy enemy;
     [SerializeField] private List<Transform> Waypoints = new List<Transform>();
-    public Rigidbody body;
     public Rigidbody playerbody;
-    public float maxvel = 10;
 
     private FSM<States> fsm;
 
@@ -31,10 +29,10 @@ public class EnemyController : MonoBehaviour
 
         var patrol = new EnemyStatePatrol(iAmove, Waypoints, enemy.transform);
         var idle = new EnemyStateIdle();
-        var attack = new EnemyStateAttack(this.GetComponent<Enemy>());
+        var attack = new EnemyStateAttack(enemy);
 
-        var chase = new EnemyStateChase(this,player);
-        var runAway = new EnemyStateRunAway(this,playerbody);
+        var chase = new EnemyStateChase(enemy,player);
+        var runAway = new EnemyStateRunAway(enemy,playerbody);
 
         // Transiciones
         patrol.Transition(States.Idle, idle);

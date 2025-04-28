@@ -712,7 +712,6 @@ MonoBehaviour:
   player: {fileID: 349407899}
   enemy: {fileID: 244974798}
   Waypoints: []
-  body: {fileID: 244974796}
   playerbody: {fileID: 349407901}
   maxvel: 10
 --- !u!114 &244974798
@@ -733,6 +732,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   AttackLOS: {fileID: 2138627499}
+  body: {fileID: 244974796}
 --- !u!1001 &308822807
 PrefabInstance:
   m_ObjectHideFlags: 0

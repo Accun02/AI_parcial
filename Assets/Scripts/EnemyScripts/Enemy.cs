@@ -8,6 +8,7 @@ public class Enemy : BaseClassEnemy
     [SerializeField] private Transform center;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] lineofsight AttackLOS;
+    public Rigidbody body;
     int damage = 2;
 
     public float AttackRange => AttackLOS.distance;
