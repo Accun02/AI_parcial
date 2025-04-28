@@ -28,6 +28,8 @@ public class SteeringController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
+        enabled = false;
+
         // Crea las instancias de steering con sus configuraciones
         switch (mode)
         {

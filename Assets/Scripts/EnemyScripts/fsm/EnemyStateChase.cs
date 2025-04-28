@@ -5,36 +5,20 @@ using UnityEngine;
 
 public class EnemyStateChase : State<States>
 {
-    Transform enemy;
-    Transform player;
-    bool seeingplayer;
-    IIAmove iAmove;
-    public EnemyStateChase(IIAmove movement,Transform enemy, Transform Target)
-    {
-     iAmove = movement;
-        this.enemy = enemy;
-        this.player = Target;
-    }
+    SteeringController steering;
 
-    public override void OnEnter()
+    public EnemyStateChase(SteeringController steeringController)
     {
-
+        this.steering = steeringController;
     }
 
     public override void Execute()
     {
-     Vector3 dirtotarget = player.position - enemy.position;
-        iAmove.Move(dirtotarget.normalized);
-        dirtotarget.y = 0;
-        iAmove.LookAt(player);
-     
-
-     
+        steering.enabled = true;
     }
 
     public override void OnExit()
     {
-
+        steering.enabled = false; // se apaga en otros estados
     }
-    
 }

@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private FSM<States> fsm;
-    ItreeNode root;
     [SerializeField] private lineofsight LOS;
     [SerializeField] private Transform player;
     [SerializeField] private Transform enemy;
-    private float timer = 0f;
     [SerializeField] private List<Vector3> Waypoints = new List<Vector3>();
+    [SerializeField] private SteeringController steering;
+
+    private FSM<States> fsm;
+
+    private float timer = 0f;
+
+    ItreeNode root;
 
     void Start()
     {
@@ -19,16 +23,18 @@ public class EnemyController : MonoBehaviour
         OnInin();
     }
 
-   private void InitialilzeFSM()
+    private void InitialilzeFSM()
     {
         IIAmove iAmove = GetComponent<IIAmove>();
-        var patrol = new EnemyStatePatrol(iAmove,Waypoints, enemy);
-        var idle = new EnemyStateIdle();
-        var attack = new EnemyStateAttack(CanAttack());
-        var runAway = new EnemyStateRun();
-        var chase = new EnemyStateChase(iAmove,enemy,player);
 
-        //guarda Transiciones posibles entre estados
+        var patrol = new EnemyStatePatrol(iAmove, Waypoints, enemy);
+        var idle = new EnemyStateIdle();
+        var attack = new EnemyStateAttack(player.GetComponent<PlayerController>());
+
+        var chase = new EnemyStateChase(steering);
+        var runAway = new EnemyStateRunAway(steering);
+
+        // Transiciones
         patrol.Transition(States.Idle, idle);
         patrol.Transition(States.Attack, attack);
         patrol.Transition(States.RunAway, runAway);
@@ -41,11 +47,10 @@ public class EnemyController : MonoBehaviour
         attack.Transition(States.RunAway, runAway);
         attack.Transition(States.Patrol, patrol);
 
-        chase.Transition(States.Idle,idle);
+        chase.Transition(States.Idle, idle);
         chase.Transition(States.Attack, attack);
-        chase.Transition(States.RunAway,runAway);
+        chase.Transition(States.RunAway, runAway);
 
-        // Estado inicial
         fsm = new FSM<States>(idle);
     }
 
@@ -67,13 +72,9 @@ public class EnemyController : MonoBehaviour
         root = qplayerexist; //rot inicial
     }
 
-
-
     bool StandTime()
     {
-     
         return false;
-          
     ;
     }
 

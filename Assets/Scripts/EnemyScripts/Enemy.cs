@@ -9,6 +9,4 @@ public class Enemy : BaseClassEnemy
     {
         base.Awake();
     }
-
-
 }

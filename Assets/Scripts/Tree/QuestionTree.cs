@@ -28,7 +28,4 @@ public class QuestionTree : ItreeNode
             rtnode.Execute();
         }
     }
-
-
- 
 }

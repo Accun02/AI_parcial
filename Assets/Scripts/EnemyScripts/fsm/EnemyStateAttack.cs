@@ -1,30 +1,26 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyStateAttack : State<States>
 {
-    PlayerController player;
-     private int damage = 2;
-    public EnemyStateAttack(bool CanAttack)
-    {
-      
+    private PlayerController player;
+    private int damage = 2;
 
-}
-public override void OnEnter()
+    public EnemyStateAttack(PlayerController player)
     {
-        base.OnEnter();
+        this.player = player;
     }
 
     public override void Execute()
     {
-    
-        player.Health -= damage;
+        if (player != null)
+        {
+            player.Health -= damage;
+        }
+        else
+        {
+            Debug.LogWarning("Player no asignado en EnemyStateAttack");
+        }
     }
 
-    public override void OnExit()
-    {
-
-    }
-
-    
+    public override void OnExit() { }
 }
