@@ -1,30 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyStateRunAway : State<States>
 {
-    SteeringController steering;
+    EnemyController controller;
 
-    public EnemyStateRunAway(SteeringController steeringController)
+    Rigidbody target;
+    private float maxVelocity;
+    private float timePrediction = 1;
+
+    public EnemyStateRunAway(EnemyController enemy,Rigidbody player)
     {
-        steering = steeringController;
+       controller = enemy;
+        target = player;
     }
 
     public override void OnEnter()
     {
-        steering.mode = SteeringController.SteeringMode.flee;
-        steering.enabled = true;
+     
     }
 
     public override void Execute()
     {
-        // No se necesita código acá porque el SteeringController se encarga
+        // Predice la futura posición del objetivo y se aleja de ella.
+        Vector3 predicionPosition = controller.body.position + target.velocity * timePrediction * Vector3.Distance(controller.body.position, target.position);
+        Vector3 desiredVelocity = (controller.body.position - predicionPosition).normalized * maxVelocity;
+        Vector3 directionForce = desiredVelocity - controller.body.velocity;
+
+        directionForce.y = 0;
+        directionForce = Vector3.ClampMagnitude(directionForce, maxVelocity);
+
+        controller.body.AddForce(directionForce, ForceMode.Acceleration);
     }
 
     public override void OnExit()
     {
-        steering.enabled = false;
+       
     }
 }
 

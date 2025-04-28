@@ -16,13 +16,13 @@ public class IdleState : State<States>
 
     public override void Execute()
     {
-        controller.canMove = false; // No se mueve en idle
+        // No se mueve en idle
     }
 
     public override void OnExit()
     {
         Debug.Log("No More IDLE State");
-        controller.canMove = true; // Permitir movimiento al salir
+         // Permitir movimiento al salir
     }
 }
 

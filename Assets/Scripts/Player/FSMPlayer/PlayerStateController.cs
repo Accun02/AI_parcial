@@ -30,23 +30,10 @@ public class PlayerStateController : MonoBehaviour
         fsm.OnExecute();
 
         // Transiciones automáticas según input
-        if (IsMoving())
-        {
-            fsm.OnTransition(States.Walk);
-        }
-        else
-        {
-            fsm.OnTransition(States.Idle);
-        }
+      
     }
 
-    private bool IsMoving()
-    {
-        return Input.GetKey(KeyCode.UpArrow) ||
-               Input.GetKey(KeyCode.DownArrow) ||
-               Input.GetKey(KeyCode.LeftArrow) ||
-               Input.GetKey(KeyCode.RightArrow);
-    }
+  
 }
 
 

@@ -8,8 +8,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private lineofsight LOS;
     [SerializeField] private Transform player;
     [SerializeField] private Transform enemy;
-    [SerializeField] private List<Vector3> Waypoints = new List<Vector3>();
-    [SerializeField] private SteeringController steering;
+    [SerializeField] private List<Transform> Waypoints = new List<Transform>();
+    public Rigidbody body;
+    public Rigidbody playerbody;
+    public float maxvel = 10;
 
     private FSM<States> fsm;
 
@@ -29,10 +31,10 @@ public class EnemyController : MonoBehaviour
 
         var patrol = new EnemyStatePatrol(iAmove, Waypoints, enemy);
         var idle = new EnemyStateIdle();
-        var attack = new EnemyStateAttack(player.GetComponent<PlayerController>());
+        var attack = new EnemyStateAttack(this.GetComponent<Enemy>());
 
-        var chase = new EnemyStateChase(steering);
-        var runAway = new EnemyStateRunAway(steering);
+        var chase = new EnemyStateChase(this,player);
+        var runAway = new EnemyStateRunAway(this,playerbody);
 
         // Transiciones
         patrol.Transition(States.Idle, idle);
@@ -74,13 +76,13 @@ public class EnemyController : MonoBehaviour
 
     bool StandTime()
     {
-        return false;
+        return true;
     ;
     }
 
     bool CanAttack()
     {
-        return Vector3.Distance(player.transform.position, transform.position) <= 3; 
+        return Vector3.Distance(player.transform.position, transform.position) <= 1; 
     }
 
     void Update()

@@ -41,12 +41,12 @@ public class lineofsight : MonoBehaviour
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask))
                 {
                     isOnRange = true;
-                    Debug.Log(" El enemigo te esta viendo!");
+                   
                     Debug.DrawLine(transform.position, objective.position, Color.green);
                 }
                 else
                 {
-                    isOnRange = false;
+             
                     Debug.DrawLine(transform.position, objective.position, Color.red);
                 }
             }

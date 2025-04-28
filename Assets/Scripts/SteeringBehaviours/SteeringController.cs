@@ -33,15 +33,11 @@ public class SteeringController : MonoBehaviour
         // Crea las instancias de steering con sus configuraciones
         switch (mode)
         {
-            case SteeringMode.seek:
-                currentSteering = new Seek(rb, target, maxVelocity);
-                break;
+       
             case SteeringMode.flee:
                 currentSteering = new Flee(rb, target, maxVelocity);
                 break;
-            case SteeringMode.persuit:
-                currentSteering = new Persuit(rb, target.GetComponent<Rigidbody>(), maxVelocity, timePrediction);
-                break;
+    
             case SteeringMode.evade:
                 currentSteering = new Evade(rb, target.GetComponent<Rigidbody>(), maxVelocity, timePrediction);
                 break;

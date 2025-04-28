@@ -24,6 +24,7 @@ public class FSM<T>
         {
           
             current.Execute();
+    
         }
 
     }
@@ -34,6 +35,7 @@ public class FSM<T>
         var previous = current;
         current.OnExit();
         current = newState;
+        Debug.Log(newState);
         current.OnEnter();
 
     }

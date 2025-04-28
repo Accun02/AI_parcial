@@ -8,12 +8,12 @@ using Vector3 = UnityEngine.Vector3;
 
 public class EnemyStatePatrol : State<States>
 {
-    List<Vector3> _waypoints;
+    List<Transform> _waypoints;
     Transform Enemy;
     int positions = 0;
     IIAmove move;
 
-    public EnemyStatePatrol(IIAmove movement, List<Vector3> Waypoints, Transform enemytrans)
+    public EnemyStatePatrol(IIAmove movement, List<Transform> Waypoints, Transform enemytrans)
     {
         Enemy = enemytrans;
         _waypoints = Waypoints;
@@ -27,11 +27,12 @@ public class EnemyStatePatrol : State<States>
 
     public override void Execute()
     {
-        if (_waypoints.Count == 0) return;
+        
 
-        Vector3 target = _waypoints[positions];
+        Vector3 target = _waypoints[positions].position;
         Vector3 dir = target - Enemy.position;
 
+        Debug.Log(target);
         move.Move(dir);
 
         if (Vector3.Distance(Enemy.position, target) < 1f)
@@ -40,6 +41,11 @@ public class EnemyStatePatrol : State<States>
             if (positions >= _waypoints.Count)
                 positions = 0;
         }
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
     }
 }
 
