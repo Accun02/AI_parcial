@@ -34,7 +34,17 @@ public class FPScontroller : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") != 0)
+        {
+            SFX.clip = playerWalking;
 
+            SFX.Play();
+            Debug.Log("WalkingSound Good");
+        }
+        else
+        {
+            SFX.Stop();
+        }
         #region Handles Movment
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -49,16 +59,8 @@ public class FPScontroller : MonoBehaviour
 
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-        if (Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") != 0)
-        {
-            SFX.clip = playerWalking;
-            SFX.Play();
-            Debug.Log("WalkingSound Good");
-        }
-        else
-        {
-            SFX.Stop();
-        }
+       
+       
             #endregion
 
 
