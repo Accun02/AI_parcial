@@ -1,13 +1,13 @@
+using System.ComponentModel.Design.Serialization;
 using UnityEngine;
 
 public class Seek : ISteering
 {
     private Rigidbody rb;
-
-    private Transform target;
-    public Transform[] waypoints;
+ public Transform[] waypoints;
     public int Targetpoints;
     private float maxVelocity;
+    private bool goingback;
     public Seek(Rigidbody rb, Transform[] target, float maxVelocity)
     {
         this.rb = rb;
@@ -17,16 +17,41 @@ public class Seek : ISteering
 
     public Vector3 MoveDirection()
     {
-        if (rb.position == waypoints[Targetpoints].position)
+        if (rb.position == waypoints[Targetpoints].position && !goingback)
         {
             increaseposition();
         }
+        else if (rb.position == waypoints[Targetpoints].position && goingback)
+        {
+            decreaseposition();
+        }
         return rb.position = Vector3.MoveTowards(rb.position, waypoints[Targetpoints].position, maxVelocity);
+
+        
     }
 
     private void increaseposition()
     {
-        Targetpoints++;
+        if (Targetpoints == waypoints.Length)
+        {
+            goingback = true;
+        }
+        else 
+        {
+            Targetpoints++;
+        }
 
+    }
+
+    private void decreaseposition()
+    {
+        if (Targetpoints == 0)
+        {
+            goingback = false;
+        }
+        else
+        {
+            Targetpoints--;
+        }
     }
 }
