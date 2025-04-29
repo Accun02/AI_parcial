@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class FPScontroller : MonoBehaviour
 {
+    public Animator anim;
     public Camera playerCamera;
     public float walkSpeed = 6f;
     public float gravity = 10f;
@@ -37,12 +38,15 @@ public class FPScontroller : MonoBehaviour
         #region Handles Movment
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
+        anim.SetFloat("VelX", moveDirection.x);
+        anim.SetFloat("VelY", moveDirection.y);
 
         // Press Left Shift to run
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ?  walkSpeed * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ?  walkSpeed * Input.GetAxis("Horizontal") : 0;
+        float curSpeedX = canMove ? walkSpeed * Input.GetAxis("Vertical") : 0;
+        float curSpeedY = canMove ? walkSpeed * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
+
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
         if (Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") != 0)
