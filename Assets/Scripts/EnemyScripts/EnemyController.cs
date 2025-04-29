@@ -7,10 +7,8 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private lineofsight LOS;
     [SerializeField] private Transform player;
-    [SerializeField] private Transform enemy;
-    [SerializeField] private List<Vector3> Waypoints = new List<Vector3>();
-    [SerializeField] private SteeringController steering;
-
+    [SerializeField] private Enemy enemy;
+    [SerializeField] private SteeringController controller;
     private FSM<States> fsm;
 
     private float timer = 0f;
@@ -27,12 +25,12 @@ public class EnemyController : MonoBehaviour
     {
         IIAmove iAmove = GetComponent<IIAmove>();
 
-        var patrol = new EnemyStatePatrol(iAmove, Waypoints, enemy);
-        var idle = new EnemyStateIdle();
+        var patrol = new EnemyStatePatrol(controller);
+        var idle = new EnemyStateIdle(controller);
         var attack = new EnemyStateAttack(player.GetComponent<PlayerController>());
 
-        var chase = new EnemyStateChase(steering);
-        var runAway = new EnemyStateRunAway(steering);
+        var chase = new EnemyStateChase(controller);
+        var runAway = new EnemyStateRunAway(controller);
 
         // Transiciones
         patrol.Transition(States.Idle, idle);
@@ -80,14 +78,18 @@ public class EnemyController : MonoBehaviour
 
     bool CanAttack()
     {
-        return Vector3.Distance(player.transform.position, transform.position) <= 3; 
+        return Vector3.Distance(player.transform.position, transform.position) <= enemy.AttackLOS.distance;
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
-        fsm.OnExecute();
+    
         root.Execute();  
+    }
+
+     void FixedUpdate()
+    {
+        fsm.OnFixedExecute();
     }
 }
 

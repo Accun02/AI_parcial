@@ -19,15 +19,13 @@ public class Persuit : ISteering
     public Vector3 MoveDirection()
     {
         // Predice la futura posición del objetivo según su velocidad.
-        Vector3 predicionPosition = targetRb.position + targetRb.velocity * timePrediction * Vector3.Distance(rb.position, targetRb.position);
+        Vector3 predicitonPosition = targetRb.position + targetRb.velocity * timePrediction * Vector3.Distance(rb.position, targetRb.position);
         // Apunta hacia esa posición futura.
-        Vector3 desiredVelocity = (predicionPosition - rb.position).normalized * maxVelocity;
+        Vector3 desiredVelocity = (predicitonPosition - rb.position).normalized * maxVelocity;
         Vector3 directionForce = desiredVelocity - rb.velocity;
 
         directionForce.y = 0;
         directionForce = Vector3.ClampMagnitude(directionForce, maxVelocity);
-
-        rb.AddForce(directionForce, ForceMode.Acceleration);
         return desiredVelocity;
     }
 }

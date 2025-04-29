@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-GameManager Instance;
-
+ public static GameManager Instance;
+public PlayerController PlayerController;
 [SerializeField]List <GameObject> EnemyList;
 
     void Awake()
@@ -21,6 +21,9 @@ GameManager Instance;
         DontDestroyOnLoad(Instance);
     }
 
-    // Update is called once per frame
+    public void Damage(int damage)
+    {
+        PlayerController.Health -= damage;
+    }
    
 }

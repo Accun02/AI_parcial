@@ -14,6 +14,7 @@ public class State<T> : Istate<T>
     {
         // Código que se ejecuta mientras estEen este estado
     }
+    public virtual void FixedExecute() { }
 
     public virtual void OnExit()
     {

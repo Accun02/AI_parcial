@@ -2,23 +2,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyStateChase : State<States>
 {
-    SteeringController steering;
+SteeringController controller;
 
-    public EnemyStateChase(SteeringController steeringController)
+    public EnemyStateChase(SteeringController controller)
     {
-        this.steering = steeringController;
+        this.controller = controller;
     }
 
-    public override void Execute()
+    public override void OnEnter()
     {
-        steering.enabled = true;
+        controller.ChangeStearingMode(SteeringController.SteeringMode.persuit);
+   
     }
+    public override void FixedExecute()
+    {
+        controller.ExecuteSteering();
+        Debug.Log("ejecutando stearring");
+    }
+    
+    
 
     public override void OnExit()
     {
-        steering.enabled = false; // se apaga en otros estados
+
     }
 }

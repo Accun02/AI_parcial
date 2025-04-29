@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class EnemyStateRunAway : State<States>
 {
-    SteeringController steering;
 
-    public EnemyStateRunAway(SteeringController steeringController)
+    SteeringController controller;
+    public EnemyStateRunAway(SteeringController controller)
     {
-        steering = steeringController;
+        this.controller = controller;   
     }
 
     public override void OnEnter()
     {
-        steering.mode = SteeringController.SteeringMode.flee;
-        steering.enabled = true;
+        controller.ChangeStearingMode(SteeringController.SteeringMode.flee);
     }
 
     public override void Execute()
     {
         // No se necesita código acá porque el SteeringController se encarga
     }
+    public override void FixedExecute()
+    {
+        controller.ExecuteSteering();
+    }
 
     public override void OnExit()
     {
-        steering.enabled = false;
+
     }
 }
 

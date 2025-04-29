@@ -1,4 +1,7 @@
+using NUnit.Framework.Constraints;
 using UnityEngine;
+using static SteeringController;
+using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(Rigidbody))]
 public class SteeringController : MonoBehaviour
@@ -10,45 +13,42 @@ public class SteeringController : MonoBehaviour
 
     [Header("References")]
     public Transform target;
+    public Rigidbody targetrb;
     public ObstacleAvoidance obstacleAvoidance; // (Se arrastra el script desde el inspector)
 
     private ISteering currentSteering;
     private Rigidbody rb;
     private Vector3 finalForce;
 
+    Flee flee;
+    Persuit persuit;
+    Evade evade;
+    Seek seek;
+    None none;
     public enum SteeringMode
     {
         seek,
         flee,
         persuit,
-        evade
+        evade,
+        None,
     }
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
-        enabled = false;
+        flee = new(rb, target, maxVelocity);
+        persuit = new(rb, targetrb, maxVelocity, timePrediction);
+        evade = new(rb, targetrb, maxVelocity, timePrediction);
+        seek = new(rb, target, maxVelocity);
 
-        // Crea las instancias de steering con sus configuraciones
-        switch (mode)
-        {
-            case SteeringMode.seek:
-                currentSteering = new Seek(rb, target, maxVelocity);
-                break;
-            case SteeringMode.flee:
-                currentSteering = new Flee(rb, target, maxVelocity);
-                break;
-            case SteeringMode.persuit:
-                currentSteering = new Persuit(rb, target.GetComponent<Rigidbody>(), maxVelocity, timePrediction);
-                break;
-            case SteeringMode.evade:
-                currentSteering = new Evade(rb, target.GetComponent<Rigidbody>(), maxVelocity, timePrediction);
-                break;
-        }
+        none = new();
+
+
     }
 
-    void FixedUpdate()
+    public void ExecuteSteering()
     {
         // Dirección base del comportamiento
         Vector3 steeringDir = currentSteering.MoveDirection();
@@ -58,7 +58,7 @@ public class SteeringController : MonoBehaviour
 
         // Suma de ambas fuerzas
         finalForce = steeringDir + avoidDir;
-
+    
         // Aplicación de la fuerza al Rigidbody
         rb.AddForce(finalForce, ForceMode.Acceleration);
 
@@ -67,15 +67,27 @@ public class SteeringController : MonoBehaviour
             transform.forward = rb.velocity.normalized;
     }
 
-    private void OnDrawGizmos()
+    public void ChangeStearingMode(SteeringMode mode)
     {
-        if (!Application.isPlaying) return;
+        this.mode = mode;
 
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + rb.velocity);
-
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawLine(transform.position, transform.position + finalForce);
+        switch (mode)
+        {
+            case SteeringMode.seek:
+                currentSteering = seek;
+                break;
+            case SteeringMode.flee:
+                currentSteering = flee;
+                break;
+            case SteeringMode.persuit:
+                currentSteering = persuit;
+                break;
+            case SteeringMode.evade:
+                currentSteering = evade;
+                break;
+                case SteeringMode.None: currentSteering = none; break;
+            
+        }
     }
 }
 

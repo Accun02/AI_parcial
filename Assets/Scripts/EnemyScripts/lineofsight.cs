@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class lineofsight : MonoBehaviour
 {
-    [SerializeField] float distance;
+    public float distance;
     [SerializeField] float angle;
     public bool isOnRange;
     public Transform objective;
@@ -17,6 +17,7 @@ public class lineofsight : MonoBehaviour
     public bool OnRange()
     {
         return  isOnRange ? true : false;
+      
     }
     void Update()
     {
@@ -41,7 +42,7 @@ public class lineofsight : MonoBehaviour
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask))
                 {
                     isOnRange = true;
-                    Debug.Log(" El enemigo te esta viendo!");
+            
                     Debug.DrawLine(transform.position, objective.position, Color.green);
                 }
                 else
@@ -54,6 +55,7 @@ public class lineofsight : MonoBehaviour
             {
                 isOnRange = false;
             }
+  
         }
         else
         {

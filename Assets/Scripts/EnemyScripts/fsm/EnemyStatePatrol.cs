@@ -8,38 +8,22 @@ using Vector3 = UnityEngine.Vector3;
 
 public class EnemyStatePatrol : State<States>
 {
-    List<Vector3> _waypoints;
-    Transform Enemy;
-    int positions = 0;
-    IIAmove move;
+   SteeringController controller;
 
-    public EnemyStatePatrol(IIAmove movement, List<Vector3> Waypoints, Transform enemytrans)
+    public EnemyStatePatrol(SteeringController controller)
     {
-        Enemy = enemytrans;
-        _waypoints = Waypoints;
-        move = movement;
+      this.controller = controller;
     }
 
     public override void OnEnter()
     {
-        positions = 0;
+        controller.ChangeStearingMode(SteeringController.SteeringMode.seek);
     }
 
-    public override void Execute()
+    public override void FixedExecute()
     {
-        if (_waypoints.Count == 0) return;
-
-        Vector3 target = _waypoints[positions];
-        Vector3 dir = target - Enemy.position;
-
-        move.Move(dir);
-
-        if (Vector3.Distance(Enemy.position, target) < 1f)
-        {
-            positions++;
-            if (positions >= _waypoints.Count)
-                positions = 0;
-        }
+        controller.ExecuteSteering();
+       
     }
 }
 

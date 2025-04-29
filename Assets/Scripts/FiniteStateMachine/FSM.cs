@@ -16,7 +16,7 @@ public class FSM<T>
     public void setInitial(Istate<T> initial) // estado inicial de fsm
     {
      current = initial;
-        current.OnEnter();
+     current.OnEnter();
     }
     public void OnExecute() //update del state
     {
@@ -24,9 +24,21 @@ public class FSM<T>
         {
           
             current.Execute();
+           
         }
 
     }
+
+    public void OnFixedExecute()
+    {
+        if (current != null)
+        {
+
+            current.FixedExecute();
+        }
+    }
+    
+
     public void OnTransition(T input)
     {
         Istate<T> newState = current.GetTransition(input);

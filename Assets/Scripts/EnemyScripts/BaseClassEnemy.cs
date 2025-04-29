@@ -12,6 +12,9 @@ public class BaseClassEnemy : MonoBehaviour, IIAmove
     {
         body = GetComponent<Rigidbody>();
     }
+
+
+    public virtual void Attack() { }
 public void Look(Vector3 lookdir) // a donde mira
     {
        transform.forward = lookdir;
