@@ -35,6 +35,7 @@ public class FSM<T>
         {
 
             current.FixedExecute();
+            Debug.Log(current.ToString());
         }
     }
     

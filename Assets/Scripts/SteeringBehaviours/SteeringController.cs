@@ -14,6 +14,7 @@ public class SteeringController : MonoBehaviour
     [Header("References")]
     public Transform target;
     public Rigidbody targetrb;
+    public Transform[] Waypoints;
     public ObstacleAvoidance obstacleAvoidance; // (Se arrastra el script desde el inspector)
 
     private ISteering currentSteering;
@@ -41,8 +42,7 @@ public class SteeringController : MonoBehaviour
         flee = new(rb, target, maxVelocity);
         persuit = new(rb, targetrb, maxVelocity, timePrediction);
         evade = new(rb, targetrb, maxVelocity, timePrediction);
-        seek = new(rb, target, maxVelocity);
-
+        seek = new(rb, Waypoints, maxVelocity);
         none = new();
 
 
@@ -51,7 +51,7 @@ public class SteeringController : MonoBehaviour
     public void ExecuteSteering()
     {
         // Dirección base del comportamiento
-        Vector3 steeringDir = currentSteering.MoveDirection();
+        Vector3 steeringDir = currentSteering.MoveDirection();                                                                                                                                       
 
         // Dirección de evasión de obstáculos
         Vector3 avoidDir = obstacleAvoidance ? obstacleAvoidance.Avoid() : Vector3.zero;

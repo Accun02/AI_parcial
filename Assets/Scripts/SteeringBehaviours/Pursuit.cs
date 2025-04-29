@@ -4,7 +4,6 @@ public class Persuit : ISteering
 {
     private Rigidbody rb;
     private Rigidbody targetRb;
-
     private float maxVelocity;
     private float timePrediction = 1;
 

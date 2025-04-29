@@ -10,6 +10,7 @@ public class lineofsight : MonoBehaviour
     public float detectionAngle;
     private LayerMask obstaclesMask;
 
+
     public bool CheckDistance(Transform target) //Checks if the target is within range of vision.
     {
         float distance = Vector3.Distance(target.position, transform.position);

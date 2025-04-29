@@ -22,7 +22,7 @@ public class Enemy : BaseClassEnemy
 
         if (hits != null)
         {
-            GameManager.Instance.Damage(damage);
+            Destroy(hits[0].gameObject);
         }
     }
 }

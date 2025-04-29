@@ -2,24 +2,18 @@
 
 public class EnemyStateAttack : State<States>
 {
-    private PlayerController player;
-    private int damage = 2;
 
-    public EnemyStateAttack(PlayerController player)
+    Enemy enemy;
+
+    public EnemyStateAttack(Enemy enemy)
     {
-        this.player = player;
+       this.enemy = enemy;
     }
 
     public override void Execute()
     {
-        if (player != null)
-        {
-            player.Health -= damage;
-        }
-        else
-        {
-            Debug.LogWarning("Player no asignado en EnemyStateAttack");
-        }
+    enemy.Attack();
+
     }
 
     public override void OnExit() { }
