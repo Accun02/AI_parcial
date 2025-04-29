@@ -16,7 +16,7 @@ public class SteeringController : MonoBehaviour
     public Rigidbody targetrb;
     public Transform[] Waypoints;
     public ObstacleAvoidance obstacleAvoidance; // (Se arrastra el script desde el inspector)
-
+    public WaypointController controller;
     private ISteering currentSteering;
     private Rigidbody rb;
     private Vector3 finalForce;
@@ -42,12 +42,16 @@ public class SteeringController : MonoBehaviour
         flee = new(rb, target, maxVelocity);
         persuit = new(rb, targetrb, maxVelocity, timePrediction);
         evade = new(rb, targetrb, maxVelocity, timePrediction);
-        seek = new(rb, Waypoints, maxVelocity);
+        seek = new(rb, target,maxVelocity);
         none = new();
 
 
     }
-
+    public void gotoposition(Transform wptarget)
+    {
+     seek.target = wptarget;
+     
+    }
     public void ExecuteSteering()
     {
     

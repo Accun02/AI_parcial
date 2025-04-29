@@ -25,14 +25,7 @@ public class EnemyStateIdle : State<States>
 
     public override void Execute()
     {
-       
-        timer -= Time.deltaTime;
-
-
-        if (timer < 0)
-        {
-            enemy.StandTime(timer);
-        }
+          enemy.timer -= Time.deltaTime;
       
     }
     public override void FixedExecute()
@@ -44,6 +37,6 @@ public class EnemyStateIdle : State<States>
 
     public override void OnExit()
     {
-        timer = 10;
+        enemy.timer = 10;
     }
 }

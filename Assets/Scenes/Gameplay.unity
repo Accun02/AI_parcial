@@ -754,6 +754,7 @@ GameObject:
   - component: {fileID: 244974796}
   - component: {fileID: 244974800}
   - component: {fileID: 244974799}
+  - component: {fileID: 244974801}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -823,6 +824,8 @@ MonoBehaviour:
   player: {fileID: 349407899}
   enemy: {fileID: 244974798}
   controller: {fileID: 244974800}
+  waypointController: {fileID: 244974801}
+  timer: 0
 --- !u!114 &244974798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -870,8 +873,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e26e487d6c52b145b9e1216a1363ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 20
-  timePrediction: 1
+  maxVelocity: 3
+  timePrediction: 0.3
   mode: 4
   target: {fileID: 349407899}
   targetrb: {fileID: 349407901}
@@ -880,6 +883,26 @@ MonoBehaviour:
   - {fileID: 708731444}
   - {fileID: 1893728571}
   obstacleAvoidance: {fileID: 244974799}
+  controller: {fileID: 0}
+--- !u!114 &244974801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244974793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9d7b16180d2ec42bc17063e1aac3c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy: {fileID: 244974794}
+  waypoints:
+  - {fileID: 606539400}
+  - {fileID: 708731444}
+  - {fileID: 1893728571}
+  Targetpoints: 0
+  radiustotarget: 0.5
 --- !u!1001 &308822807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1546,7 +1569,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -1985,7 +2008,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -5925,7 +5948,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}

@@ -19,7 +19,6 @@ public class Enemy : BaseClassEnemy
     {
 
         Collider[] hits = Physics.OverlapSphere(center.position, AttackLOS.detectionRange, layerMask);
-        Debug.Log(hits);
         if (hits != null)
         {
             foreach (var item in hits)

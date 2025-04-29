@@ -1,57 +1,27 @@
 using System.ComponentModel.Design.Serialization;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Seek : ISteering
 {
     private Rigidbody rb;
- public Transform[] waypoints;
-    public int Targetpoints;
-    private float maxVelocity;
-    private bool goingback;
-    public Seek(Rigidbody rb, Transform[] target, float maxVelocity)
+    public Transform target;
+    public float maxVelocity;
+    public Seek(Rigidbody rb, Transform target,float maxvel)
     {
         this.rb = rb;
-        this.waypoints = target;
-        this.maxVelocity = maxVelocity;
+        this.target = target;
+        this.maxVelocity = maxvel;
+        
     }
 
     public Vector3 MoveDirection()
     {
-        if (rb.position == waypoints[Targetpoints].position && !goingback)
-        {
-            increaseposition();
-        }
-        else if (rb.position == waypoints[Targetpoints].position && goingback)
-        {
-            decreaseposition();
-        }
-        return rb.position = Vector3.MoveTowards(rb.position, waypoints[Targetpoints].position, maxVelocity);
-
-        
-    }
-
-    private void increaseposition()
-    {
-        if (Targetpoints == waypoints.Length)
-        {
-            goingback = true;
-        }
-        else 
-        {
-            Targetpoints++;
-        }
-
-    }
-
-    private void decreaseposition()
-    {
-        if (Targetpoints == 0)
-        {
-            goingback = false;
-        }
-        else
-        {
-            Targetpoints--;
-        }
+        if( (target == null) ) return Vector3.zero;
+        Vector3 desiredVelocity = (target.position - rb.position).normalized * maxVelocity;
+        Vector3 directionForce = desiredVelocity - rb.velocity;
+        directionForce.y = 0;
+        directionForce = Vector3.ClampMagnitude(directionForce, maxVelocity);
+        return directionForce;
     }
 }

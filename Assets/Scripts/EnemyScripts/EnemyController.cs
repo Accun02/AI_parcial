@@ -11,8 +11,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Enemy enemy;
     [SerializeField] private SteeringController controller;
     private FSM<States> fsm;
-
-    float timer;
+    [SerializeField] WaypointController waypointController;
+    public float timer;
   
     ItreeNode root;
 
@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour
     private void InitialilzeFSM()
     {
 
-        var patrol = new EnemyStatePatrol(controller);
+        var patrol = new EnemyStatePatrol(controller,waypointController);
         var idle = new EnemyStateIdle(controller,this,timer);
         var attack = new EnemyStateAttack(enemy,controller);
         var chase = new EnemyStateChase(controller);
@@ -33,7 +33,6 @@ public class EnemyController : MonoBehaviour
 
         // Transiciones
         patrol.Transition(States.Idle, idle);
-        patrol.Transition(States.Attack, attack);
         patrol.Transition(States.RunAway, runAway);
         patrol.Transition(States.Chase, chase);
 
@@ -49,9 +48,9 @@ public class EnemyController : MonoBehaviour
 
 
         runAway.AddTransition(States.Idle, idle);
-    
+        runAway.AddTransition(States.Patrol, patrol);
 
-        fsm = new FSM<States>(patrol);
+        fsm = new FSM<States>(idle);
      
     }
 
@@ -68,13 +67,26 @@ public class EnemyController : MonoBehaviour
         //cambia entre estados
         var qdistance = new QuestionTree(CanAttack,attack,chase);
         var qChooseAction = new QuestionTree(() => ChooseWise(),qdistance,runAway);
-        var qseepalyer = new QuestionTree(() => LOS.CheckAngle(player) && LOS.CheckDistance(player) && LOS.CheckView(player), qChooseAction,idle);
+        var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), patrol, idle);
+        var qgoingtodestination = new QuestionTree(() => waypointController.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol);
+        var qseepalyer = new QuestionTree(() => LOS.CheckAngle(player) && LOS.CheckDistance(player) && LOS.CheckView(player), qChooseAction,qgoingtodestination);
         var qplayerexist = new QuestionTree(() => player != null, qseepalyer, idle);
-        var qisidle = new QuestionTree(() => StandTime(timer),patrol,qseepalyer);
-        root = qisidle; //root inicial
+        var qisidle = new QuestionTree(() => StandTime(),patrol,qseepalyer);
+        root = qplayerexist; //root inicial
     }
 
- public  bool StandTime(float timer)
+    private bool waitorcontinue()
+    {
+        var random = generateRandom();
+        if (random < 0.5f)
+        {
+            return true;
+
+        }
+        else return false;
+    }
+
+    public  bool StandTime()
     {
 
         if (timer < 0)
@@ -103,6 +115,7 @@ public class EnemyController : MonoBehaviour
 
 
     }
+
     float generateRandom()
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);
@@ -120,5 +133,7 @@ public class EnemyController : MonoBehaviour
     {
         fsm.OnFixedExecute();
     }
+
+    
 }
 
