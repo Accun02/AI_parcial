@@ -5,6 +5,8 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     //detecta cuando el player colisiona con la moneda
+    private AudioSource SFX;
+    [SerializeField] private AudioClip coinCollected;
 
     private void OnTriggerEnter(Collider other) //cuando algo colisione con la moneda
     {
@@ -14,6 +16,8 @@ public class Coin : MonoBehaviour
         {
             coinCollectible.CoinsCollected();
             gameObject.SetActive(false); //lo desactiva una vez que colisione
+            SFX.clip = coinCollected;
+            SFX.Play();
         }
     }
 }
