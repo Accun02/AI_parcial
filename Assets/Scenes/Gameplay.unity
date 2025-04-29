@@ -3640,7 +3640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d669bd7eca0a3e44195dfc631f108c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerController: {fileID: 349407902}
+  PlayerController: {fileID: 349407896}
   EnemyList: []
 --- !u!4 &1420223384
 Transform:
