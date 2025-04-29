@@ -64,10 +64,10 @@ public class EnemyController : MonoBehaviour
 
         //cambia entre estados
         var qdistance = new QuestionTree(CanAttack,attack,chase);
-        var qseepalyer = new QuestionTree(LOS.OnRange,qdistance,idle);
+        var qseepalyer = new QuestionTree(() => LOS.CheckAngle(player) && LOS.CheckDistance(player) && LOS.CheckView(player), qdistance,idle);
         var qplayerexist = new QuestionTree(() => player != null, qseepalyer, idle);
         var qisidle = new QuestionTree(StandTime,patrol,qseepalyer);
-        root = qplayerexist; //rot inicial
+        root = qplayerexist; //root inicial
     }
 
     bool StandTime()
@@ -78,7 +78,7 @@ public class EnemyController : MonoBehaviour
 
     bool CanAttack()
     {
-        return Vector3.Distance(player.transform.position, transform.position) <= enemy.AttackLOS.distance;
+        return Vector3.Distance(player.transform.position, transform.position) <= enemy.AttackLOS.detectionRange;
     }
 
     void Update()

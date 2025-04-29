@@ -6,76 +6,39 @@ using UnityEngine.UIElements;
 
 public class lineofsight : MonoBehaviour
 {
-    public float distance;
-    [SerializeField] float angle;
-    public bool isOnRange;
-    public Transform objective;
-    public LayerMask playermask;
-    public LayerMask obstacleMask;
+    public float detectionRange;
+    public float detectionAngle;
+    private LayerMask obstaclesMask;
 
-
-    public bool OnRange()
+    public bool CheckDistance(Transform target) //Checks if the target is within range of vision.
     {
-        return  isOnRange ? true : false;
-      
+        float distance = Vector3.Distance(target.position, transform.position);
+        return distance <= detectionRange;
     }
-    void Update()
+
+    public bool CheckAngle(Transform target) //Checks if the target is within the angle of vision.
     {
-        RaycastHit hit;
-        if (Physics.SphereCast(transform.position, angle, Vector3.forward, out hit, distance, playermask))
-            if (objective != null)
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(0, 0, distance) * hit.distance, Color.green);
-            }
-        Vector3 directionToTarget = (objective.position - transform.position).normalized;
-        float distanceToTarget = Vector3.Distance(transform.position, objective.position);
+        Vector3 dir = target.position - transform.position;
+        float angle = Vector3.Angle(transform.forward, dir);
+        return angle <= detectionAngle / 2;
+    }
 
+    public bool CheckView(Transform target) //Checks if no obstacles obstructs the target out of view.
+    {
+        Vector3 dir = target.position - transform.position;
 
-        //verifica si esta dentro de la distancia
-        if (distanceToTarget <= distance)
-        {
-            //se fija si esta dentro del angulo de vision
-            float angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
-            if (angleToTarget <= angle / 2)
-            {
-                //se fija si hay algo en el medio obstaculizando
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstacleMask))
-                {
-                    isOnRange = true;
-            
-                    Debug.DrawLine(transform.position, objective.position, Color.green);
-                }
-                else
-                {
-                    isOnRange = false;
-                    Debug.DrawLine(transform.position, objective.position, Color.red);
-                }
-            }
-            else
-            {
-                isOnRange = false;
-            }
-  
-        }
-        else
-        {
-            isOnRange = false;
-        }
-        OnRange();
+        return !Physics.Raycast(transform.position, dir.normalized, dir.magnitude, obstaclesMask);
     }
 
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, distance);
+        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, detectionAngle / 2, 0) * transform.forward * detectionRange);
+        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, -detectionAngle / 2, 0) * transform.forward * detectionRange);
 
-        // Dibujar el  ngulo de visi n en el editor
-        Vector3 rightLimit = Quaternion.Euler(0, angle / 2, 0) * transform.forward;
-        Vector3 leftLimit = Quaternion.Euler(0, -angle / 2, 0) * transform.forward;
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, rightLimit * distance);
-        Gizmos.DrawRay(transform.position, leftLimit * distance);
     }
 }
 

@@ -18,7 +18,7 @@ public class Enemy : BaseClassEnemy
     public override void Attack()
     {
 
-        Collider[] hits = Physics.OverlapSphere(center.position, AttackLOS.distance, layerMask);
+        Collider[] hits = Physics.OverlapSphere(center.position, AttackLOS.detectionRange, layerMask);
 
         if (hits != null)
         {
