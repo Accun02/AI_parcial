@@ -18,7 +18,7 @@ public class EnemyStateRunAway : State<States>
 
     public override void Execute()
     {
-        // No se necesita código acá porque el SteeringController se encarga
+  
     }
     public override void FixedExecute()
     {

@@ -50,7 +50,7 @@ public class SteeringController : MonoBehaviour
 
     public void ExecuteSteering()
     {
-        // Dirección base del comportamiento
+    
         Vector3 steeringDir = currentSteering.MoveDirection();                                                                                                                                       
 
         // Dirección de evasión de obstáculos

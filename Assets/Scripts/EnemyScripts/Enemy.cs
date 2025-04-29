@@ -19,10 +19,18 @@ public class Enemy : BaseClassEnemy
     {
 
         Collider[] hits = Physics.OverlapSphere(center.position, AttackLOS.detectionRange, layerMask);
-
+        Debug.Log(hits);
         if (hits != null)
         {
-            Destroy(hits[0].gameObject);
+            foreach (var item in hits)
+            {
+                var currTarget = item.transform;
+                if (!AttackLOS.CheckAngle(currTarget)) continue;
+                if (!AttackLOS.CheckView(currTarget)) continue;
+                //
+                Destroy(item.gameObject);
+                break;
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private SteeringController controller;
     private FSM<States> fsm;
 
-
+    float timer;
   
     ItreeNode root;
 
@@ -26,8 +26,8 @@ public class EnemyController : MonoBehaviour
     {
 
         var patrol = new EnemyStatePatrol(controller);
-        var idle = new EnemyStateIdle(controller,this);
-        var attack = new EnemyStateAttack(enemy);
+        var idle = new EnemyStateIdle(controller,this,timer);
+        var attack = new EnemyStateAttack(enemy,controller);
         var chase = new EnemyStateChase(controller);
         var runAway = new EnemyStateRunAway(controller);
 
@@ -41,12 +41,11 @@ public class EnemyController : MonoBehaviour
         idle.Transition(States.RunAway, runAway);
         idle.Transition(States.Chase, chase);
 
-        attack.Transition(States.RunAway, runAway);
-        attack.Transition(States.Patrol, patrol);
+        attack.Transition(States.Idle, idle);
 
         chase.Transition(States.Idle, idle);
         chase.Transition(States.Attack, attack);
-        chase.Transition(States.RunAway, runAway);
+
 
 
         runAway.AddTransition(States.Idle, idle);
@@ -68,29 +67,34 @@ public class EnemyController : MonoBehaviour
 
         //cambia entre estados
         var qdistance = new QuestionTree(CanAttack,attack,chase);
-        var qChooseAction = new QuestionTree(ChooseWise,qdistance,runAway);
+        var qChooseAction = new QuestionTree(() => ChooseWise(),qdistance,runAway);
         var qseepalyer = new QuestionTree(() => LOS.CheckAngle(player) && LOS.CheckDistance(player) && LOS.CheckView(player), qChooseAction,idle);
         var qplayerexist = new QuestionTree(() => player != null, qseepalyer, idle);
-        var qisidle = new QuestionTree(() => StandTime(),patrol,qseepalyer);
-        root = qplayerexist; //root inicial
+        var qisidle = new QuestionTree(() => StandTime(timer),patrol,qseepalyer);
+        root = qisidle; //root inicial
     }
 
- public  bool StandTime()
+ public  bool StandTime(float timer)
     {
 
-        return true;
+        if (timer < 0)
+        {
+            return true;
+        }
+        else return false;
     ;
     }
 
     bool CanAttack()
     {
+
         return Vector3.Distance(player.transform.position, transform.position) <= enemy.AttackLOS.detectionRange;
     }
 
     bool  ChooseWise()
     {
-
-      if (generateRandom() < 0.5f)
+        var random =  generateRandom();
+        if (random < 0.8f)
                 {
                     return true;
          
@@ -102,13 +106,13 @@ public class EnemyController : MonoBehaviour
     float generateRandom()
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);
-        Debug.Log(randomValue);
-        return (float)randomValue;
+
+        return randomValue;
     }
 
     void Update()
     {
-     
+        fsm.OnExecute();
         root.Execute();  
     }
 

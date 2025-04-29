@@ -19,7 +19,7 @@ public class QuestionTree : ItreeNode
 
     public void Execute()
     {
-        if (question())
+        if (question() == true)
         {
             ltnode.Execute();
         }

@@ -21,7 +21,7 @@ SteeringController controller;
     public override void FixedExecute()
     {
         controller.ExecuteSteering();
-        Debug.Log("ejecutando stearring");
+
     }
     
     

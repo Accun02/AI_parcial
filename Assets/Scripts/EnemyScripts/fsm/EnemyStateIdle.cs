@@ -10,28 +10,37 @@ public class EnemyStateIdle : State<States>
 
     EnemyController enemy;
     float timer = 10;
-    public EnemyStateIdle(SteeringController controller,EnemyController enemy)
+    public EnemyStateIdle(SteeringController controller,EnemyController enemy,float timer)
     {
         this.controller = controller;
         this.enemy = enemy;
+        this.timer = timer;
     }
 
     public override void OnEnter()
     {
         controller.ChangeStearingMode(SteeringController.SteeringMode.None);
+        timer = 10;
     }
 
     public override void Execute()
     {
-       timer -= Time.deltaTime;
+       
+        timer -= Time.deltaTime;
 
-        if (timer < 0) 
+
+        if (timer < 0)
         {
-            enemy.StandTime();
+            enemy.StandTime(timer);
         }
+      
+    }
+    public override void FixedExecute()
+    {
+        controller.ExecuteSteering();
     }
 
-   
+
 
     public override void OnExit()
     {

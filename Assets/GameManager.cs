@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
  public static GameManager Instance;
-public PlayerController PlayerController;
+public GameObject PlayerController;
 [SerializeField]List <GameObject> EnemyList;
 
     void Awake()
@@ -21,9 +24,14 @@ public PlayerController PlayerController;
         DontDestroyOnLoad(Instance);
     }
 
-    public void Damage(int damage)
+
+
+    private void Update()
     {
-        PlayerController.Health -= damage;
+            if (PlayerController.IsDestroyed()) 
+        {
+            SceneManager.LoadScene("Gameplay");
+        }
     }
-   
+
 }
