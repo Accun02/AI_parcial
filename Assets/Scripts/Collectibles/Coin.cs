@@ -5,7 +5,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     //detecta cuando el player colisiona con la moneda
-    private AudioSource SFX;
+    [SerializeField] private AudioSource SFX;
     [SerializeField] private AudioClip coinCollected;
 
     private void OnTriggerEnter(Collider other) //cuando algo colisione con la moneda

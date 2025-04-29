@@ -9,13 +9,16 @@ public class PlayerStateController : MonoBehaviour
 
     private FPScontroller controller;
 
+    [SerializeField] private AudioSource SFX;
+    [SerializeField] private AudioClip playerWalking;
+
     private void Start()
     {
         controller = GetComponent<FPScontroller>();
 
         // Crear estados con referencia al controller
         idle = new IdleState(controller);
-        walk = new WalkState(controller);
+        walk = new WalkState(controller, playerWalking, SFX);
 
         // Definir transiciones
         idle.AddTransition(States.Walk, walk);

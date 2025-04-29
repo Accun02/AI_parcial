@@ -19,6 +19,9 @@ public class FPScontroller : MonoBehaviour
 
     public bool canMove = true;
 
+    [SerializeField] private AudioSource SFX;
+    [SerializeField] private AudioClip playerWalking;
+
 
     CharacterController characterController;
     void Start()
@@ -42,11 +45,21 @@ public class FPScontroller : MonoBehaviour
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-        #endregion
+        if (Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") != 0)
+        {
+            SFX.clip = playerWalking;
+            SFX.Play();
+            Debug.Log("WalkingSound Good");
+        }
+        else
+        {
+            SFX.Stop();
+        }
+            #endregion
 
 
-        #region Handles Rotation
-        characterController.Move(moveDirection * Time.deltaTime);
+            #region Handles Rotation
+            characterController.Move(moveDirection * Time.deltaTime);
 
         if (canMove)
         {
