@@ -4,12 +4,15 @@ using Unity.VisualScripting;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
- public static GameManager Instance;
-public GameObject PlayerController;
-[SerializeField]List <GameObject> EnemyList;
+    [SerializeField] List<GameObject> EnemyList;
+
+    public GameObject PlayerController;
+
+    public static GameManager Instance;
 
     void Awake()
     {
@@ -24,14 +27,13 @@ public GameObject PlayerController;
         DontDestroyOnLoad(Instance);
     }
 
-
-
-    private void Update()
+    public void Dead()
     {
-            if (PlayerController.IsDestroyed()) 
-        {
-            SceneManager.LoadScene("Gameplay");
-        }
+        SceneManager.LoadScene("Gameplay");
     }
 
+    public void ShowVictoryText()
+    {
+        SceneManager.LoadScene("Win");
+    }
 }

@@ -26,8 +26,7 @@ public class Enemy : BaseClassEnemy
                 var currTarget = item.transform;
                 if (!AttackLOS.CheckAngle(currTarget)) continue;
                 if (!AttackLOS.CheckView(currTarget)) continue;
-                //
-                Destroy(item.gameObject);
+                GameManager.Instance.Dead();
                 break;
             }
         }
