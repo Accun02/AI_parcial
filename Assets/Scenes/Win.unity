@@ -441,8 +441,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -143, y: -7}
+  m_SizeDelta: {x: 231.00018, y: 86.0246}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1309622962
 MonoBehaviour:
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You Won!
+  m_text: You Have Won!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 743abc3c4094463448ce2b763bdc62c0, type: 2}
   m_sharedMaterial: {fileID: 3848372797106389479, guid: 743abc3c4094463448ce2b763bdc62c0, type: 2}
@@ -529,7 +529,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -60.752075, y: 0, z: 0, w: 0}
+  m_margin: {x: 24.571022, y: 0, z: -301.94864, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
