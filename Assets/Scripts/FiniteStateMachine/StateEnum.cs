@@ -10,5 +10,6 @@ using UnityEngine;
         Chase,
         Patrol,
         RunAway,
+        Explode,
     }
 

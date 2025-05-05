@@ -9,12 +9,12 @@ public class EnemyStateIdle : State<States>
 {
     SteeringController controller;
 
-    EnemyController enemy;
-
+    BasicEnemyController enemy;
+    ExplodingEnemyController exploding;
     EnemyStateChase enemchase;
     EnemyStatePatrol enempatrol;
     
-    public EnemyStateIdle(SteeringController controller, EnemyController enemy,EnemyStateChase chase, EnemyStatePatrol patrol)
+    public EnemyStateIdle(SteeringController controller, BasicEnemyController enemy,EnemyStateChase chase, EnemyStatePatrol patrol)
     {
         this.controller = controller;
         this.enemy = enemy;
@@ -22,7 +22,12 @@ public class EnemyStateIdle : State<States>
         this.enempatrol = patrol;
       
     }
-
+    public EnemyStateIdle (SteeringController controller, ExplodingEnemyController enemy, EnemyStatePatrol patrol)
+    {
+        this.controller = controller;
+        this.exploding = enemy;
+        this.enempatrol = patrol;
+    }
     public override void OnEnter()
     {
         

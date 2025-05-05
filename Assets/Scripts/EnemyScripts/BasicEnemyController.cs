@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class BasicEnemyController : MonoBehaviour
 {
     [SerializeField] private lineofsight LOS;
     [SerializeField] private Transform player;

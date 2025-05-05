@@ -886,7 +886,7 @@ MonoBehaviour:
   - {fileID: 708731444}
   - {fileID: 1893728571}
   obstacleAvoidance: {fileID: 244974799}
-  controller: {fileID: 0}
+  controller: {fileID: 244974801}
 --- !u!114 &244974801
 MonoBehaviour:
   m_ObjectHideFlags: 0
