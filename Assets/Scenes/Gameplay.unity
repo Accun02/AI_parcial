@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597f740bf9806744ea49ba6ca60a9dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX: {fileID: 0}
+  SFX: {fileID: 1640261041}
   coinCollected: {fileID: 8300000, guid: 7ae656cda553f8346bac7a651b1f4374, type: 3}
 --- !u!82 &108417214
 AudioSource:
@@ -1201,7 +1201,7 @@ Transform:
   m_GameObject: {fileID: 349407896}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.47, y: -0.956, z: -17.34}
+  m_LocalPosition: {x: -23.9, y: -0.956, z: 27.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2388,7 +2388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597f740bf9806744ea49ba6ca60a9dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX: {fileID: 0}
+  SFX: {fileID: 1640261041}
   coinCollected: {fileID: 8300000, guid: 7ae656cda553f8346bac7a651b1f4374, type: 3}
 --- !u!82 &774767425
 AudioSource:
@@ -2946,7 +2946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597f740bf9806744ea49ba6ca60a9dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX: {fileID: 0}
+  SFX: {fileID: 1640261041}
   coinCollected: {fileID: 8300000, guid: 7ae656cda553f8346bac7a651b1f4374, type: 3}
 --- !u!82 &932257706
 AudioSource:
@@ -3587,7 +3587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597f740bf9806744ea49ba6ca60a9dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX: {fileID: 0}
+  SFX: {fileID: 1640261041}
   coinCollected: {fileID: 8300000, guid: 7ae656cda553f8346bac7a651b1f4374, type: 3}
 --- !u!82 &1128053655
 AudioSource:
@@ -4157,7 +4157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597f740bf9806744ea49ba6ca60a9dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX: {fileID: 0}
+  SFX: {fileID: 1640261041}
   coinCollected: {fileID: 8300000, guid: 7ae656cda553f8346bac7a651b1f4374, type: 3}
 --- !u!82 &1361948779
 AudioSource:
@@ -5818,7 +5818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597f740bf9806744ea49ba6ca60a9dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX: {fileID: 0}
+  SFX: {fileID: 1640261041}
   coinCollected: {fileID: 8300000, guid: 7ae656cda553f8346bac7a651b1f4374, type: 3}
 --- !u!82 &1728275004
 AudioSource:
