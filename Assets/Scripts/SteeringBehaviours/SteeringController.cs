@@ -45,7 +45,7 @@ public class SteeringController : MonoBehaviour
         seek = new(rb, target,maxVelocity);
         none = new();
 
-
+        currentSteering = none;
     }
     public void gotoposition(Transform wptarget)
     {
@@ -62,13 +62,18 @@ public class SteeringController : MonoBehaviour
 
         // Suma de ambas fuerzas
         finalForce = steeringDir + avoidDir;
-    
-        // Aplicación de la fuerza al Rigidbody
-        rb.AddForce(finalForce, ForceMode.Acceleration);
 
-        // Rotación hacia la dirección de movimiento
-        if (rb.velocity != Vector3.zero)
-            transform.forward = rb.velocity.normalized;
+        if (steeringDir != Vector3.zero)
+        {
+            // Aplicación de la fuerza al Rigidbody
+            rb.AddForce(finalForce, ForceMode.Acceleration);
+
+            // Rotación hacia la dirección de movimiento
+            if (rb.velocity != Vector3.zero)
+                transform.forward = rb.velocity.normalized;
+        }
+
+      
     }
 
     public void ChangeStearingMode(SteeringMode mode)
@@ -89,7 +94,8 @@ public class SteeringController : MonoBehaviour
             case SteeringMode.evade:
                 currentSteering = evade;
                 break;
-                case SteeringMode.None: currentSteering = none; break;
+                case SteeringMode.None: currentSteering = none; 
+                break;
             
         }
     }

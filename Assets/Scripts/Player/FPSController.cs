@@ -39,7 +39,7 @@ public class FPScontroller : MonoBehaviour
             SFX.clip = playerWalking;
 
             SFX.Play();
-            Debug.Log("WalkingSound Good");
+         
         }
         else
         {

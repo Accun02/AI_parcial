@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class CoinCollectible : MonoBehaviour
 {
-    public int numberOfCoins {  get; private set; } //cualquier script puede leer el valor
+    public int numberOfCoins = 0; //cualquier script puede leer el valor
                                                     //pero solo este setea el valor
     
     public UnityEvent<CoinCollectible> OnCoinsCollected;

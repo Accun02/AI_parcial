@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class EnemyStateIdle : State<States>
@@ -9,34 +10,49 @@ public class EnemyStateIdle : State<States>
     SteeringController controller;
 
     EnemyController enemy;
-    float timer = 10;
-    public EnemyStateIdle(SteeringController controller,EnemyController enemy,float timer)
+
+    EnemyStateChase enemchase;
+    EnemyStatePatrol enempatrol;
+    
+    public EnemyStateIdle(SteeringController controller, EnemyController enemy,EnemyStateChase chase, EnemyStatePatrol patrol)
     {
         this.controller = controller;
         this.enemy = enemy;
-        this.timer = timer;
+        this.enemchase = chase;
+        this.enempatrol = patrol;
+      
     }
 
     public override void OnEnter()
     {
+        
+        RemoveTransitions(enemchase, States.Chase);
+        RemoveTransitions(enempatrol, States.Patrol);
         controller.ChangeStearingMode(SteeringController.SteeringMode.None);
-        timer = 10;
+
     }
 
     public override void Execute()
     {
-          enemy.timer -= Time.deltaTime;
+          
+        enemy.timer -= Time.deltaTime;
+        enemy.StandTime();
       
     }
     public override void FixedExecute()
     {
-        controller.ExecuteSteering();
+    controller.ExecuteSteering();
     }
-
-
-
     public override void OnExit()
     {
-        enemy.timer = 10;
+
+
+        base.AddTransition(States.Patrol, enempatrol);
+        base.AddTransition(States.Chase, enemchase);
+
+      
     }
+
+
+
 }

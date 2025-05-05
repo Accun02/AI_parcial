@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 public class State<T> : Istate<T>
@@ -43,9 +44,25 @@ public class State<T> : Istate<T>
         return null; // Si no hay transición, devuelve null
     }
 
-    public virtual void Transition(T input, Istate<T> state)
+
+    public virtual void RemoveTransitions(Istate<T> state, T input)
     {
-        AddTransition(input, state);
+        for (int i = 0; i < _transitions.Count; i++)
+        {
+            if (state != null) 
+            {
+                if (_transitions.ContainsValue(state))
+                {
+                    _transitions.Remove(input, out state);
+                }
+            }
+           
+        }
+    }
+
+    internal void RemoveTransitions(EnemyStateChase enemchase)
+    {
+        throw new NotImplementedException();
     }
 }
 

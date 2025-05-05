@@ -22,7 +22,6 @@ public class Persuit : ISteering
         // Apunta hacia esa posición futura.
         Vector3 desiredVelocity = (predicitonPosition - rb.position).normalized * maxVelocity;
         Vector3 directionForce = desiredVelocity - rb.velocity;
-
         directionForce.y = 0;
         directionForce = Vector3.ClampMagnitude(directionForce, maxVelocity);
         return desiredVelocity;

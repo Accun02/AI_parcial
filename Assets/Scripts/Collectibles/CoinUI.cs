@@ -13,7 +13,7 @@ public class CoinUI : MonoBehaviour
     void Start()
     {
         coinText = GetComponent<TextMeshProUGUI>();
-        UpdateCoinText(coinCollectible);
+ 
     }
 
     public void UpdateCoinText(CoinCollectible coinCollectible)

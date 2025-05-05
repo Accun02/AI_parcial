@@ -51,7 +51,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.cyan;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 }

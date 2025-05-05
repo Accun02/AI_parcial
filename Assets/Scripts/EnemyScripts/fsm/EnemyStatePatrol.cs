@@ -28,5 +28,10 @@ public class EnemyStatePatrol : State<States>
         controller.ExecuteSteering();
        
     }
+
+    public override void OnExit()
+    {
+
+    }
 }
 

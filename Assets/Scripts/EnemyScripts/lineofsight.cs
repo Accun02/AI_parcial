@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class lineofsight : MonoBehaviour
 {
     public float detectionRange;
+    public float loseplayer;
     public float detectionAngle;
     private LayerMask obstaclesMask;
 
@@ -14,7 +15,15 @@ public class lineofsight : MonoBehaviour
     public bool CheckDistance(Transform target) //Checks if the target is within range of vision.
     {
         float distance = Vector3.Distance(target.position, transform.position);
+
         return distance <= detectionRange;
+    }
+
+    public bool LosePlayer(Transform target)
+    {
+        float distance = Vector3.Distance(target.position, transform.position);
+
+        return distance > loseplayer;
     }
 
     public bool CheckAngle(Transform target) //Checks if the target is within the angle of vision.
