@@ -15,7 +15,6 @@ public class Explodingenemy : BaseClassEnemy
     {
         base.Awake();
     }
-
     public override void Attack()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position,radius, layerMask);

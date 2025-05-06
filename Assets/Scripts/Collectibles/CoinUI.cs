@@ -13,13 +13,11 @@ public class CoinUI : MonoBehaviour
     void Start()
     {
         coinText = GetComponent<TextMeshProUGUI>();
- 
     }
 
     public void UpdateCoinText(CoinCollectible coinCollectible)
     {
         coinText.text = coinCollectible.numberOfCoins.ToString();
-        coinText.text = coinCollectible.numberOfCoins + "/" + totalCoins; //muestra en el canvas monedas agarradas / total
+        coinText.text = coinCollectible.numberOfCoins + "/" + totalCoins; //Muestra en el canvas monedas agarradas / total.
     }
-
 }

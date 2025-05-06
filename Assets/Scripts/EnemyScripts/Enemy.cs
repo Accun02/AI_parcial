@@ -5,19 +5,21 @@ using UnityEngine;
 public class Enemy : BaseClassEnemy
 {
     [SerializeField] Transform center;
-    int damage = 2;
-    public lineofsight AttackLOS;
+
     [SerializeField] LayerMask layerMask;
 
+    int damage = 2;
 
+    public lineofsight AttackLOS;
 
     protected override void Awake()
     {
         base.Awake();
     }
+
+    //Ataque del enemigo.
     public override void Attack()
     {
-
         Collider[] hits = Physics.OverlapSphere(center.position, AttackLOS.detectionRange, layerMask);
         if (hits != null)
         {
