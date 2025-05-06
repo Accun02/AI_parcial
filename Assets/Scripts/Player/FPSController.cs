@@ -36,14 +36,10 @@ public class FPScontroller : MonoBehaviour
     {
         if (Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") != 0)
         {
-            SFX.clip = playerWalking;
+
 
             SFX.Play();
          
-        }
-        else
-        {
-            SFX.Stop();
         }
         #region Handles Movment
         Vector3 forward = transform.TransformDirection(Vector3.forward);
