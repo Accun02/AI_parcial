@@ -710,6 +710,14 @@ PrefabInstance:
       value: Enemy2
       objectReference: {fileID: 0}
     - target: {fileID: 8363987201670156402, guid: 9fbb853c6dfd2c4428f0a1c7286ff018, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 349407899}
+    - target: {fileID: 8363987201670156402, guid: 9fbb853c6dfd2c4428f0a1c7286ff018, type: 3}
+      propertyPath: targetrb
+      value: 
+      objectReference: {fileID: 349407901}
+    - target: {fileID: 8363987201670156402, guid: 9fbb853c6dfd2c4428f0a1c7286ff018, type: 3}
       propertyPath: Waypoints.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -842,7 +850,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5008006654945272399, guid: 9fbb853c6dfd2c4428f0a1c7286ff018, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1703514290}
   m_SourcePrefab: {fileID: 100100000, guid: 9fbb853c6dfd2c4428f0a1c7286ff018, type: 3}
 --- !u!4 &288490663 stripped
 Transform:
@@ -1092,7 +1103,7 @@ Transform:
   m_GameObject: {fileID: 334324634}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5477157, y: -5.603011, z: 3.3010943}
+  m_LocalPosition: {x: 3.5477157, y: -6.8, z: 3.3010943}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1644,6 +1655,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 349407899}
+    - target: {fileID: 8208608043505430504, guid: caa26fc1656f8984daa57007d915d207, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 349407899}
+    - target: {fileID: 8208608043505430504, guid: caa26fc1656f8984daa57007d915d207, type: 3}
+      propertyPath: targetrb
+      value: 
+      objectReference: {fileID: 349407901}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1776,7 +1795,7 @@ Transform:
   m_GameObject: {fileID: 641309315}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5477157, y: -5.603011, z: 3.3010943}
+  m_LocalPosition: {x: 3.5477157, y: -7.36, z: 3.3010943}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3917,6 +3936,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy3
       objectReference: {fileID: 0}
+    - target: {fileID: 8363987201670156402, guid: 9fbb853c6dfd2c4428f0a1c7286ff018, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 349407899}
+    - target: {fileID: 8363987201670156402, guid: 9fbb853c6dfd2c4428f0a1c7286ff018, type: 3}
+      propertyPath: targetrb
+      value: 
+      objectReference: {fileID: 349407901}
     - target: {fileID: 8858630172005497234, guid: 9fbb853c6dfd2c4428f0a1c7286ff018, type: 3}
       propertyPath: player
       value: 
@@ -5721,6 +5748,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8276962624976755951, guid: 5d15ab8c0ba216c4da916a30e71f5eca, type: 3}
   m_PrefabInstance: {fileID: 1666113470}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1703514289 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5008006654945272399, guid: 9fbb853c6dfd2c4428f0a1c7286ff018, type: 3}
+  m_PrefabInstance: {fileID: 288490662}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1703514290
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703514289}
+  m_Enabled: 0
+  m_Avatar: {fileID: 9000000, guid: 92c2d87256f007d428b713da6286b289, type: 3}
+  m_Controller: {fileID: 9100000, guid: e4596792560a9b1448f9e31cecf63d97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1728274996
 PrefabInstance:
   m_ObjectHideFlags: 0
