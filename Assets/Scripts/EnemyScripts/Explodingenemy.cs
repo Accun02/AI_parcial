@@ -21,7 +21,6 @@ public class Explodingenemy : BaseClassEnemy
         Collider[] hits = Physics.OverlapSphere(transform.position,radius, layerMask);
         if (hits != null)
         {
-      
            
             foreach (var item in hits)
             {
