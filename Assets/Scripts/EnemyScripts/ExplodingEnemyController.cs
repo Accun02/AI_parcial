@@ -84,7 +84,7 @@ public class ExplodingEnemyController : MonoBehaviour
     private bool waitorcontinue()
     {
         var random = generateRandom();
-        if (random < 0.1f)
+        if (random < 0.7f)
         {
             return true;
 

@@ -13,7 +13,7 @@ public class State<T> : Istate<T>
 
     public virtual void Execute()
     {
-        //Código que se ejecuta mientras estén en este estado.
+        //Código que se ejecuta mientras estEn en este estado.
     }
 
     public virtual void FixedExecute() { }

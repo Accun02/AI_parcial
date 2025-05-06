@@ -77,16 +77,16 @@ public class BasicEnemyController : MonoBehaviour
 
         var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), idle, patrol); // El enemigo ve si se queda quieto o patrulla.
 
-        var insight = new QuestionTree(() => checkplayer, qdistance, idle); // El enemigo checkea si el jugadore está cerca.
+        var insight = new QuestionTree(() => checkplayer, qdistance, idle); // El enemigo checkea si el jugadore estEcerca.
 
-        var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway); // Si el enemigo está lejos de el jugador.
+        var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway); // Si el enemigo estElejos de el jugador.
         var qChooseAction = new QuestionTree(() => ChooseWise(), insight, lostplayerr);  // El enemigo eligue entre dos opciones: RunAway o Chase al jugador. 
 
-        var qgoingtodestination = new QuestionTree(() => waypointController.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol); // Si está yendo en dirección al Waypoint, o si no, empieza a Patrol de nuevo.
+        var qgoingtodestination = new QuestionTree(() => waypointController.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol); // Si estEyendo en dirección al Waypoint, o si no, empieza a Patrol de nuevo.
 
         var qseepalyer = new QuestionTree(() => checkplayer, qChooseAction, qgoingtodestination); //Si el enemigo puede ver al jugador.
 
-        var qisidle = new QuestionTree(() => StandTime(), patrol, qseepalyer); //Si el enemigo está quieto.
+        var qisidle = new QuestionTree(() => StandTime(), patrol, qseepalyer); //Si el enemigo estEquieto.
 
         var qplayerexist = new QuestionTree(() => player != null, qisidle, null); //Si existe el jugador.
 
@@ -125,7 +125,7 @@ public class BasicEnemyController : MonoBehaviour
     bool ChooseWise()
     {
         var random = generateRandom();
-        if (random < 0.3f)
+        if (random < 0.5f)
         {
             return true;
 

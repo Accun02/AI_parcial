@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0a4dcbeae93c04492c6943582f1c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstaclesMask:
+    serializedVersion: 2
+    m_Bits: 0
   detectionRange: 3
   loseplayer: 10
   detectionAngle: 50
@@ -118,9 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2edc78b7589b9649ae703e2afa6aeee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
   enemySFX: {fileID: -3769515666076416767}
-  enemyExplodes: {fileID: 8300000, guid: 7ae656cda553f8346bac7a651b1f4374, type: 3}
+  enemyExplodes: {fileID: 8300000, guid: 408d744bc454b6b4491861ae9ab37776, type: 3}
   layerMask:
     serializedVersion: 2
     m_Bits: 8
@@ -219,8 +221,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7ae656cda553f8346bac7a651b1f4374, type: 3}
-  m_Resource: {fileID: 8300000, guid: 7ae656cda553f8346bac7a651b1f4374, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 408d744bc454b6b4491861ae9ab37776, type: 3}
+  m_Resource: {fileID: 8300000, guid: 408d744bc454b6b4491861ae9ab37776, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: -0.48

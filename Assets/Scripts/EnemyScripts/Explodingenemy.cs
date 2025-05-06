@@ -11,16 +11,18 @@ public class Explodingenemy : BaseClassEnemy
 
     public LayerMask layerMask;
 
-    public float radius =  10; //Determina qué tan lejos llega el daño.
+    public float radius =  10; //Determina quEtan lejos llega el daño.
 
     private void Awake()
     {
         base.Awake();
     }
 
-    //Define qué pasa cuando el enemigo "ataca" (explota).
+    //Define quEpasa cuando el enemigo "ataca" (explota).
     public override void Attack()
     {
+        enemySFX.clip = enemyExplodes;
+        enemySFX.Play();
         Collider[] hits = Physics.OverlapSphere(transform.position,radius, layerMask);
         if (hits != null)
         {
