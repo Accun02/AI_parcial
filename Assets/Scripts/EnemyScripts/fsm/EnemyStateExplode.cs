@@ -7,7 +7,6 @@ using UnityEngine;
 public class EnemyStateExplode : State<States>
 {
     Explodingenemy enemy;
-
     EnemyStatePatrol enempatrol;
     EnemyStateIdle enemidle;
 
@@ -41,7 +40,7 @@ public class EnemyStateExplode : State<States>
         // Ejecuta cualquier comportamiento de steering activo.
         controller.ExecuteSteering();
 
-        //Si el sonido aún no está reproduciéndose, lo reproduce.
+        //Si el sonido aún no estEreproduciéndose, lo reproduce.
         if (!enemy.enemySFX.isPlaying )
         {
             enemy.enemySFX.Play();
