@@ -35,7 +35,7 @@ public class EnemyStateIdle : State<States>
         RemoveTransitions(enempatrol, States.Patrol);
         controller.ChangeStearingMode(SteeringController.SteeringMode.None);
       if (enemy != null)  enemy.timer = 10;
-        if (exploding != null) exploding.timer = 10;
+      if (exploding != null) exploding.timer = 10;
     }
 
     public override void Execute()

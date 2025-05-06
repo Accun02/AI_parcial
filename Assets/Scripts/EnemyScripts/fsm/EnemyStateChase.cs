@@ -7,15 +7,19 @@ using static UnityEngine.GraphicsBuffer;
 public class EnemyStateChase : State<States>
 {
 SteeringController controller;
+EnemyStatePatrol enemPatrol;
 
-    public EnemyStateChase(SteeringController controller)
+    public EnemyStateChase(SteeringController controller, EnemyStatePatrol enemPatrol)
     {
         this.controller = controller;
+        this.enemPatrol = enemPatrol;
     }
 
     public override void OnEnter()
     {
         controller.ChangeStearingMode(SteeringController.SteeringMode.persuit);
+
+        RemoveTransitions(enemPatrol, States.Patrol);
    
     }
     public override void FixedExecute()
@@ -28,6 +32,6 @@ SteeringController controller;
 
     public override void OnExit()
     {
-
+        AddTransition(States.Patrol,enemPatrol);
     }
 }

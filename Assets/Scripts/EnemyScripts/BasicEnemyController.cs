@@ -32,9 +32,9 @@ public class BasicEnemyController : MonoBehaviour
 
         patrol = new EnemyStatePatrol(controller,waypointController);
         idle = new EnemyStateIdle(controller,this,chase,patrol);
-        attack = new EnemyStateAttack(enemy,controller);
-        chase = new EnemyStateChase(controller);
-        runAway = new EnemyStateRunAway(controller);
+        attack = new EnemyStateAttack(enemy,controller,chase,patrol,idle);
+        chase = new EnemyStateChase(controller,patrol);
+        runAway = new EnemyStateRunAway(controller,patrol);
 
         // Transiciones
         patrol.AddTransition(States.Idle, idle);
@@ -92,7 +92,7 @@ public class BasicEnemyController : MonoBehaviour
     private bool waitorcontinue()
     {
         var random = generateRandom();
-        if (random < 0.5f)
+        if (random < 0.7f)
         {
             return true;
 

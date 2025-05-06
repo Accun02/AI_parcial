@@ -6,14 +6,17 @@ public class EnemyStateRunAway : State<States>
 {
 
     SteeringController controller;
-    public EnemyStateRunAway(SteeringController controller)
+    EnemyStatePatrol enempatrol;
+    public EnemyStateRunAway(SteeringController controller,EnemyStatePatrol patrol)
     {
         this.controller = controller;   
+        enempatrol = patrol;
     }
 
     public override void OnEnter()
     {
         controller.ChangeStearingMode(SteeringController.SteeringMode.flee);
+        RemoveTransitions(enempatrol, States.Patrol);
     }
 
     public override void Execute()
@@ -27,7 +30,7 @@ public class EnemyStateRunAway : State<States>
 
     public override void OnExit()
     {
-
+        AddTransition(States.Patrol, enempatrol);
     }
 }
 

@@ -21,7 +21,7 @@ public class lineofsight : MonoBehaviour
 
     public bool LosePlayer(Transform target)
     {
-        float distance = Vector3.Distance(target.position, transform.position);
+        float distance = Vector3.Distance(target.position, this.transform.position);
 
         return distance > loseplayer;
     }

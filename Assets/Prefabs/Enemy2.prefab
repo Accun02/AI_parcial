@@ -172,6 +172,7 @@ MonoBehaviour:
   Waypoints: []
   obstacleAvoidance: {fileID: 1440083407370041538}
   controller: {fileID: 5953418834611114458}
+  rb: {fileID: 1788468709820945486}
 --- !u!114 &5953418834611114458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +191,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   Targetpoints: 0
-  radiustotarget: 0.5
+  radiustotarget: 1
 --- !u!114 &1440083407370041538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63a6360997fc5e5409d6033418e79827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 5
+  detectionRange: 2.5
   avoidForce: 10
   obstacleMask:
     serializedVersion: 2
@@ -218,11 +219,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 408d744bc454b6b4491861ae9ab37776, type: 3}
-  m_Resource: {fileID: 8300000, guid: 408d744bc454b6b4491861ae9ab37776, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7ae656cda553f8346bac7a651b1f4374, type: 3}
+  m_Resource: {fileID: 8300000, guid: 7ae656cda553f8346bac7a651b1f4374, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: -0.48
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -324,8 +325,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2.0772846, z: 0.41214752}
-  m_Center: {x: 0, y: 1.0528666, z: -0.009170532}
+  m_Size: {x: 1, y: 1.8898394, z: 0.41214752}
+  m_Center: {x: 0, y: 1.1465892, z: -0.009170532}
 --- !u!1001 &9129732095201503171
 PrefabInstance:
   m_ObjectHideFlags: 0

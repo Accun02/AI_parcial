@@ -18,7 +18,7 @@ public class SteeringController : MonoBehaviour
     public ObstacleAvoidance obstacleAvoidance; // (Se arrastra el script desde el inspector)
     public WaypointController controller;
     private ISteering currentSteering;
-    private Rigidbody rb;
+    public Rigidbody rb;
     private Vector3 finalForce;
 
     Flee flee;
@@ -37,13 +37,12 @@ public class SteeringController : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
 
         flee = new(rb, target, maxVelocity);
         persuit = new(rb, targetrb, maxVelocity, timePrediction);
         evade = new(rb, targetrb, maxVelocity, timePrediction);
         seek = new(rb, target,maxVelocity);
-        none = new();
+        none = new(rb);
 
         currentSteering = none;
     }

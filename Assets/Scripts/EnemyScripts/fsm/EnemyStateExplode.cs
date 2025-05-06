@@ -8,16 +8,21 @@ public class EnemyStateExplode : State<States>
     Explodingenemy enemy;
     SteeringController controller;
     float timer = 3;
-
-   public EnemyStateExplode (Explodingenemy expenemy, SteeringController controller)
+    EnemyStatePatrol enempatrol;
+    EnemyStateIdle enemidle;
+    public EnemyStateExplode (Explodingenemy expenemy, SteeringController controller, EnemyStatePatrol patrol, EnemyStateIdle idle)
     {
         this.controller = controller;
         this.enemy = expenemy;
+        enemidle = idle;
+        enempatrol = patrol;
     }
 
     public override void OnEnter()
     {
         controller.ChangeStearingMode(SteeringController.SteeringMode.None);
+        RemoveTransitions(enempatrol, States.Patrol);
+        RemoveTransitions(enemidle, States.Idle);
     }
 
     public override void Execute()
@@ -33,5 +38,11 @@ public class EnemyStateExplode : State<States>
         {
             enemy.Attack();
         }
+    }
+    public override void OnExit()
+    {
+        AddTransition(States.Patrol, enempatrol);
+        AddTransition(States.Idle, enemidle);
+
     }
 }

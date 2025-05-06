@@ -37,8 +37,8 @@ public class ExplodingEnemyController : MonoBehaviour
 
         patrol = new EnemyStatePatrol(controller,waypointController);
         idle = new EnemyStateIdle(controller,this,patrol);
-        explode = new EnemyStateExplode(enemy,controller);
-        runAway = new EnemyStateRunAway(controller);
+        explode = new EnemyStateExplode(enemy,controller,patrol,idle);
+        runAway = new EnemyStateRunAway(controller,patrol);
 
         // Transiciones
         patrol.AddTransition(States.Idle, idle);
@@ -86,7 +86,7 @@ public class ExplodingEnemyController : MonoBehaviour
     private bool waitorcontinue()
     {
         var random = generateRandom();
-        if (random < 0.5f)
+        if (random < 0.7f)
         {
             return true;
 
@@ -108,7 +108,7 @@ public class ExplodingEnemyController : MonoBehaviour
     bool  ChooseWise()
     {
         var random =  generateRandom();
-        if (random < 0.1f)
+        if (random < 0.7f)
                 {
                     return true;
          

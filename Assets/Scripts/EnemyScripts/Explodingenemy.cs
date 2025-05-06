@@ -22,7 +22,6 @@ public class Explodingenemy : BaseClassEnemy
         if (hits != null)
         {
       
-
            
             foreach (var item in hits)
             {
