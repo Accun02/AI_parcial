@@ -23,8 +23,13 @@ public class EnemyStateExplode : State<States>
     public override void Execute()
     {
         timer -= Time.deltaTime;
-
+         enemy.enemySFX.clip = enemy.enemyExplodes;
+         if (!enemy.enemySFX.isPlaying )
+        {
+            enemy.enemySFX.Play();
+        }
         if (timer < 0)
+        
         {
             enemy.Attack();
         }
