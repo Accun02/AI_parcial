@@ -49,7 +49,6 @@ public class ExplodingEnemyController : MonoBehaviour
         idle.AddTransition(States.Explode,explode);
         idle.AddTransition(States.RunAway, runAway);
 
-        explode.AddTransition(States.Idle, idle);
 
         runAway.AddTransition(States.Idle, idle);
         runAway.AddTransition(States.Patrol, patrol);
@@ -68,6 +67,7 @@ public class ExplodingEnemyController : MonoBehaviour
         var runAway = new ActionTree(() => fsm.OnTransition(States.RunAway));
 
         //Cambia entre estados
+
         var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), idle, patrol); // 
         var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway);
         var qChooseAction = new QuestionTree(() => ChooseWise(), lostplayerr,explode);   
@@ -86,7 +86,7 @@ public class ExplodingEnemyController : MonoBehaviour
     private bool waitorcontinue()
     {
         var random = generateRandom();
-        if (random < 0.7f)
+        if (random < 0.1f)
         {
             return true;
 

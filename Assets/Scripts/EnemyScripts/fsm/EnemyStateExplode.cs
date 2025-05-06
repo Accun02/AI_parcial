@@ -21,14 +21,14 @@ public class EnemyStateExplode : State<States>
     public override void OnEnter()
     {
         controller.ChangeStearingMode(SteeringController.SteeringMode.None);
-        RemoveTransitions(enempatrol, States.Patrol);
-        RemoveTransitions(enemidle, States.Idle);
+
     }
 
     public override void Execute()
     {
         timer -= Time.deltaTime;
          enemy.enemySFX.clip = enemy.enemyExplodes;
+        controller.ExecuteSteering();
          if (!enemy.enemySFX.isPlaying )
         {
             enemy.enemySFX.Play();
@@ -38,11 +38,5 @@ public class EnemyStateExplode : State<States>
         {
             enemy.Attack();
         }
-    }
-    public override void OnExit()
-    {
-        AddTransition(States.Patrol, enempatrol);
-        AddTransition(States.Idle, enemidle);
-
     }
 }

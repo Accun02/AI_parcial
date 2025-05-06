@@ -19,10 +19,11 @@ public class EnemyStateAttack : State<States>
     }
     public override void OnEnter()
     {
-        controller.ChangeStearingMode(SteeringController.SteeringMode.None);
         RemoveTransitions(enempatrol, States.Patrol);
         RemoveTransitions(enemchase, States.Chase);
         RemoveTransitions(enemidle, States.Idle);
+        controller.ChangeStearingMode(SteeringController.SteeringMode.None);
+       
     }
     public override void Execute()
     {

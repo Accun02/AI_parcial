@@ -37,12 +37,12 @@ public class SteeringController : MonoBehaviour
 
     void Start()
     {
-
+        none = new(rb);
         flee = new(rb, target, maxVelocity);
         persuit = new(rb, targetrb, maxVelocity, timePrediction);
         evade = new(rb, targetrb, maxVelocity, timePrediction);
         seek = new(rb, target,maxVelocity);
-        none = new(rb);
+      
 
         currentSteering = none;
     }

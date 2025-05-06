@@ -17,10 +17,9 @@ EnemyStatePatrol enemPatrol;
 
     public override void OnEnter()
     {
-        controller.ChangeStearingMode(SteeringController.SteeringMode.persuit);
 
-        RemoveTransitions(enemPatrol, States.Patrol);
-   
+        base.RemoveTransitions(enemPatrol, States.Patrol);
+        controller.ChangeStearingMode(SteeringController.SteeringMode.persuit);
     }
     public override void FixedExecute()
     {
@@ -32,6 +31,6 @@ EnemyStatePatrol enemPatrol;
 
     public override void OnExit()
     {
-        AddTransition(States.Patrol,enemPatrol);
+        base.AddTransition(States.Patrol,enemPatrol);
     }
 }

@@ -9,7 +9,7 @@ public class lineofsight : MonoBehaviour
     public float detectionRange;
     public float loseplayer;
     public float detectionAngle;
-    private LayerMask obstaclesMask;
+    [SerializeField] private LayerMask obstaclesMask;
 
 
     public bool CheckDistance(Transform target) //Checks if the target is within range of vision.

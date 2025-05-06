@@ -31,9 +31,9 @@ public class BasicEnemyController : MonoBehaviour
     {
 
         patrol = new EnemyStatePatrol(controller,waypointController);
-        idle = new EnemyStateIdle(controller,this,chase,patrol);
-        attack = new EnemyStateAttack(enemy,controller,chase,patrol,idle);
         chase = new EnemyStateChase(controller,patrol);
+        idle = new EnemyStateIdle(controller, this, chase, patrol);
+        attack = new EnemyStateAttack(enemy, controller, chase, patrol, idle);
         runAway = new EnemyStateRunAway(controller,patrol);
 
         // Transiciones
@@ -70,13 +70,12 @@ public class BasicEnemyController : MonoBehaviour
         //cambia entre estados
         var qdistance = new QuestionTree(CanAttack,attack,chase); //si esta muy cerca ataca al jugador
 
-        var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), idle, patrol); // 
+        var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), idle, patrol); // ve si se queda quieto o patrulla
+ 
+        var insight = new QuestionTree(() => checkplayer , qdistance, idle); // si el jugadore esta cerca
 
-        
-        var insight = new QuestionTree(() => checkplayer , qdistance, idle);
-
-        var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway);
-        var qChooseAction = new QuestionTree(() => ChooseWise(),insight,lostplayerr);   
+        var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway); // si el enemigo esta lejos de el jugador 
+        var qChooseAction = new QuestionTree(() => ChooseWise(),insight,lostplayerr);  // eligue si   
 
         var qgoingtodestination = new QuestionTree(() => waypointController.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol);
 

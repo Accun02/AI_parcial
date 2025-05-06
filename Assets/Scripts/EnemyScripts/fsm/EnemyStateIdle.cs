@@ -30,9 +30,9 @@ public class EnemyStateIdle : State<States>
     }
     public override void OnEnter()
     {
-        
-        RemoveTransitions(enemchase, States.Chase);
-        RemoveTransitions(enempatrol, States.Patrol);
+
+        base.RemoveTransitions(enemchase, States.Chase);
+        base.RemoveTransitions(enempatrol, States.Patrol);
         controller.ChangeStearingMode(SteeringController.SteeringMode.None);
       if (enemy != null)  enemy.timer = 10;
       if (exploding != null) exploding.timer = 10;
