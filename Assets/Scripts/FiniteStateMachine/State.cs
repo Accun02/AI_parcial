@@ -3,18 +3,19 @@ using System.Collections.Generic;
 
 public class State<T> : Istate<T>
 {
-    // Diccionario que guarda transiciones a otros estados
+    // Diccionario que guarda transiciones a otros estados.
     private Dictionary<T, Istate<T>> _transitions = new Dictionary<T, Istate<T>>();
 
     public virtual void OnEnter()
     {
-        // CÛdigo al entrar al estado
+        //CÛdigo al entrar al estado.
     }
 
     public virtual void Execute()
     {
-        // CÛdigo que se ejecuta mientras estÅEen este estado
+        //CÛdigo que se ejecuta mientras estÅÈn en este estado.
     }
+
     public virtual void FixedExecute() { }
 
     public virtual void OnExit()
@@ -30,7 +31,8 @@ public class State<T> : Istate<T>
         }
         else
         {
-            _transitions[input] = state; // Reemplaza si ya existe
+            //Reemplaza si ya existe.
+            _transitions[input] = state; 
         }
     }
 
@@ -56,7 +58,6 @@ public class State<T> : Istate<T>
                     _transitions.Remove(input, out state);
                 }
             }
-           
         }
     }
 

@@ -6,40 +6,41 @@ using UnityEngine;
 public class FSM<T> 
 {
     Istate<T> current;
+
     public Action<T,Istate<T>> action;
+
     public FSM() { }
+
+    //Coloca el estado inicial.
     public FSM(Istate<T> initial)
     {
         setInitial(initial);
     }
 
-    public void setInitial(Istate<T> initial) // estado inicial de fsm
+    public void setInitial(Istate<T> initial) //Estado inicial del FSM.
     {
-     current = initial;
-     current.OnEnter();
+        current = initial;
+        current.OnEnter();
     }
-    public void OnExecute() //update del state
+
+    //Update del State.
+    public void OnExecute()
     {
         if (current != null)
         {
-          
             current.Execute();
- 
         }
-
     }
 
     public void OnFixedExecute()
     {
         if (current != null)
         {
-
             current.FixedExecute();
-           
         }
     }
     
-
+    //Transición entre estados.
     public void OnTransition(T input)
     {
         current.OnExit();
@@ -48,6 +49,5 @@ public class FSM<T>
         current = newState;
         Debug.Log(current);
         current.OnEnter();
-
     }
 }

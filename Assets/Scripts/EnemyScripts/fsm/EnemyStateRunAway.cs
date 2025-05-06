@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemyStateRunAway : State<States>
 {
-
     SteeringController controller;
     EnemyStatePatrol enempatrol;
+
+    //Instancia.
     public EnemyStateRunAway(SteeringController controller,EnemyStatePatrol patrol)
     {
         this.controller = controller;   
@@ -15,7 +16,9 @@ public class EnemyStateRunAway : State<States>
 
     public override void OnEnter()
     {
+        //Cambia el Steering.
         controller.ChangeStearingMode(SteeringController.SteeringMode.flee);
+
         RemoveTransitions(enempatrol, States.Patrol);
     }
 
@@ -23,14 +26,17 @@ public class EnemyStateRunAway : State<States>
     {
   
     }
+
     public override void FixedExecute()
     {
+        //Ejecuta el Steering.
         controller.ExecuteSteering();
     }
 
     public override void OnExit()
     {
-        AddTransition(States.Patrol, enempatrol);
+        //Agrega transición.
+        AddTransition(States.Patrol, enempatrol); 
     }
 }
 
