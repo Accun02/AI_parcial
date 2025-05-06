@@ -15,12 +15,13 @@ public class SteeringController : MonoBehaviour
     public Transform target;
     public Rigidbody targetrb;
     public Transform[] Waypoints;
-    public ObstacleAvoidance obstacleAvoidance; // (Se arrastra el script desde el inspector)
+    public ObstacleAvoidance obstacleAvoidance; //(Se arrastra el script desde el inspector)
     public WaypointController controller;
     private ISteering currentSteering;
     public Rigidbody rb;
     private Vector3 finalForce;
 
+    //instancias de los comportamientos
     Flee flee;
     Persuit persuit;
     Evade evade;
@@ -37,37 +38,38 @@ public class SteeringController : MonoBehaviour
 
     void Start()
     {
+        //se crean los objetos de cada comportameinto con sus dependencias
         none = new(rb);
         flee = new(rb, target, maxVelocity);
         persuit = new(rb, targetrb, maxVelocity, timePrediction);
         evade = new(rb, targetrb, maxVelocity, timePrediction);
         seek = new(rb, target,maxVelocity);
       
-
+        //el comp. inicial es ninguna
         currentSteering = none;
     }
-    public void gotoposition(Transform wptarget)
+    public void gotoposition(Transform wptarget) //cambia el objetivo del seek
     {
      seek.target = wptarget;
      
     }
-    public void ExecuteSteering()
+    public void ExecuteSteering() //ejecuta la logica del comportamiento
     {
     
         Vector3 steeringDir = currentSteering.MoveDirection();                                                                                                                                       
 
-        // Dirección de evasión de obstáculos
+        //dirección de evasión de obstáculos
         Vector3 avoidDir = obstacleAvoidance ? obstacleAvoidance.Avoid() : Vector3.zero;
 
-        // Suma de ambas fuerzas
+        //suma de ambas fuerzas
         finalForce = steeringDir + avoidDir;
 
         if (steeringDir != Vector3.zero)
         {
-            // Aplicación de la fuerza al Rigidbody
+            //aplicación de la fuerza al Rigidbody
             rb.AddForce(finalForce, ForceMode.Acceleration);
 
-            // Rotación hacia la dirección de movimiento
+            //rotación hacia la dirección de movimiento
             if (rb.velocity != Vector3.zero)
                 transform.forward = rb.velocity.normalized;
         }
@@ -75,7 +77,7 @@ public class SteeringController : MonoBehaviour
       
     }
 
-    public void ChangeStearingMode(SteeringMode mode)
+    public void ChangeStearingMode(SteeringMode mode) //cambia el comportamiento segun el modo
     {
         this.mode = mode;
 

@@ -5,17 +5,16 @@ using UnityEngine;
 
 public class ActionTree : ItreeNode
 {
-    Action actions;
+    Action actions; //accion que se ejecutara cuando este nodo sea alcanzado
     public ActionTree(Action actions)
     {
-        this.actions = actions;
+        this.actions = actions; //se guarda la accion a ejecutar
     }
 
     
     public void Execute()
     {
-        actions();
-    
+        actions(); //se ejecuta la acción asignada
     }
 
 }

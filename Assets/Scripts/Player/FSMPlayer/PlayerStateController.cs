@@ -1,13 +1,14 @@
 using UnityEngine;
 
-[RequireComponent(typeof(FPScontroller))]
-public class PlayerStateController : MonoBehaviour
+[RequireComponent(typeof(FPScontroller))] //necesita que el GO tenga FPS controller
+public class PlayerStateController : MonoBehaviour //gestiona los estados del jugador
 {
-    public FSM<States> fsm;
-    private IdleState idle;
+    //maquina de estados finito y los estados idle y caminar
+    public FSM<States> fsm; 
+    private IdleState idle; 
     private WalkState walk;
 
-    private FPScontroller controller;
+    private FPScontroller controller; //compnenete fps controller
 
     [SerializeField] private AudioSource SFX;
     [SerializeField] private AudioClip playerWalking;
@@ -16,23 +17,23 @@ public class PlayerStateController : MonoBehaviour
     {
         controller = GetComponent<FPScontroller>();
 
-        // Crear estados con referencia al controller
+        //crea estados con referencia al controller con el sonido
         idle = new IdleState(controller);
         walk = new WalkState(controller, playerWalking, SFX);
 
-        // Definir transiciones
+        //define las transiciones
         idle.AddTransition(States.Walk, walk);
         walk.AddTransition(States.Idle, idle);
 
-        // Crear FSM e iniciar en Idle
+        //crea FSM e inicia en Idle
         fsm = new FSM<States>(idle);
     }
 
     private void Update()
     {
-        fsm.OnExecute();
+        fsm.OnExecute(); //ejecuta el estado actual
 
-        // Transiciones automáticas según input
+        //cambios de estados según el input del jugador
         if (IsMoving())
         {
             fsm.OnTransition(States.Walk);
@@ -43,7 +44,7 @@ public class PlayerStateController : MonoBehaviour
         }
     }
 
-    private bool IsMoving()
+    private bool IsMoving() //inputs para detectar cuando el jugador se mueve
     {
         return Input.GetKey(KeyCode.UpArrow) ||
                Input.GetKey(KeyCode.DownArrow) ||

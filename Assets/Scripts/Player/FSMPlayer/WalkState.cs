@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class WalkState : State<States>
+public class WalkState : State<States> //estado de caminata
 {
     private FPScontroller controller;
 
-    [SerializeField] private AudioSource SFX;
+    //audio de pasos para acompañar al estado de caminata
+    [SerializeField] private AudioSource SFX; 
     [SerializeField] private AudioClip playerWalking;
 
     public WalkState(FPScontroller fps, AudioClip soundWalking, AudioSource playerWalking)
@@ -14,10 +15,10 @@ public class WalkState : State<States>
         this.playerWalking = soundWalking;
     }
 
-    public override void OnEnter()
+    public override void OnEnter() //cuando entro al estado walk
     {
         Debug.Log("WALK State Activated");
-        controller.canMove = true; // Habilita el movimiento
+        controller.canMove = true; //habilita el movimiento
         SFX.clip = playerWalking;
         SFX.Play();
     }
@@ -27,10 +28,10 @@ public class WalkState : State<States>
 
     }
 
-    public override void OnExit()
+    public override void OnExit() //cuando salgo del estado walk
     {
         Debug.Log("No More WALK State");
-        controller.canMove = false; // Lo frenamos cuando sale
+        controller.canMove = false; //se detiene el mov y el efecto de sonido
         SFX.Stop();
     }
 }

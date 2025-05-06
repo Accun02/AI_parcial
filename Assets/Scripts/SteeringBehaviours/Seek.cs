@@ -17,9 +17,9 @@ public class Seek : ISteering
 
     public Vector3 MoveDirection()
     {
-        if( (target == null) ) return Vector3.zero;
-        Vector3 desiredVelocity = (target.position - rb.position).normalized * maxVelocity;
-        Vector3 directionForce = desiredVelocity - rb.velocity;
+        if( (target == null) ) return Vector3.zero; //si no hay objetivo, no hace nada
+        Vector3 desiredVelocity = (target.position - rb.position).normalized * maxVelocity; //calcula la velocidad hacia el objetivo
+        Vector3 directionForce = desiredVelocity - rb.velocity; //calcula la diferencia con la velocidad actual para aplicar como fuerza
         directionForce.y = 0;
         directionForce = Vector3.ClampMagnitude(directionForce, maxVelocity);
         return directionForce;

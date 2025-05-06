@@ -2,7 +2,7 @@
 using UnityEngine;
 using static SteeringController;
 using static UnityEngine.GraphicsBuffer;
-public class None : ISteering
+public class None : ISteering 
 {
     Rigidbody body;
     public None(Rigidbody rigidbody) 
@@ -12,7 +12,7 @@ public class None : ISteering
 
     public Vector3 MoveDirection()
     {
-
+        //detiene el mov.
         body.velocity = Vector3.zero;
         body.angularVelocity = Vector3.zero;
         body.rotation = Quaternion.identity;

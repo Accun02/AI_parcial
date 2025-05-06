@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class QuestionTree : ItreeNode
 {
-    Func<bool> question;
+    Func<bool> question; //pregunta o condicion que se evaluara
+    //ramas izq (si es verdadero) y der (si es falso)
     ItreeNode ltnode;
     ItreeNode rtnode;
 
@@ -21,7 +22,7 @@ public class QuestionTree : ItreeNode
     {
         if (question() == true)
         {
-            ltnode.Execute();
+            ltnode.Execute(); //si la condición es verdadera, ejecuta rama izquierda
         }
         else
         {

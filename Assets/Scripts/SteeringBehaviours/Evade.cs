@@ -16,7 +16,7 @@ public class Evade : ISteering
     }
     public Vector3 MoveDirection()
     {
-        // Predice la futura posición del objetivo y se aleja de ella.
+        //predice la futura posición del objetivo y se aleja de ella.
         Vector3 predicionPosition = targetRb.position + targetRb.velocity * timePrediction * Vector3.Distance(rb.position, targetRb.position);
         Vector3 desiredVelocity = (rb.position - predicionPosition).normalized * maxVelocity;
         Vector3 directionForce = desiredVelocity - rb.velocity;
