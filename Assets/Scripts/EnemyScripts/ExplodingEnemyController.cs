@@ -36,10 +36,11 @@ public class ExplodingEnemyController : MonoBehaviour
 
         // Transiciones
         patrol.AddTransition(States.Idle, idle);
-        patrol.AddTransition(States.Chase, explode);
+        patrol.AddTransition(States.Explode, explode);
+        patrol.AddTransition(States.RunAway, runAway);
 
         idle.AddTransition(States.Patrol, patrol);
-        idle.AddTransition(States.Chase,explode);
+        idle.AddTransition(States.Explode,explode);
 
         explode.AddTransition(States.Idle, idle);
 
@@ -97,16 +98,11 @@ public class ExplodingEnemyController : MonoBehaviour
     ;
     }
 
-    bool CanAttack()
-    {
-
-        return Vector3.Distance(player.transform.position, transform.position) <= enemy.AttackLOS.detectionRange;
-    }
 
     bool  ChooseWise()
     {
         var random =  generateRandom();
-        if (random < 0.3f)
+        if (random < 0.7f)
                 {
                     return true;
          

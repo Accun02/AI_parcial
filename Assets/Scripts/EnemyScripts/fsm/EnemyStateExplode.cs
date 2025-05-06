@@ -17,7 +17,7 @@ public class EnemyStateExplode : State<States>
 
     public override void OnEnter()
     {
-        con
+        controller.ChangeStearingMode(SteeringController.SteeringMode.None);
     }
 
     public override void Execute()

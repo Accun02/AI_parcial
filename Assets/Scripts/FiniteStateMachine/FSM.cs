@@ -24,7 +24,7 @@ public class FSM<T>
         {
           
             current.Execute();
-            Debug.Log(current);
+ 
         }
 
     }
@@ -42,10 +42,11 @@ public class FSM<T>
 
     public void OnTransition(T input)
     {
-        current.OnEnter();
+        current.OnExit();
         Istate<T> newState = current.GetTransition(input);
         if (newState == null) return;
         current = newState;
+        Debug.Log(current);
         current.OnEnter();
 
     }

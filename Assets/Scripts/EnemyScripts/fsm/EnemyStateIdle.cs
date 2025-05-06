@@ -34,14 +34,24 @@ public class EnemyStateIdle : State<States>
         RemoveTransitions(enemchase, States.Chase);
         RemoveTransitions(enempatrol, States.Patrol);
         controller.ChangeStearingMode(SteeringController.SteeringMode.None);
-
+      if (enemy != null)  enemy.timer = 10;
+        if (exploding != null) exploding.timer = 10;
     }
 
     public override void Execute()
     {
-          
-        enemy.timer -= Time.deltaTime;
-        enemy.StandTime();
+        if (enemy != null)
+        {
+            enemy.timer -= Time.deltaTime;
+            enemy.StandTime();
+        }
+        if (exploding != null)
+        {
+            exploding.timer -= Time.deltaTime;
+
+            exploding.StandTime();
+        }
+
       
     }
     public override void FixedExecute()
@@ -50,12 +60,8 @@ public class EnemyStateIdle : State<States>
     }
     public override void OnExit()
     {
-
-
         base.AddTransition(States.Patrol, enempatrol);
         base.AddTransition(States.Chase, enemchase);
-
-      
     }
 
 
