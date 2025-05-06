@@ -65,7 +65,6 @@ public class BasicEnemyController : MonoBehaviour
 
     private void OnInin()
     {
-
         //Ejecuta los estados.
         var patrol = new ActionTree(() => fsm.OnTransition(States.Patrol));
         var idle = new ActionTree(() => fsm.OnTransition(States.Idle));

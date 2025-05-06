@@ -54,21 +54,19 @@ public class ExplodingEnemyController : MonoBehaviour
         runAway.AddTransition(States.Patrol, patrol);
 
         fsm = new FSM<States>(idle);
-     
     }
 
     private void OnInin()
     {
 
-        //Ejecuta los estados
+        //Ejecuta los estados.
         var patrol = new ActionTree(() => fsm.OnTransition(States.Patrol));
         var idle = new ActionTree(() => fsm.OnTransition(States.Idle));
         var explode = new ActionTree(() => fsm.OnTransition(States.Explode));
         var runAway = new ActionTree(() => fsm.OnTransition(States.RunAway));
 
-        //Cambia entre estados
-
-        var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), idle, patrol); // 
+        //Cambia entre estados.
+        var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), idle, patrol);
         var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway);
         var qChooseAction = new QuestionTree(() => ChooseWise(), lostplayerr,explode);   
 
@@ -80,7 +78,7 @@ public class ExplodingEnemyController : MonoBehaviour
 
         var qplayerexist = new QuestionTree(() => player != null, qisidle, null);
 
-        root = qplayerexist; //root inicial
+        root = qplayerexist; //Root inicial.
     }
 
     private bool waitorcontinue()
@@ -104,16 +102,15 @@ public class ExplodingEnemyController : MonoBehaviour
     ;
     }
 
-
     bool  ChooseWise()
     {
         var random =  generateRandom();
         if (random < 0.7f)
-                {
-                    return true;
+        {
+           return true;
          
-                }
-                else return false; 
+        }
+        else return false; 
     }
 
     float generateRandom()
@@ -132,7 +129,7 @@ public class ExplodingEnemyController : MonoBehaviour
 
      void FixedUpdate()
     {
-        fsm.OnFixedExecute();
+       fsm.OnFixedExecute();
     }
 }
 

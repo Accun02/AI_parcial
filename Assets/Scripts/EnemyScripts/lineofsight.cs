@@ -6,19 +6,21 @@ using UnityEngine.UIElements;
 
 public class lineofsight : MonoBehaviour
 {
+    [SerializeField] private LayerMask obstaclesMask;
+
     public float detectionRange;
     public float loseplayer;
     public float detectionAngle;
-    [SerializeField] private LayerMask obstaclesMask;
 
-
-    public bool CheckDistance(Transform target) //Checks if the target is within range of vision.
+    //Comprueba si el objetivo está dentro del rango de visión.
+    public bool CheckDistance(Transform target) 
     {
         float distance = Vector3.Distance(target.position, transform.position);
 
         return distance <= detectionRange;
     }
 
+    //Comprueba si el objetivo está fuera del rango de seguimiento (como para dejar de perseguirlo).
     public bool LosePlayer(Transform target)
     {
         float distance = Vector3.Distance(target.position, this.transform.position);
@@ -26,14 +28,16 @@ public class lineofsight : MonoBehaviour
         return distance > loseplayer;
     }
 
-    public bool CheckAngle(Transform target) //Checks if the target is within the angle of vision.
+    // Comprueba si el objetivo está dentro del ángulo de visión.
+    public bool CheckAngle(Transform target)
     {
         Vector3 dir = target.position - transform.position;
         float angle = Vector3.Angle(transform.forward, dir);
         return angle <= detectionAngle / 2;
     }
 
-    public bool CheckView(Transform target) //Checks if no obstacles obstructs the target out of view.
+    // Comprueba que no haya obstáculos que bloqueen la vista del objetivo.
+    public bool CheckView(Transform target)
     {
         Vector3 dir = target.position - transform.position;
 
@@ -42,13 +46,14 @@ public class lineofsight : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        // Dibuja una esfera que representa el rango de detección.
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
 
+        // Dibuja líneas que representan el ángulo de visión.
         Gizmos.color = Color.red;
         Gizmos.DrawRay(transform.position, Quaternion.Euler(0, detectionAngle / 2, 0) * transform.forward * detectionRange);
         Gizmos.DrawRay(transform.position, Quaternion.Euler(0, -detectionAngle / 2, 0) * transform.forward * detectionRange);
-
     }
 }
 
