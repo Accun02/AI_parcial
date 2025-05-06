@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Explodingenemy : BaseClassEnemy
 {
+    [SerializeField] private AudioSource enemySFX;
+    [SerializeField] private AudioClip enemyExplodes;
 
-public LayerMask layerMask;
+    public LayerMask layerMask;
+
     public float radius =  10;
 
     private void Awake()
@@ -13,14 +16,14 @@ public LayerMask layerMask;
         base.Awake();
     }
 
-
- 
-
     public override void Attack()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position,radius, layerMask);
         if (hits != null)
         {
+            enemySFX.clip = enemyExplodes;
+            enemySFX.Play();
+
             Destroy(this.gameObject);
             foreach (var item in hits)
             {

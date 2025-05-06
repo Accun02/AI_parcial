@@ -10,14 +10,20 @@ public class ExplodingEnemyController : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Explodingenemy enemy;
     [SerializeField] private SteeringController controller;
-    private FSM<States> fsm;
+
     [SerializeField] WaypointController waypointController;
+
+    private FSM<States> fsm;
+
     public float timer;
+
     bool checkplayer;
+
     EnemyStateIdle idle;
     EnemyStatePatrol patrol;
     EnemyStateExplode explode;
     EnemyStateRunAway runAway;
+
     ItreeNode root;
 
     void Start()
@@ -41,6 +47,7 @@ public class ExplodingEnemyController : MonoBehaviour
 
         idle.AddTransition(States.Patrol, patrol);
         idle.AddTransition(States.Explode,explode);
+        idle.AddTransition(States.RunAway, runAway);
 
         explode.AddTransition(States.Idle, idle);
 
@@ -54,14 +61,13 @@ public class ExplodingEnemyController : MonoBehaviour
     private void OnInin()
     {
 
-        //ejecuta los estados
+        //Ejecuta los estados
         var patrol = new ActionTree(() => fsm.OnTransition(States.Patrol));
         var idle = new ActionTree(() => fsm.OnTransition(States.Idle));
         var explode = new ActionTree(() => fsm.OnTransition(States.Explode));
         var runAway = new ActionTree(() => fsm.OnTransition(States.RunAway));
 
-        //cambia entre estados
-
+        //Cambia entre estados
         var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), idle, patrol); // 
         var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway);
         var qChooseAction = new QuestionTree(() => ChooseWise(), lostplayerr,explode);   
@@ -102,7 +108,7 @@ public class ExplodingEnemyController : MonoBehaviour
     bool  ChooseWise()
     {
         var random =  generateRandom();
-        if (random < 0.7f)
+        if (random < 0.1f)
                 {
                     return true;
          
@@ -128,7 +134,5 @@ public class ExplodingEnemyController : MonoBehaviour
     {
         fsm.OnFixedExecute();
     }
-
-    
 }
 
