@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> EnemyList;
 
+    public PFNodeGrid PFNodeGrid;
     public GameObject PlayerController;
 
     public static GameManager Instance;
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
             Destroy(Instance);
         }
         DontDestroyOnLoad(Instance);
+
+        PFNodeGrid.SetNodeGrid();
     }
 
     public void Dead()

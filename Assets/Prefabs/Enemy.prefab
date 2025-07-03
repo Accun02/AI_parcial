@@ -107,6 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0a4dcbeae93c04492c6943582f1c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstaclesMask:
+    serializedVersion: 2
+    m_Bits: 0
   detectionRange: 3.46
   loseplayer: 0
   detectionAngle: 35.7
@@ -125,6 +128,7 @@ GameObject:
   - component: {fileID: 8363987201670156402}
   - component: {fileID: 2027484856272823371}
   - component: {fileID: 8574966349366599140}
+  - component: {fileID: 1159782526427383417}
   - component: {fileID: -2363038773439713286}
   m_Layer: 0
   m_Name: Enemy
@@ -164,12 +168,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2280e395a5946534aa6f1ef03c255b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
   center: {fileID: 428568294985091945}
-  AttackLOS: {fileID: 5598727917867966454}
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  AttackLOS: {fileID: 5598727917867966454}
 --- !u!114 &8858630172005497234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +275,24 @@ MonoBehaviour:
   - {fileID: 0}
   Targetpoints: 0
   radiustotarget: 1
+--- !u!114 &1159782526427383417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5008006654945272399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa98694743340344bd15801bd3ef8ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pFNodesStartAndEnd: []
+  mask:
+    serializedVersion: 2
+    m_Bits: 192
+  distanceNodeArrival: 1
+  NodeManager: {fileID: 0}
 --- !u!82 &-2363038773439713286
 AudioSource:
   m_ObjectHideFlags: 0
@@ -413,6 +434,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0a4dcbeae93c04492c6943582f1c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstaclesMask:
+    serializedVersion: 2
+    m_Bits: 0
   detectionRange: 9.22
   loseplayer: 23.1
   detectionAngle: 50
