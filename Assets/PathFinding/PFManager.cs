@@ -10,9 +10,8 @@ using Random = UnityEngine.Random;
 public class PFManager : MonoBehaviour
 {
     public static PFManager Instance { get; private set; }
-    [SerializeField] PathFindingMovement[] entities;
+    [SerializeField] PFEntity[] entities;
     [SerializeField] PFNodeGrid grid;
-    [SerializeField] float distanceToTarget;
     [SerializeField] LayerMask walls;
 
     public PFNodeGrid Grid => grid;
@@ -31,22 +30,17 @@ public class PFManager : MonoBehaviour
 
 
     public void SetPath()
-    {
-      
+    {  
         for (int i = 0; i < entities.Length; i++) 
         {
-            var startNode = grid.nodeGrid.
-
-            Where(x => (x.transform.position - entities[i].transform.position).sqrMagnitude <= entities[i].distanceNodeArrival * entities[i].distanceNodeArrival)
-               .OrderBy(x => (x.transform.position - entities[i].transform.position).sqrMagnitude).FirstOrDefault();
+            var startNode = entities[i].SearchClose();
+            Debug.Log(startNode);
             var endNode = grid.nodeGrid[Random.Range(20, 80)];
-        var path = new List<PFNodes>();  
-            
-        path = PathFinding.Astar(startNode, endNode , walls);
+            var path = new List<PFNodes>();
+            entities[i].endNode = endNode;
+            path = PathFinding.Astar(startNode, endNode , walls);
        
-            entities[i].pFNodesStartAndEnd[0] = startNode;
-            entities[i].pFNodesStartAndEnd[1] = endNode;
-            entities[i].pFNodesAllRoute = path;
+            entities[i].SetPath = path;   
         }
      
     }

@@ -60,7 +60,7 @@ public class Boid : FlockingSteeringBehaviour
         {
             Boid boid = boidsInRange[i].GetComponent<Boid>();
 
-            if (boid != null || boid == this) continue;
+            if (boid == null || boid == this) continue;
 
             direction += (transform.position - boid.transform.position).normalized / separationRadius;
 
@@ -84,7 +84,7 @@ public class Boid : FlockingSteeringBehaviour
         {
             Boid boid = boidsInRange[i].GetComponent<Boid>();
 
-            if (boid != null || boid == this) continue;
+            if (boid == null || boid == this) continue;
 
             centrePos += boid.transform.position; //Promedio de posiciones.
 
@@ -108,7 +108,7 @@ public class Boid : FlockingSteeringBehaviour
         {
             Boid boid = boidsInRange[i].GetComponent<Boid>();
 
-            if (boid != null || boid == this) continue;
+            if (boid == null || boid == this) continue;
 
             desired += boid.Velocity;
 

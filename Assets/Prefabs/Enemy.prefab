@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 8363987201670156402}
   - component: {fileID: 2027484856272823371}
   - component: {fileID: 8574966349366599140}
-  - component: {fileID: 1159782526427383417}
+  - component: {fileID: 5465147823565361351}
   - component: {fileID: -2363038773439713286}
   m_Layer: 0
   m_Name: Enemy
@@ -275,7 +275,7 @@ MonoBehaviour:
   - {fileID: 0}
   Targetpoints: 0
   radiustotarget: 1
---- !u!114 &1159782526427383417
+--- !u!114 &5465147823565361351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -284,15 +284,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 5008006654945272399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaa98694743340344bd15801bd3ef8ad, type: 3}
+  m_Script: {fileID: 11500000, guid: ad48f62e21b31f342a43bf2ac5495be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pFNodesStartAndEnd: []
-  mask:
+  endNode: {fileID: 0}
+  reachDistance: 0
+  path: []
+  NodeLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  Obsmask:
     serializedVersion: 2
     m_Bits: 192
-  distanceNodeArrival: 1
-  NodeManager: {fileID: 0}
+  speed: 4
 --- !u!82 &-2363038773439713286
 AudioSource:
   m_ObjectHideFlags: 0

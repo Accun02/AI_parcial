@@ -8,11 +8,8 @@ public class PFNodes : MonoBehaviour
     private List<PFNodes> neighbors = new List<PFNodes>();
     [SerializeField] private int widthPos;
     [SerializeField] private int heightPos;
-    [SerializeField] private float cost;
+    [SerializeField] private float cost = 1;
     [SerializeField] private bool blocked;
-    private Renderer rend;
-    [SerializeField] LayerMask Nodemask;
-    [SerializeField] LayerMask Wallmask;
      public float radius = 5f;
     public float Range = 10;
     public bool Blocked => blocked;
@@ -26,34 +23,7 @@ public class PFNodes : MonoBehaviour
     public int y { get { return heightPos; } }
     public float Cost { get { return cost; } }
 
-    private void Awake()
-    {
 
-        Collider[] hits = Physics.OverlapSphere(transform.position, radius,Nodemask);
-        List<PFNodes> nodeclose = new List<PFNodes>();
-        for (int i = 0; i < hits.Length; i++) 
-        {
-            if (hits[i].transform == this.transform) 
-            {
-                continue;
-            }
-            if (hits[i].TryGetComponent<PFNodes>(out PFNodes component))
-            {
-                nodeclose.Add(component);
-            }
-            
-        }
-        for ( int j = 0; j < nodeclose.Count; j++) 
-        {
-
-            if(!Physics.Raycast(transform.position, nodeclose[j].transform.position,Range,Wallmask))
-            {
-                neighbors.Add(nodeclose[j]);
-            }
-        }
-
-      
-    }
     public void SetIndexes(int w, int h)
     {
         widthPos = w;
@@ -63,6 +33,5 @@ public class PFNodes : MonoBehaviour
     {
         this.neighbors = neighbors;
     }
-
-  }
+    }
 
