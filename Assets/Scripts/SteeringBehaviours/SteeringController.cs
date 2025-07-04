@@ -14,9 +14,7 @@ public class SteeringController : MonoBehaviour
     [Header("References")]
     public Transform target;
     public Rigidbody targetrb;
-    public Transform[] Waypoints;
     public ObstacleAvoidance obstacleAvoidance; //(Se arrastra el script desde el inspector)
-    public WaypointController controller;
     private ISteering currentSteering;
     public Rigidbody rb;
     private Vector3 finalForce;
@@ -25,11 +23,9 @@ public class SteeringController : MonoBehaviour
     Flee flee;
     Persuit persuit;
     Evade evade;
-    Seek seek;
     None none;
     public enum SteeringMode
     {
-        seek,
         flee,
         persuit,
         evade,
@@ -43,16 +39,11 @@ public class SteeringController : MonoBehaviour
         flee = new(rb, target, maxVelocity);
         persuit = new(rb, targetrb, maxVelocity, timePrediction);
         evade = new(rb, targetrb, maxVelocity, timePrediction);
-        seek = new(rb, target,maxVelocity);
       
         //el comp. inicial es ninguna
         currentSteering = none;
     }
-    public void gotoposition(Transform wptarget) //cambia el objetivo del seek
-    {
-     seek.target = wptarget;
-     
-    }
+  
     public void ExecuteSteering() //ejecuta la logica del comportamiento
     {
     
@@ -83,9 +74,7 @@ public class SteeringController : MonoBehaviour
 
         switch (mode)
         {
-            case SteeringMode.seek:
-                currentSteering = seek;
-                break;
+    
             case SteeringMode.flee:
                 currentSteering = flee;
                 break;

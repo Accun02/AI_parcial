@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<GameObject> EnemyList;
 
     public PFNodeGrid PFNodeGrid;
-    public GameObject PlayerController;
+    public PlayerController PlayerController;
 
     public static GameManager Instance;
 
@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void Dead()
     {
+        if ( PlayerController.Health == 0)
         SceneManager.LoadScene("Gameplay");
     }
 

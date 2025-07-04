@@ -13,10 +13,7 @@ public class Explodingenemy : BaseClassEnemy
 
     public float radius =  10; //Determina quEtan lejos llega el daño.
 
-    private void Awake()
-    {
-        base.Awake();
-    }
+
 
     //Define quEpasa cuando el enemigo "ataca" (explota).
     public override void Attack()

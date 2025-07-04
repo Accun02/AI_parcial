@@ -1620,6 +1620,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd7d12c360dd4a448203d9d3a91715a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eneemymask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!82 &349407903
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7074,7 +7077,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1703514289}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 92c2d87256f007d428b713da6286b289, type: 3}
   m_Controller: {fileID: 9100000, guid: e4596792560a9b1448f9e31cecf63d97, type: 2}
   m_CullingMode: 0

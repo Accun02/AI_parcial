@@ -63,7 +63,6 @@ GameObject:
   - component: {fileID: 1969984856703306855}
   - component: {fileID: 1788468709820945486}
   - component: {fileID: 8208608043505430504}
-  - component: {fileID: 5953418834611114458}
   - component: {fileID: 1440083407370041538}
   - component: {fileID: -3769515666076416767}
   - component: {fileID: 2070293022636270030}
@@ -172,29 +171,8 @@ MonoBehaviour:
   mode: 4
   target: {fileID: 0}
   targetrb: {fileID: 0}
-  Waypoints: []
   obstacleAvoidance: {fileID: 1440083407370041538}
-  controller: {fileID: 5953418834611114458}
   rb: {fileID: 1788468709820945486}
---- !u!114 &5953418834611114458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6037226692699676672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db9d7b16180d2ec42bc17063e1aac3c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Enemy: {fileID: 245073900305155904}
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Targetpoints: 0
-  radiustotarget: 1
 --- !u!114 &1440083407370041538
 MonoBehaviour:
   m_ObjectHideFlags: 0
