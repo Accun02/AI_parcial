@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PFEntity : MonoBehaviour
 {
@@ -28,10 +30,17 @@ public class PFEntity : MonoBehaviour
             {
                 node++;
             }
+
+            if (node == path.Count)
+            {
+                SetNewPath();
+                node = 0;
+              
+            }
         }
     }
 
-    public bool checkdistancetowaypoint() //verifica si el enemigo llegÛ lo suficientemente cerca del waypoint actual
+    public bool checkdistancetowaypoint() //verifica si el enemigo llegÅElo suficientemente cerca del waypoint actual
     {
         if (Vector3.Distance(transform.position, path[node].transform.position) <= reachDistance)
         {
@@ -73,5 +82,21 @@ public class PFEntity : MonoBehaviour
         PFNodes closenode = Closestto.gameObject.GetComponent<PFNodes>();
         Debug.Log(closenode);
         return closenode;
+    }
+
+
+    public void SetNewPath()
+    {
+
+        PFNodes startNode = endNode;
+          
+         endNode = PFManager.Instance.grid.nodeGrid[Random.Range(20, 80)];
+         var path = new List<PFNodes>();
+      
+          path = PathFinding.Astar(startNode, endNode, Obsmask);
+
+          SetPath = path;
+        
+
     }
 }

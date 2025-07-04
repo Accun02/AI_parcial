@@ -11,7 +11,7 @@ public class PFManager : MonoBehaviour
 {
     public static PFManager Instance { get; private set; }
     [SerializeField] PFEntity[] entities;
-    [SerializeField] PFNodeGrid grid;
+     public PFNodeGrid grid;
     [SerializeField] LayerMask walls;
 
     public PFNodeGrid Grid => grid;

@@ -32,12 +32,7 @@ public class PFNodeGrid : MonoBehaviour
 
             for (int w = 0; w < width; w++)
             {
-                //List<PFNodes> neigh = new();
-                //if (w > 0) neigh.Add(nodeGrid[(w - 1) + h * width]);
-                //if (w < width - 1) neigh.Add(nodeGrid[(w + 1) + h * width]);
-                //if (h > 0) neigh.Add(nodeGrid[w + (h - 1) * width]);
-                //if (h < height - 1) neigh.Add(nodeGrid[w + (h + 1) * width]);
-                //nodeGrid[w + h * width].SetNeighbors(neigh);
+       
 
                 nodeGrid[w + h * width].SetNeighbors(nodes,obs);
             }

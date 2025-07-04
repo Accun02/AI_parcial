@@ -351,7 +351,7 @@ MonoBehaviour:
   Obsmask:
     serializedVersion: 2
     m_Bits: 192
-  speed: 5
+  speed: 3
 --- !u!1001 &9129732095201503171
 PrefabInstance:
   m_ObjectHideFlags: 0
