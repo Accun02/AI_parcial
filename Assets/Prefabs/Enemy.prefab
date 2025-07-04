@@ -229,14 +229,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e26e487d6c52b145b9e1216a1363ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 3
+  maxVelocity: 6
   timePrediction: 0.3
   mode: 4
   target: {fileID: 0}
   targetrb: {fileID: 0}
-  Waypoints: []
   obstacleAvoidance: {fileID: 2027484856272823371}
-  controller: {fileID: 0}
   rb: {fileID: 8230446598382997340}
 --- !u!114 &2027484856272823371
 MonoBehaviour:
@@ -270,13 +268,14 @@ MonoBehaviour:
   endNode: {fileID: 0}
   reachDistance: 1
   path: []
+  rb: {fileID: 0}
   NodeLayerMask:
     serializedVersion: 2
     m_Bits: 512
   Obsmask:
     serializedVersion: 2
     m_Bits: 192
-  speed: 4
+  speed: 2
 --- !u!82 &-2363038773439713286
 AudioSource:
   m_ObjectHideFlags: 0
@@ -513,5 +512,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 80.37873, y: 149.01392, z: 36.265217}
-  m_Center: {x: -0.19758195, y: 97.00962, z: -0.2719201}
+  m_Size: {x: 80.37873, y: 172.29584, z: 36.265217}
+  m_Center: {x: -0.19758195, y: 85.368904, z: -0.2719201}

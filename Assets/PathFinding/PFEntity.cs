@@ -10,6 +10,7 @@ public class PFEntity : MonoBehaviour
     public PFNodes endNode;
     public float reachDistance;
     [SerializeField] private List<PFNodes> path;
+    [SerializeField] Rigidbody rb;
     float radius = 100;
     [SerializeField] LayerMask NodeLayerMask;
     [SerializeField] LayerMask Obsmask;
@@ -25,6 +26,7 @@ public class PFEntity : MonoBehaviour
         {
             Vector3 dir = path[node].transform.position - transform.position;
             transform.position += dir.normalized * speed * Time.deltaTime;
+            transform.LookAt(path[node].transform);
             if (dir.sqrMagnitude < reachDistance)
 
             {

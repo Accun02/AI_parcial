@@ -59,6 +59,7 @@ public class SteeringController : MonoBehaviour
         {
             //aplicación de la fuerza al Rigidbody
             rb.AddForce(finalForce, ForceMode.Acceleration);
+            transform.LookAt(target);
 
             //rotación hacia la dirección de movimiento
             if (rb.velocity != Vector3.zero)

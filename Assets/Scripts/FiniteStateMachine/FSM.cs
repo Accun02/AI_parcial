@@ -47,7 +47,7 @@ public class FSM<T>
         Istate<T> newState = current.GetTransition(input);
         if (newState == null) return;
         current = newState;
-       
+        Debug.Log(newState);
         current.OnEnter();
     }
 }

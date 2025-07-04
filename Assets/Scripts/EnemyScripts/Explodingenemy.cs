@@ -26,7 +26,7 @@ public class Explodingenemy : BaseClassEnemy
             foreach (var item in hits)
             {
                 var currTarget = item.transform;
-                GameManager.Instance.Dead();
+           
                 break;
             }
             Destroy(this.gameObject);
