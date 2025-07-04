@@ -11,7 +11,7 @@ public class ExplodingEnemyController : MonoBehaviour
     [SerializeField] private Explodingenemy enemy;
     [SerializeField] private SteeringController controller;
 
-    [SerializeField] WaypointController waypointController;
+    [SerializeField] PFEntity entity;
 
     private FSM<States> fsm;
 
@@ -35,7 +35,7 @@ public class ExplodingEnemyController : MonoBehaviour
     private void InitialilzeFSM()
     {
 
-        patrol = new EnemyStatePatrol(controller,waypointController);
+        patrol = new EnemyStatePatrol(controller,entity);
         idle = new EnemyStateIdle(controller,this,patrol);
         explode = new EnemyStateExplode(enemy,controller,patrol,idle);
         runAway = new EnemyStateRunAway(controller,patrol);
@@ -70,7 +70,7 @@ public class ExplodingEnemyController : MonoBehaviour
         var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway);
         var qChooseAction = new QuestionTree(() => ChooseWise(), lostplayerr,explode);   
 
-        var qgoingtodestination = new QuestionTree(() => waypointController.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol);
+        var qgoingtodestination = new QuestionTree(() => entity.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol);
 
         var qseepalyer = new QuestionTree(() =>checkplayer, qChooseAction,qgoingtodestination);
 

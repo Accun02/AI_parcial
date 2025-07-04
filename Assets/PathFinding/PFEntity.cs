@@ -13,20 +13,33 @@ public class PFEntity : MonoBehaviour
     [SerializeField] LayerMask Obsmask;
     public float speed;
 
+    int node = 0;
     public List<PFNodes> SetPath { set { path = value; } }
 
     // Update is called once per frame
-    void Update()
+  public  void Move()
     {
         if (path.Count > 0)
         {
-            Vector3 dir = path[0].transform.position - transform.position;
+            Vector3 dir = path[node].transform.position - transform.position;
             transform.position += dir.normalized * speed * Time.deltaTime;
-            if (dir.sqrMagnitude < 0.2f)
-                path.RemoveAt(0);
+            if (dir.sqrMagnitude < reachDistance)
+
+            {
+                node++;
+            }
         }
     }
 
+    public bool checkdistancetowaypoint() //verifica si el enemigo llegó lo suficientemente cerca del waypoint actual
+    {
+        if (Vector3.Distance(transform.position, path[node].transform.position) <= reachDistance)
+        {
+        //cambia al prox waypoint segun la direccion
+            return true; //esta en el rango
+        }
+        else { return false; } //no llego aun
+    }
     public PFNodes SearchClose()
     {
         Collider[] Hits = Physics.OverlapSphere(this.transform.position, radius, NodeLayerMask);

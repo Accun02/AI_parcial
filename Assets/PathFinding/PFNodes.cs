@@ -10,6 +10,7 @@ public class PFNodes : MonoBehaviour
     [SerializeField] private int heightPos;
     [SerializeField] private float cost = 1;
     [SerializeField] private bool blocked;
+    
      public float radius = 5f;
     public float Range = 10;
     public bool Blocked => blocked;
@@ -29,9 +30,21 @@ public class PFNodes : MonoBehaviour
         widthPos = w;
         heightPos = h;
     }
-    public void SetNeighbors(List<PFNodes> neighbors)
+    public void SetNeighbors( LayerMask nodes, LayerMask  obstacles)
     {
-        this.neighbors = neighbors;
+  
+        Collider[] Hits = Physics.OverlapSphere(this.transform.position, radius, nodes);
+        for (int i = 0; i < Hits.Length; i++)
+        {
+            Vector3 dir = Hits[i].transform.position - transform.position;
+            if (!Physics.Raycast(transform.position, dir.normalized, dir.magnitude, obstacles))
+            {
+                PFNodes neigbourNode = Hits[i].gameObject.GetComponent<PFNodes>();
+                if (neigbourNode != null) 
+                neighbors.Add(neigbourNode);
+            }
+            
+        }
     }
     }
 

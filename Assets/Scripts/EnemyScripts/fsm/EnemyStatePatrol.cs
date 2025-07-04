@@ -9,27 +9,23 @@ using Vector3 = UnityEngine.Vector3;
 public class EnemyStatePatrol : State<States>
 {
     SteeringController controller;
-    WaypointController waypointController;
+    PFEntity pFEntity;
 
     //Instancia.
-    public EnemyStatePatrol(SteeringController controller, WaypointController waypointController)
+    public EnemyStatePatrol(SteeringController controller, PFEntity entity)
     {
         this.controller = controller;
-        this.waypointController = waypointController;
+  this.pFEntity = entity;
     }
 
     public override void OnEnter()
     {
-        //Cambia el Steering.
-        controller.ChangeStearingMode(SteeringController.SteeringMode.seek);
 
-        //El Waypoint al que el enemigo se tiene que dirigir.
-        controller.gotoposition(waypointController.waypoints[waypointController.Targetpoints]);
     }
 
     public override void FixedExecute()
     {
-        controller.ExecuteSteering();
+        pFEntity.Move();
     }
 
     public override void OnExit()

@@ -10,9 +10,7 @@ public class BasicEnemyController : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Enemy enemy;
     [SerializeField] private SteeringController controller;
-
-    [SerializeField] WaypointController waypointController;
-
+    [SerializeField] private PFEntity entity;
     private FSM<States> fsm;
 
     public float timer;
@@ -36,7 +34,7 @@ public class BasicEnemyController : MonoBehaviour
     private void InitialilzeFSM()
     {
 
-        patrol = new EnemyStatePatrol(controller, waypointController);
+        patrol = new EnemyStatePatrol(controller, entity);
         chase = new EnemyStateChase(controller, patrol);
         idle = new EnemyStateIdle(controller, this, chase, patrol);
         attack = new EnemyStateAttack(enemy, controller, chase, patrol, idle);
@@ -82,7 +80,7 @@ public class BasicEnemyController : MonoBehaviour
         var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway); // Si el enemigo estElejos de el jugador.
         var qChooseAction = new QuestionTree(() => ChooseWise(), insight, lostplayerr);  // El enemigo eligue entre dos opciones: RunAway o Chase al jugador. 
 
-        var qgoingtodestination = new QuestionTree(() => waypointController.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol); // Si estEyendo en dirección al Waypoint, o si no, empieza a Patrol de nuevo.
+        var qgoingtodestination = new QuestionTree(() => entity.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol); // Si estEyendo en dirección al Waypoint, o si no, empieza a Patrol de nuevo.
 
         var qseepalyer = new QuestionTree(() => checkplayer, qChooseAction, qgoingtodestination); //Si el enemigo puede ver al jugador.
 

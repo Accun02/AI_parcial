@@ -5,6 +5,8 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class PFNodeGrid : MonoBehaviour
 {
+    [SerializeField] LayerMask nodes;
+    [SerializeField] LayerMask obs;
     public PFNodes prefab;
     public PFNodes[] nodeGrid;
     public int width;
@@ -27,24 +29,19 @@ public class PFNodeGrid : MonoBehaviour
         }
         for (int h = 0; h < height; h++)
         {
+
             for (int w = 0; w < width; w++)
             {
-                List<PFNodes> neigh = new();
-                if (w > 0) neigh.Add(nodeGrid[(w - 1) + h * width]);
-                if (w < width - 1) neigh.Add(nodeGrid[(w + 1) + h * width]);
-                if (h > 0) neigh.Add(nodeGrid[w + (h - 1) * width]);
-                if (h < height - 1) neigh.Add(nodeGrid[w + (h + 1) * width]);
-                nodeGrid[w + h * width].SetNeighbors(neigh);
+                //List<PFNodes> neigh = new();
+                //if (w > 0) neigh.Add(nodeGrid[(w - 1) + h * width]);
+                //if (w < width - 1) neigh.Add(nodeGrid[(w + 1) + h * width]);
+                //if (h > 0) neigh.Add(nodeGrid[w + (h - 1) * width]);
+                //if (h < height - 1) neigh.Add(nodeGrid[w + (h + 1) * width]);
+                //nodeGrid[w + h * width].SetNeighbors(neigh);
+
+                nodeGrid[w + h * width].SetNeighbors(nodes,obs);
             }
         }
     }
-    [ContextMenu("Eliminar Nodos")]
-    public void DeleteNodes()
-    {
-        for (int i = 0; i < nodeGrid.Length; i++)
-        {
-            DestroyImmediate(nodeGrid[i].gameObject);
-        }
-        nodeGrid = new PFNodes[0];
-    }
+  
 }

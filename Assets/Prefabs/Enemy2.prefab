@@ -108,7 +108,7 @@ MonoBehaviour:
   player: {fileID: 0}
   enemy: {fileID: 1969984856703306855}
   controller: {fileID: 8208608043505430504}
-  waypointController: {fileID: 5953418834611114458}
+  entity: {fileID: 9031133763191457568}
   timer: 10
 --- !u!114 &1969984856703306855
 MonoBehaviour:
