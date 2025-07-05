@@ -75,12 +75,13 @@ public class BasicEnemyController : MonoBehaviour
 
         var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), idle, patrol); // El enemigo ve si se queda quieto o patrulla.
 
-        var insight = new QuestionTree(() => checkplayer, qdistance, idle); // El enemigo checkea si el jugadore estEcerca.
+        var insight = new QuestionTree(() => checkplayer, qdistance, idle); // El enemigo checkea si el jugador esta cerca.
 
-        var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway); // Si el enemigo estElejos de el jugador.
+        var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway); // Si el enemigo esta lejos del jugador.
+
         var qChooseAction = new QuestionTree(() => ChooseWise(), insight, lostplayerr);  // El enemigo eligue entre dos opciones: RunAway o Chase al jugador. 
 
-        var qgoingtodestination = new QuestionTree(() => entity.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol); // Si estEyendo en dirección al Waypoint, o si no, empieza a Patrol de nuevo.
+        var qgoingtodestination = new QuestionTree(() => entity.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol); // Si esta yendo en dirección al Waypoint, o si no, empieza a Patrol de nuevo.
 
         var qseepalyer = new QuestionTree(() => checkplayer, qChooseAction, qgoingtodestination); //Si el enemigo puede ver al jugador.
 
