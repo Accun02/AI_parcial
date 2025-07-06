@@ -53,7 +53,7 @@ public class ExplodingEnemyController : MonoBehaviour
         runAway.AddTransition(States.Idle, idle);
         runAway.AddTransition(States.Patrol, patrol);
 
-        fsm = new FSM<States>(idle);
+        fsm = new FSM<States>(patrol); //ANTES ESTABA EN IDLE
     }
 
     private void OnInin()
@@ -67,14 +67,16 @@ public class ExplodingEnemyController : MonoBehaviour
 
         //Cambia entre estados.
         var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), idle, patrol);
+
         var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway);
-        var qChooseAction = new QuestionTree(() => ChooseWise(), lostplayerr,explode);   
+
+        var qChooseAction = new QuestionTree(() => ChooseWise(), lostplayerr, explode);   
 
         var qgoingtodestination = new QuestionTree(() => entity.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol);
 
-        var qseepalyer = new QuestionTree(() =>checkplayer, qChooseAction,qgoingtodestination);
+        var qseepalyer = new QuestionTree(() => CheckPlayer(), qChooseAction, qgoingtodestination);
 
-        var qisidle = new QuestionTree(() => StandTime(),patrol,qseepalyer);
+        var qisidle = new QuestionTree(() => StandTime(), patrol, qseepalyer);
 
         var qplayerexist = new QuestionTree(() => player != null, qisidle, null);
 
@@ -124,12 +126,28 @@ public class ExplodingEnemyController : MonoBehaviour
     {    
         fsm.OnExecute();
         root.Execute();
-        checkplayer = LOS.CheckAngle(player) && LOS.CheckDistance(player) && LOS.CheckView(player);
+        //checkplayer = LOS.CheckAngle(player) && LOS.CheckDistance(player) && LOS.CheckView(player);
     }
 
-     void FixedUpdate()
+    bool CheckPlayer()
+    {
+        if (fsm.current == idle || fsm.current == patrol)
+        {
+            checkplayer = LOS.CheckAngle(player) && LOS.CheckDistance(player) && LOS.CheckView(player);
+
+        }
+        else
+        {
+            checkplayer = LOS.CheckDistance(player) && LOS.CheckView(player);
+
+        }
+        return checkplayer;
+    }
+
+    void FixedUpdate()
     {
        fsm.OnFixedExecute();
+        
     }
 }
 

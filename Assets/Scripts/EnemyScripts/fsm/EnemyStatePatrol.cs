@@ -15,7 +15,7 @@ public class EnemyStatePatrol : State<States>
     public EnemyStatePatrol(SteeringController controller, PFEntity entity)
     {
         this.controller = controller;
-  this.pFEntity = entity;
+        this.pFEntity = entity;
     }
 
     public override void OnEnter()

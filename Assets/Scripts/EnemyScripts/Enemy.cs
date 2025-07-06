@@ -6,6 +6,7 @@ public class Enemy : BaseClassEnemy
 {
     [SerializeField] Transform center;
     private int health = 10;
+
     public int Health {  get { return health; } set { health = value; } }
     [SerializeField] LayerMask layerMask;
 

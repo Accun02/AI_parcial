@@ -22,6 +22,7 @@ public class BasicEnemyController : MonoBehaviour
     EnemyStatePatrol patrol;
     EnemyStateChase chase;
     EnemyStateRunAway runAway;
+    EnemyStateShoot shoot;
 
     ItreeNode root;
 
@@ -39,6 +40,7 @@ public class BasicEnemyController : MonoBehaviour
         idle = new EnemyStateIdle(controller, this, chase, patrol);
         attack = new EnemyStateAttack(enemy, controller, chase, patrol, idle);
         runAway = new EnemyStateRunAway(controller, patrol);
+        shoot = new EnemyStateShoot(controller, enemy); //nuevo estado
 
         // Transiciones
         patrol.AddTransition(States.Idle, idle);
@@ -47,17 +49,18 @@ public class BasicEnemyController : MonoBehaviour
         idle.AddTransition(States.Patrol, patrol);
         idle.AddTransition(States.Chase, chase);
 
-        attack.AddTransition(States.Idle, idle);
+        //attack.AddTransition(States.Idle, idle);
         attack.AddTransition(States.Patrol, patrol);
+        attack.AddTransition(States.Chase, chase);
 
         chase.AddTransition(States.Idle, idle);
         chase.AddTransition(States.Attack, attack);
-        chase.AddTransition(States.Patrol, patrol);
+        //chase.AddTransition(States.Patrol, patrol);
 
         runAway.AddTransition(States.Idle, idle);
         runAway.AddTransition(States.Patrol, patrol);
 
-        fsm = new FSM<States>(idle);
+        fsm = new FSM<States>(patrol);
 
     }
 
@@ -75,7 +78,7 @@ public class BasicEnemyController : MonoBehaviour
 
         var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), idle, patrol); // El enemigo ve si se queda quieto o patrulla.
 
-        var insight = new QuestionTree(() => checkplayer, qdistance, idle); // El enemigo checkea si el jugador estÅa cerca.
+        var insight = new QuestionTree(() => CheckPlayer(), qdistance, idle); // El enemigo checkea si el jugador estÅa cerca.
 
         var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway); // Si el enemigo estÅa lejos del jugador.
 
@@ -83,7 +86,7 @@ public class BasicEnemyController : MonoBehaviour
 
         var qgoingtodestination = new QuestionTree(() => entity.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol); // Si estÅa yendo en direcciÛn al Waypoint, o si no, empieza a Patrol de nuevo.
 
-        var qseepalyer = new QuestionTree(() => checkplayer, qChooseAction, qgoingtodestination); //Si el enemigo puede ver al jugador.
+        var qseepalyer = new QuestionTree(() => CheckPlayer(), qChooseAction, qgoingtodestination); //Si el enemigo puede ver al jugador.
 
         var qisidle = new QuestionTree(() => StandTime(), patrol, qseepalyer); //Si el enemigo estÅEquieto.
 
@@ -124,7 +127,7 @@ public class BasicEnemyController : MonoBehaviour
     bool ChooseWise()
     {
         var random = generateRandom();
-        if (random < 0.5f)
+        if (random < 1.0f)
         {
             return true;
 
@@ -140,13 +143,34 @@ public class BasicEnemyController : MonoBehaviour
         return randomValue;
     }
 
-    void Update()
-    {    
-        fsm.OnExecute();
-        root.Execute();
-        checkplayer = LOS.CheckAngle(player) && LOS.CheckDistance(player) && LOS.CheckView(player);
+    bool CheckPlayer()
+    {
+        if (fsm.current == idle || fsm.current == patrol)
+        {
+            checkplayer = LOS.CheckAngle(player) && LOS.CheckDistance(player) && LOS.CheckView(player);
+
+        }
+        else
+        {
+            checkplayer = LOS.CheckDistance(player) && LOS.CheckView(player);
+
+        }
+        return checkplayer;
     }
 
+    /*bool Attack()
+    {
+        
+    }*/
+
+    void Update()
+    {
+        fsm.OnExecute();
+        root.Execute();
+        //checkplayer = LOS.CheckAngle(player) && LOS.CheckDistance(player) && LOS.CheckView(player);
+    }
+
+    
      void FixedUpdate()
      {
         fsm.OnFixedExecute();

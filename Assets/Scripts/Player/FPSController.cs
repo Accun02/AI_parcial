@@ -11,7 +11,6 @@ public class FPScontroller : MonoBehaviour //controla el mov y rotacion del pers
     public float walkSpeed = 6f;
     public float gravity = 10f;
 
-
     public float lookSpeed = 2f;
     public float lookXLimit = 45f;
 

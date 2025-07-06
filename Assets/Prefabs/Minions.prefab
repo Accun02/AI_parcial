@@ -108,9 +108,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 4
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &3014333404864857514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285ef706713e4e74eb1abe8d8455d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 5
+  _maxSpeed: 8
   _maxForce: 10
   separationRadius: 1.25
   detectionRadius: 4
@@ -133,7 +133,6 @@ MonoBehaviour:
   layerMaskBoid:
     serializedVersion: 2
     m_Bits: 256
-  playerTranform: {fileID: 0}
 --- !u!54 &2927329323001881102
 Rigidbody:
   m_ObjectHideFlags: 0

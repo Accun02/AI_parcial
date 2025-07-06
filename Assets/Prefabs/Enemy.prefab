@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e26e487d6c52b145b9e1216a1363ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 6
+  maxVelocity: 10
   timePrediction: 0.3
   mode: 4
   target: {fileID: 0}
@@ -420,7 +420,7 @@ MonoBehaviour:
   obstaclesMask:
     serializedVersion: 2
     m_Bits: 0
-  detectionRange: 9.22
+  detectionRange: 5
   loseplayer: 23.1
   detectionAngle: 50
 --- !u!1001 &383460014175618273

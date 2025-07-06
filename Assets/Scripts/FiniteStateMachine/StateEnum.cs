@@ -12,5 +12,6 @@ using UnityEngine;
         Patrol,
         RunAway,
         Explode,
+        Shoot
     }
 

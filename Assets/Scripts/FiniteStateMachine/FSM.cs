@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FSM<T> 
 {
-    Istate<T> current;
+    public Istate<T> current;
 
     public Action<T,Istate<T>> action;
 

@@ -8,7 +8,7 @@ public class BaseClassEnemy : MonoBehaviour
 
    protected virtual void Awake()
    {
-        body = GetComponent<Rigidbody>();
+       body = GetComponent<Rigidbody>();
    }
 
     public virtual void Attack() { }
@@ -20,7 +20,7 @@ public class BaseClassEnemy : MonoBehaviour
 
     public void LookAt(Transform target) //Mira al objetivo (hasta donde tiene que ir: sea el waypoint o el jugador).
     {
-       Vector3 dirtotarget = target.position - transform.position;
-     Look(dirtotarget);
+        Vector3 dirtotarget = target.position - transform.position;
+        Look(dirtotarget);
     }
 }

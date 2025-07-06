@@ -24,7 +24,8 @@ public class EnemyStateChase : State<States>
     public override void OnEnter()
     {
         //Se eliminan posibles transiciones hacia el estado de patrullaje.
-        base.RemoveTransitions(enemPatrol, States.Patrol);
+
+        //base.RemoveTransitions(enemPatrol, States.Patrol);
 
         //Se cambia el modo de movimiento del controlador al modo Pursuit.
         controller.ChangeStearingMode(SteeringController.SteeringMode.persuit);
@@ -39,6 +40,8 @@ public class EnemyStateChase : State<States>
     public override void OnExit()
     {
         //Se vuelve a permitir la transición hacia el estado de Patrol.
-        base.AddTransition(States.Patrol,enemPatrol);
+
+        //base.AddTransition(States.Patrol,enemPatrol);
+
     }
 }
