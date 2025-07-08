@@ -3,12 +3,14 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] private float smoothSpeed = 5f;
+
     public int maxHealth = 100;
     public int currentHealth;
+
     public Image healthBarFill;
     public GameObject gameOverPanel;
 
-    [SerializeField] private float smoothSpeed = 5f;
     private float targetFill = 1f;
 
     void Start()
@@ -40,7 +42,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void UpdateHealthBar()
+    public void UpdateHealthBar()
     {
         targetFill = (float)currentHealth / maxHealth;
         healthBarFill.color = targetFill <= 0.4f ? Color.red : Color.green;

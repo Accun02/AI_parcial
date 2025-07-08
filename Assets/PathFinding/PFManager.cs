@@ -7,22 +7,26 @@ using System;
 using UnityEngine.VFX;
 using UnityEditor.Experimental.GraphView;
 using Random = UnityEngine.Random;
+
 public class PFManager : MonoBehaviour
 {
-    public static PFManager Instance { get; private set; }
     [SerializeField] PFEntity[] entities;
-     public PFNodeGrid grid;
+
     [SerializeField] LayerMask walls;
 
+    public static PFManager Instance { get; private set; }
+
+    public PFNodeGrid grid;
     public PFNodeGrid Grid => grid;
+
+    public List<RechargeAmmo> rechargeAmmoList; 
 
 
     private void Awake()
     {
         Instance = this;
-
-      
     }
+
     private void Start()
     {
         SetPath();
@@ -41,7 +45,5 @@ public class PFManager : MonoBehaviour
        
             entities[i].SetPath = path;   
         }
-     
     }
-
 }

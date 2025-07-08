@@ -25,9 +25,11 @@ public class RechargeAmmo : MonoBehaviour
         }
     }
 
-    void Reload(int ammo)
+    public void Reload(int ammo)
     {
-        player.ammo += ammo;
+        player.RechargeAmmo(ammo);
+
+        player.UpdateAmmoUI();
     }
 
     // Update is called once per frame

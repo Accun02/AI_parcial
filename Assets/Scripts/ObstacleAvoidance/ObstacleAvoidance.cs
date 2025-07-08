@@ -4,8 +4,8 @@ public class ObstacleAvoidance : MonoBehaviour
 {
     [Header("Configuration")]
     [SerializeField] private float detectionRange = 5f; // Radio de detección de obstáculos.
-    [SerializeField] private float avoidForce = 10f;     // Fuerza para evitar el obstáculo.
-    [SerializeField] private LayerMask obstacleMask;     // Capas consideradas obstáculos.
+    [SerializeField] private float avoidForce = 10f;    // Fuerza para evitar el obstáculo.
+    [SerializeField] private LayerMask obstacleMask;    // Capas consideradas obstáculos.
 
     public Vector3 Avoid()
     {

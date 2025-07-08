@@ -8,12 +8,11 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     [SerializeField] LayerMask eneemymask;
-<<<<<<< Updated upstream
+
     [SerializeField] private AudioSource audioSource;
-    private int ammo = 10;
-=======
+
     public int ammo = 10;
->>>>>>> Stashed changes
+
     private int damage = 2;
     public Image healthBarFill;
     public GameObject gameOverPanel;
@@ -87,8 +86,6 @@ public class PlayerController : MonoBehaviour
 
 
         characterController.Move(moveDirection * Time.deltaTime);  //rotacion del personaje
-
-
     }
 
     public void Rotate()
@@ -106,7 +103,6 @@ public class PlayerController : MonoBehaviour
         {
             healthBarFill.fillAmount = Mathf.Lerp(healthBarFill.fillAmount, targetFill, Time.deltaTime * smoothSpeed);
         }
-     
     }
 
     public void Shoot()
@@ -138,16 +134,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void UpdateHealthBar()
+    public void UpdateHealthBar()
     {
         targetFill = (float)currentHealth / maxHealth;
         healthBarFill.color = targetFill <= 0.4f ? Color.red : Color.green;
     }
-    void UpdateAmmoUI()
+
+    public void UpdateAmmoUI()
     {
         if (ammoText != null)
         {
             ammoText.text = "Ammo: " + ammo;
         }
+    }
+
+    public void RechargeAmmo(int amount)
+    {
+        ammo = Mathf.Clamp(ammo + amount, 0, 100);
     }
 }

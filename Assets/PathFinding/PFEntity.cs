@@ -20,16 +20,19 @@ public class PFEntity : MonoBehaviour
     public List<PFNodes> SetPath { set { path = value; } }
 
     // Update is called once per frame
-  public  void Move()
+  public void Move()
     {
         if (path.Count > 0)
         {
             Vector3 dir = path[node].transform.position - transform.position;
+
             transform.position += dir.normalized * speed * Time.deltaTime;
             transform.LookAt(path[node].transform);
-            if (dir.sqrMagnitude < reachDistance)
+
+            if (dir.sqrMagnitude < reachDistance && node < path.Count -1)
 
             {
+                //node = Mathf.Clamp (node++, 0, path.Count - 1);
                 node++;
             }
 
@@ -37,19 +40,19 @@ public class PFEntity : MonoBehaviour
             {
                 SetNewPath();
                 node = 0;
-              
             }
         }
     }
 
-    public bool checkdistancetowaypoint() //verifica si el enemigo llegElo suficientemente cerca del waypoint actual
+    public bool checkdistancetowaypoint() //verifica si el enemigo llegó lo más próximo al waypoint actual
     {
         if (Vector3.Distance(transform.position, path[node].transform.position) <= reachDistance)
         {
-        //cambia al prox waypoint segun la direccion
-            return true; //esta en el rango
+        //cambia al prox waypoint según la dirección
+            return true; //está en el rango
         }
-        else { return false; } //no llego aun
+
+        else { return false; } //no llego aún
     }
     public PFNodes SearchClose()
     {
@@ -78,9 +81,8 @@ public class PFEntity : MonoBehaviour
                 closest = distance;
                 Closestto = c;
             }
-
-        
         }
+
         PFNodes closenode = Closestto.gameObject.GetComponent<PFNodes>();
         Debug.Log(closenode);
         return closenode;
@@ -89,7 +91,6 @@ public class PFEntity : MonoBehaviour
 
     public void SetNewPath()
     {
-
         PFNodes startNode = endNode;
           
          endNode = PFManager.Instance.grid.nodeGrid[Random.Range(20, 80)];
@@ -98,7 +99,5 @@ public class PFEntity : MonoBehaviour
           path = PathFinding.Astar(startNode, endNode, Obsmask);
 
           SetPath = path;
-        
-
     }
 }
