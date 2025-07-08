@@ -64,7 +64,7 @@ public class ShootingEnemy : BaseClassEnemy
             if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, LOS.detectionRange, layerMask))
             {
 
-                Debug.Log(hit.collider.name);
+          
                 hit.collider.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
 
 
@@ -82,7 +82,7 @@ public class ShootingEnemy : BaseClassEnemy
     public override void TakeDamage(int amount)
     {
         Health = Mathf.Max(0, Health - amount);
-        Debug.Log("recibio daño");
+    
         if (Health <= 0)
         {
             Destroy(gameObject);

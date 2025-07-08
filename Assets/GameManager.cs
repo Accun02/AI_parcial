@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(Instance);
 
         PFNodeGrid.SetNodeGrid();
+        
     }
 
     public void Dead()

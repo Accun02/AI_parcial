@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         gameOverPanel.SetActive(false);
         UpdateHealthBar();
         audioSource = GetComponent<AudioSource>();
-
+        Time.timeScale = 1f;
         UpdateAmmoUI();
     }
 
@@ -130,6 +130,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Jugador muerto");
             gameOverPanel.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             Time.timeScale = 0f;
         }
     }

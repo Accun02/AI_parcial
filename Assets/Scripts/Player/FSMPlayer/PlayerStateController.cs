@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(FPScontroller))] //necesita que el GO tenga FPS controller
 public class PlayerStateController : MonoBehaviour //gestiona los estados del jugador
 {
     //maquina de estados finito y los estados idle y caminar
