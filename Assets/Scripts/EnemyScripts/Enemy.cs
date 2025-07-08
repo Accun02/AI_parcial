@@ -6,28 +6,32 @@ public class Enemy : BaseClassEnemy
 {
     [SerializeField] Transform center;
     private int health = 10;
-
+    [SerializeField] lineofsight los;
     public int Health {  get { return health; } set { health = value; } }
     [SerializeField] LayerMask layerMask;
 
-    int balas = 8;
+    public int maxBullets = 6;
+    public int CurrentBullets = 7;
     int damage = 2;
 
     public lineofsight AttackLOS;
 
-    protected override void Awake()
-    {
-       
-    }
+ 
 
     //Ataque del enemigo.
     public void RangeAttack()
     {
-        if (Physics.Raycast(transform.position,transform.forward, out RaycastHit hit,100,layerMask)  && balas > 0)
+        Debug.DrawRay(transform.position + Vector3.up, transform.forward * los.detectionRange, Color.red);
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, los.detectionRange))
         {
-            hit.collider.gameObject.GetComponent<PlayerController>().Health -= damage;
+            if (hit.transform.CompareTag("Player"))
+            {
+                hit.collider.gameObject.GetComponent<PlayerController>().TakeDamage(20);
+                
+            }
         }
-        balas--;
+        CurrentBullets--;
     }
     public override void Attack()
     {
@@ -39,9 +43,20 @@ public class Enemy : BaseClassEnemy
                 var currTarget = item.transform;
                 if (!AttackLOS.CheckAngle(currTarget)) continue;
                 if (!AttackLOS.CheckView(currTarget)) continue;
-               currTarget.GetComponent<PlayerController>().Health -= damage;
+                item.gameObject.GetComponent<PlayerController>().TakeDamage(20);
                 break;
             }
+        }
+
+      
+    }
+    public void TakeDamage(int amount)
+    {
+        health = Mathf.Max(0, health - amount);
+       
+        if (health <= 0)
+        {
+           Destroy(gameObject);
         }
     }
 }

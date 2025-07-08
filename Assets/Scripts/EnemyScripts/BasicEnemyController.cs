@@ -53,6 +53,9 @@ public class BasicEnemyController : MonoBehaviour
         attack.AddTransition(States.Patrol, patrol);
         attack.AddTransition(States.Chase, chase);
 
+        shoot.AddTransition(States.Patrol, patrol);
+     
+
         chase.AddTransition(States.Idle, idle);
         chase.AddTransition(States.Attack, attack);
         //chase.AddTransition(States.Patrol, patrol);
@@ -72,13 +75,14 @@ public class BasicEnemyController : MonoBehaviour
         var attack = new ActionTree(() => fsm.OnTransition(States.Attack));
         var chase = new ActionTree(() => fsm.OnTransition(States.Chase));
         var runAway = new ActionTree(() => fsm.OnTransition(States.RunAway));
-
+        var shoot = new ActionTree(() => fsm.OnTransition(States.Shoot));
         //Cambia entre estados.
         var qdistance = new QuestionTree(CanAttack, attack, chase); //Si el enemigo esta muy cerca del jugador, lo ataca.
 
         var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), idle, patrol); // El enemigo ve si se queda quieto o patrulla.
 
-        var insight = new QuestionTree(() => CheckPlayer(), qdistance, idle); // El enemigo checkea si el jugador esta cerca.
+        var qwichattackuse = new QuestionTree(() => CheckBulletsLeft(), qdistance, shoot);
+        var insight = new QuestionTree(() => CheckPlayer(), qwichattackuse,idle); // El enemigo checkea si el jugador esta cerca.
 
         var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway); // Si el enemigo esta lejos del jugador.
 
@@ -93,6 +97,18 @@ public class BasicEnemyController : MonoBehaviour
         var qplayerexist = new QuestionTree(() => player != null, qisidle, null); //Si existe el jugador.
 
         root = qplayerexist; //La root inicial.
+    }
+
+    private bool CheckBulletsLeft()
+    {
+        var random = generateRandom();
+        if (random + (enemy.CurrentBullets/10) > 0.7f)
+        {
+            return true;
+        }
+           return false;
+
+        
     }
 
     //Si continúa Patrol o se pone en Idle.
