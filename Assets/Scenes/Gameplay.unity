@@ -2348,6 +2348,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6507174385591725896, guid: caa26fc1656f8984daa57007d915d207, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 349407899}
     - target: {fileID: 7276151876279416811, guid: caa26fc1656f8984daa57007d915d207, type: 3}
       propertyPath: player
       value: 
