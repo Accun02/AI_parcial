@@ -13,7 +13,7 @@ public class SteeringController : MonoBehaviour
 
     [Header("References")]
     public Transform target;
-    public Rigidbody targetrb;
+    public CharacterController targetcc;
     public ObstacleAvoidance obstacleAvoidance; //(Se arrastra el script desde el inspector)
     private ISteering currentSteering;
     public Rigidbody rb;
@@ -37,8 +37,8 @@ public class SteeringController : MonoBehaviour
         //se crean los objetos de cada comportameinto con sus dependencias
         none = new(rb);
         flee = new(rb, target, maxVelocity);
-        persuit = new(rb, targetrb, maxVelocity, timePrediction);
-        evade = new(rb, targetrb, maxVelocity, timePrediction);
+        persuit = new(rb, targetcc, maxVelocity, timePrediction);
+        evade = new(rb, targetcc, maxVelocity, timePrediction);
       
         //el comp. inicial es ninguna
         currentSteering = none;

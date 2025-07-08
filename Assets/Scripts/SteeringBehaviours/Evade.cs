@@ -3,21 +3,21 @@ using UnityEngine;
 public class Evade : ISteering
 {
     private Rigidbody rb;
-    private Rigidbody targetRb;
+    private CharacterController targetcc;
 
     private float maxVelocity;
     private float timePrediction;
-    public Evade(Rigidbody rb, Rigidbody target, float maxVelocity, float timePrediction)
+    public Evade(Rigidbody rb, CharacterController target, float maxVelocity, float timePrediction)
     {
         this.rb = rb;
-        this.targetRb = target;
+        this.targetcc = target;
         this.maxVelocity = maxVelocity;
         this.timePrediction = timePrediction;
     }
     public Vector3 MoveDirection()
     {
         //predice la futura posición del objetivo y se aleja de ella.
-        Vector3 predicionPosition = targetRb.position + targetRb.velocity * timePrediction * Vector3.Distance(rb.position, targetRb.position);
+        Vector3 predicionPosition = targetcc.transform.position + targetcc.velocity * timePrediction * Vector3.Distance(rb.position, targetcc.transform.position);
         Vector3 desiredVelocity = (rb.position - predicionPosition).normalized * maxVelocity;
         Vector3 directionForce = desiredVelocity - rb.velocity;
 
