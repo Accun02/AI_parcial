@@ -9,8 +9,6 @@ public class EnemyCoward : EnemyAI
         {
             Vector3 dirToPlayer = transform.position - player.position;
             Vector3 fleePosition = transform.position + dirToPlayer.normalized * fleeDistance;
-
-            agent.SetDestination(fleePosition);
         }
     }
 }

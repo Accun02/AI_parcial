@@ -19,7 +19,6 @@ public class EnemyChaser : EnemyAI
         if (CanSeePlayer())
         {
             Debug.Log(gameObject.name + " puede ver al jugador");
-            agent.SetDestination(player.position);
 
             if (Vector3.Distance(transform.position, player.position) <= attackDistance)
             {
