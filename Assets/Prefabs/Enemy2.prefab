@@ -65,7 +65,6 @@ GameObject:
   - component: {fileID: 8208608043505430504}
   - component: {fileID: 1440083407370041538}
   - component: {fileID: -3769515666076416767}
-  - component: {fileID: 2070293022636270030}
   - component: {fileID: 9031133763191457568}
   m_Layer: 0
   m_Name: Enemy2
@@ -166,11 +165,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e26e487d6c52b145b9e1216a1363ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 6
+  maxVelocity: 3
   timePrediction: 0.3
   mode: 4
   target: {fileID: 0}
-  targetrb: {fileID: 0}
+  targetcc: {fileID: 0}
   obstacleAvoidance: {fileID: 1440083407370041538}
   rb: {fileID: 1788468709820945486}
 --- !u!114 &1440083407370041538
@@ -287,27 +286,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &2070293022636270030
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6037226692699676672}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1.8898394, z: 0.41214752}
-  m_Center: {x: 0, y: 1.1465892, z: -0.009170532}
 --- !u!114 &9031133763191457568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +301,7 @@ MonoBehaviour:
   endNode: {fileID: 0}
   reachDistance: 1
   path: []
+  rb: {fileID: 0}
   NodeLayerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -394,11 +373,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Paladin J Nordstrom
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f1d7a415ae9875a45922714c52f68e0b, type: 3}
+      propertyPath: m_Layer
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f1d7a415ae9875a45922714c52f68e0b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1407641102946018505}
   m_SourcePrefab: {fileID: 100100000, guid: f1d7a415ae9875a45922714c52f68e0b, type: 3}
+--- !u!1 &8246718919125686930 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f1d7a415ae9875a45922714c52f68e0b, type: 3}
+  m_PrefabInstance: {fileID: 9129732095201503171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1407641102946018505
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8246718919125686930}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.8898394, z: 0.41214752}
+  m_Center: {x: 0, y: 1.1465892, z: -0.009170532}
 --- !u!4 &8735271910374015016 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f1d7a415ae9875a45922714c52f68e0b, type: 3}

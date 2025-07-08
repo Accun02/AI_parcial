@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Enemy : BaseClassEnemy
@@ -12,11 +14,27 @@ public class Enemy : BaseClassEnemy
 
     public int maxBullets = 6;
     public int CurrentBullets = 7;
-    int damage = 2;
+    int damage = 20;
+
+    public float attackCooldown = 4f;
+    private float lastAttackTime;
 
     public lineofsight AttackLOS;
 
- 
+
+
+    private void Update()
+    {
+        CanAttack();
+
+    }
+
+    private bool CanAttack()
+    {
+        lastAttackTime += Time.deltaTime;
+    
+    return lastAttackTime >= attackCooldown;
+    }
 
     //Ataque del enemigo.
     public void RangeAttack()
@@ -35,25 +53,33 @@ public class Enemy : BaseClassEnemy
     }
     public override void Attack()
     {
-        Collider[] hits = Physics.OverlapSphere(center.position, AttackLOS.detectionRange, layerMask);
-        if (hits != null)
+        if (CanAttack())
         {
-            foreach (var item in hits)
+            Collider[] hits = Physics.OverlapSphere(center.position, AttackLOS.detectionRange, layerMask);
+            if (hits != null)
             {
-                var currTarget = item.transform;
-                if (!AttackLOS.CheckAngle(currTarget)) continue;
-                if (!AttackLOS.CheckView(currTarget)) continue;
-                item.gameObject.GetComponent<PlayerController>().TakeDamage(20);
-                break;
-            }
-        }
 
+                foreach (var item in hits)
+                {
+
+                    var currTarget = item.transform;
+
+                    item.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+
+                    break;
+
+
+                }
+            }
+            lastAttackTime = 0;
+        }
       
     }
     public void TakeDamage(int amount)
     {
         health = Mathf.Max(0, health - amount);
-       
+
+        Debug.Log("enem recibio daño");
         if (health <= 0)
         {
            Destroy(gameObject);

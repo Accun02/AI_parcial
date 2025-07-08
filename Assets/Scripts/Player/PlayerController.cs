@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private int damage = 2;
     public Image healthBarFill;
     public GameObject gameOverPanel;
-
+    [SerializeField] private float smoothSpeed = 5f;
     private float targetFill = 1f;
 
     void Start()
@@ -20,6 +20,13 @@ public class PlayerController : MonoBehaviour
         targetFill = 1f;
         gameOverPanel.SetActive(false);
         UpdateHealthBar();
+    }
+    void Update()
+    {
+        if (healthBarFill.fillAmount != targetFill)
+        {
+            healthBarFill.fillAmount = Mathf.Lerp(healthBarFill.fillAmount, targetFill, Time.deltaTime * smoothSpeed);
+        }
     }
 
     public void Shoot()

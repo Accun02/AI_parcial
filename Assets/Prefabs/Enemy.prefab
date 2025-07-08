@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {fileID: 428568294985091945}
-  los: {fileID: 6320892526410493932}
+  los: {fileID: 5598727917867966454}
   layerMask:
     serializedVersion: 2
     m_Bits: 8
@@ -232,11 +232,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e26e487d6c52b145b9e1216a1363ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 10
+  maxVelocity: 3
   timePrediction: 0.3
   mode: 4
   target: {fileID: 0}
-  targetrb: {fileID: 0}
+  targetcc: {fileID: 0}
   obstacleAvoidance: {fileID: 2027484856272823371}
   rb: {fileID: 8230446598382997340}
 --- !u!114 &2027484856272823371

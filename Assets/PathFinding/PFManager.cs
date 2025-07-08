@@ -34,7 +34,6 @@ public class PFManager : MonoBehaviour
         for (int i = 0; i < entities.Length; i++) 
         {
             var startNode = entities[i].SearchClose();
-            Debug.Log(startNode);
             var endNode = grid.nodeGrid[Random.Range(20, 80)];
             var path = new List<PFNodes>();
             entities[i].endNode = endNode;

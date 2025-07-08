@@ -29,12 +29,13 @@ public class EnemyStateAttack : State<States>
 
         //Cambia el modo de movimiento a "ninguno" mientras ataca.
         controller.ChangeStearingMode(SteeringController.SteeringMode.None);
+        enemy.Attack();
     }
 
     // Lógica principal del ataque, se ejecuta en cada frame.
     public override void Execute()
     {
-    enemy.Attack();
+
     }
 
     //Se ejecuta en cada frame de física.
