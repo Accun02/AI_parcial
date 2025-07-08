@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class WalkState : State<States> //estado de caminata
 {
-    private FPScontroller controller;
+    private PlayerController controller;
 
     //audio de pasos para acompañar al estado de caminata
     [SerializeField] private AudioSource SFX; 
     [SerializeField] private AudioClip playerWalking;
 
-    public WalkState(FPScontroller fps, AudioClip soundWalking, AudioSource playerWalking)
+    public WalkState(PlayerController fps, AudioClip soundWalking, AudioSource playerWalking)
     {
         controller = fps;
         this.SFX = playerWalking;

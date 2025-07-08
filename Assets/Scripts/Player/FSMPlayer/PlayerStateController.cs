@@ -8,18 +8,18 @@ public class PlayerStateController : MonoBehaviour //gestiona los estados del ju
     private IdleState idle; 
     private WalkState walk;
     [SerializeField] PlayerController playerController;
-    [SerializeField] private FPScontroller controller; //compnenete fps controller
+
 
     [SerializeField] private AudioSource SFX;
     [SerializeField] private AudioClip playerWalking;
 
     private void Start()
     {
-        controller = GetComponent<FPScontroller>();
+
 
         //crea estados con referencia al controller con el sonido
-        idle = new IdleState(controller);
-        walk = new WalkState(controller, playerWalking, SFX);
+        idle = new IdleState(playerController);
+        walk = new WalkState(playerController, playerWalking, SFX);
 
         //define las transiciones
         idle.AddTransition(States.Walk, walk);
@@ -44,7 +44,7 @@ public class PlayerStateController : MonoBehaviour //gestiona los estados del ju
         {
             fsm.OnTransition(States.Idle);
         }
-        controller.Rotate();
+        playerController.Rotate();
     }
 
     private bool IsMoving() //inputs para detectar cuando el jugador se mueve

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class IdleState : State<States> //estado idle del personaje
 {
-    private FPScontroller controller; //componenete fps controller
+    private PlayerController controller; //componenete fps controller
 
-    public IdleState(FPScontroller fps)
+    public IdleState(PlayerController fps)
     {
         controller = fps;
     }
@@ -16,7 +16,7 @@ public class IdleState : State<States> //estado idle del personaje
 
     public override void Execute()
     {
-        /*controller.Shoot();*/ //mientras este en idle, no se mueve
+        controller.Shoot(); //mientras este en idle, no se mueve
     }
 
     public override void OnExit() //se ejecuta cuando se sale del estado idle

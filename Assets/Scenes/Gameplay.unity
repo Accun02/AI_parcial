@@ -1903,6 +1903,15 @@ MonoBehaviour:
   smoothSpeed: 5
   shootSound: {fileID: 8300000, guid: 2d082f7485174ba43bf3348bd82faab1, type: 3}
   ammoText: {fileID: 236423630}
+  anim: {fileID: 1571979842}
+  playerCamera: {fileID: 1563365526}
+  walkSpeed: 6
+  gravity: 10
+  lookSpeed: 2
+  lookXLimit: 45
+  canMove: 1
+  SFX: {fileID: 349407903}
+  playerWalking: {fileID: 8300000, guid: 273db633fc26ad54f8027b10fc453ce4, type: 3}
 --- !u!82 &349407903
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2013,7 +2022,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 349407902}
-  controller: {fileID: 349407897}
   SFX: {fileID: 349407903}
   playerWalking: {fileID: 8300000, guid: 273db633fc26ad54f8027b10fc453ce4, type: 3}
 --- !u!54 &349407906
