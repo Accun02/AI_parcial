@@ -8,8 +8,12 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     [SerializeField] LayerMask eneemymask;
+<<<<<<< Updated upstream
     [SerializeField] private AudioSource audioSource;
     private int ammo = 10;
+=======
+    public int ammo = 10;
+>>>>>>> Stashed changes
     private int damage = 2;
     public Image healthBarFill;
     public GameObject gameOverPanel;
