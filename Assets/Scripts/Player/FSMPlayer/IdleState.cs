@@ -16,7 +16,7 @@ public class IdleState : State<States> //estado idle del personaje
 
     public override void Execute()
     {
-        controller.canMove = false; //mientras este en idle, no se mueve
+        /*controller.Shoot();*/ //mientras este en idle, no se mueve
     }
 
     public override void OnExit() //se ejecuta cuando se sale del estado idle

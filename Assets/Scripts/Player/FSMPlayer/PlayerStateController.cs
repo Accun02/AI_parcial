@@ -45,7 +45,6 @@ public class PlayerStateController : MonoBehaviour //gestiona los estados del ju
             fsm.OnTransition(States.Idle);
         }
         controller.Rotate();
-        playerController.Shoot();
     }
 
     private bool IsMoving() //inputs para detectar cuando el jugador se mueve
