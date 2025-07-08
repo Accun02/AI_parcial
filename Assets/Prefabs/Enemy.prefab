@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {fileID: 428568294985091945}
-  los: {fileID: 0}
+  los: {fileID: 6320892526410493932}
   layerMask:
     serializedVersion: 2
     m_Bits: 8
@@ -271,7 +271,7 @@ MonoBehaviour:
   endNode: {fileID: 0}
   reachDistance: 1
   path: []
-  rb: {fileID: 0}
+  rb: {fileID: 8230446598382997340}
   NodeLayerMask:
     serializedVersion: 2
     m_Bits: 512
