@@ -1,32 +1,31 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEditor.ShaderData;
 
-public class Enemy : BaseClassEnemy
+public class ShootingEnemy : BaseClassEnemy
 {
-    [SerializeField] Transform center;
-    [SerializeField] lineofsight AttackLOS;
-    [SerializeField] lineofsight LOS;
+ 
+    public float radius =  10; //Determina quEtan lejos llega el daño.
 
+    public int maxBullets = 6;
+    public float CurrentBullets = 7;
     [SerializeField] LayerMask layerMask;
+    [SerializeField] Transform center;
+    public lineofsight AttackLOS;
+    [SerializeField] lineofsight  LOS;
 
-    private void Update()
-    {
-        CanAttack();
-
-    }
-
+    //Define quEpasa cuando el enemigo "ataca" (explota).
     private bool CanAttack()
     {
         lastAttackTime += Time.deltaTime;
-    
-    return lastAttackTime >= attackCooldown;
+
+        return lastAttackTime >= attackCooldown;
     }
 
     //Ataque del enemigo.
-  
+
     public override void Attack()
     {
         if (CanAttack())
@@ -49,7 +48,22 @@ public class Enemy : BaseClassEnemy
             }
             lastAttackTime = 0;
         }
-      
+
+    }
+    public override void RangeAttack()
+    {
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, LOS.detectionRange,layerMask))
+        {
+
+            Debug.Log(hit.collider.name);
+              hit.collider.gameObject.GetComponent<PlayerController>().TakeDamage(damage); 
+               
+            
+
+        }
+        CurrentBullets--;
     }
     public override void TakeDamage(int amount)
     {

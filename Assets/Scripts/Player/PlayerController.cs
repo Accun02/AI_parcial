@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 100, eneemymask) && ammo > 0)
             {
-                hit.collider.gameObject.GetComponentInParent<Enemy>().TakeDamage(damage);
+                hit.collider.gameObject.GetComponentInParent<BaseClassEnemy>().TakeDamage(damage);
             }
             ammo--;
         }

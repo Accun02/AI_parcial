@@ -3,14 +3,14 @@
 public class EnemyStateAttack : State<States>
 {
     //Referencias a otras clases y estados del enemigo.
-    Enemy enemy;
+    BaseClassEnemy enemy;
     SteeringController controller;
     EnemyStateChase enemchase;
     EnemyStatePatrol enempatrol;
     EnemyStateIdle enemidle;
 
     //Constructor que recibe referencias necesarias para manejar transiciones entre estados.
-    public EnemyStateAttack(Enemy enemy,SteeringController controller, EnemyStateChase chase, EnemyStatePatrol patrol, EnemyStateIdle idle)
+    public EnemyStateAttack(BaseClassEnemy enemy,SteeringController controller, EnemyStateChase chase, EnemyStatePatrol patrol, EnemyStateIdle idle)
     {
        this.enemy = enemy;
        this.controller = controller;

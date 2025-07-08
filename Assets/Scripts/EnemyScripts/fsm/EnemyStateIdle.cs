@@ -11,7 +11,7 @@ public class EnemyStateIdle : State<States>
     SteeringController controller;
 
     BasicEnemyController enemy;
-    ExplodingEnemyController exploding;
+    ShootingEnemyController exploding;
 
     EnemyStateChase enemchase;
     EnemyStatePatrol enempatrol;
@@ -26,7 +26,7 @@ public class EnemyStateIdle : State<States>
     }
 
     //Constructor alternativo para enemigos explosivos que solo patrullan.
-    public EnemyStateIdle (SteeringController controller, ExplodingEnemyController enemy, EnemyStatePatrol patrol)
+    public EnemyStateIdle (SteeringController controller, ShootingEnemyController enemy, EnemyStatePatrol patrol)
     {
         this.controller = controller;
         this.exploding = enemy;

@@ -7,8 +7,9 @@ using UnityEngine;
 public class BasicEnemyController : MonoBehaviour
 {
     [SerializeField] private lineofsight LOS;
+    [SerializeField]private lineofsight attackLos;
     [SerializeField] private Transform player;
-    [SerializeField] private Enemy enemy;
+    [SerializeField] private BaseClassEnemy enemy;
     [SerializeField] private SteeringController controller;
     [SerializeField] private PFEntity entity;
     private FSM<States> fsm;
@@ -81,8 +82,7 @@ public class BasicEnemyController : MonoBehaviour
 
         var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), idle, patrol); // El enemigo ve si se queda quieto o patrulla.
 
-        var qwichattackuse = new QuestionTree(() => CheckBulletsLeft(), qdistance, shoot);
-        var insight = new QuestionTree(() => CheckPlayer(), qwichattackuse,idle); // El enemigo checkea si el jugador esta cerca.
+        var insight = new QuestionTree(() => CheckPlayer(), qdistance,idle); // El enemigo checkea si el jugador esta cerca.
 
         var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway); // Si el enemigo esta lejos del jugador.
 
@@ -99,17 +99,7 @@ public class BasicEnemyController : MonoBehaviour
         root = qplayerexist; //La root inicial.
     }
 
-    private bool CheckBulletsLeft()
-    {
-        var random = generateRandom();
-        if (random + (enemy.CurrentBullets/10) > 0.7f)
-        {
-            return true;
-        }
-           return false;
-
-        
-    }
+ 
 
     //Si continúa Patrol o se pone en Idle.
     private bool waitorcontinue()
@@ -136,7 +126,7 @@ public class BasicEnemyController : MonoBehaviour
     //Si puede atacar el enemigo.
     bool CanAttack()
     {
-        return Vector3.Distance(player.transform.position, transform.position) <= enemy.AttackLOS.detectionRange;
+        return Vector3.Distance(player.transform.position, transform.position) <= attackLos.detectionRange;
     }
 
     //Elige entre si RunAway o Chase.
@@ -183,7 +173,7 @@ public class BasicEnemyController : MonoBehaviour
     {
         fsm.OnExecute();
         root.Execute();
-        //checkplayer = LOS.CheckAngle(player) && LOS.CheckDistance(player) && LOS.CheckView(player);
+  
     }
 
     

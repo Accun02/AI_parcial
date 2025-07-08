@@ -4,11 +4,11 @@ using Unity.VisualScripting;
 using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
-public class ExplodingEnemyController : MonoBehaviour
+public class ShootingEnemyController : MonoBehaviour
 {
     [SerializeField] private lineofsight LOS;
     [SerializeField] private Transform player;
-    [SerializeField] private Explodingenemy enemy;
+    [SerializeField] private ShootingEnemy enemy;
     [SerializeField] private SteeringController controller;
 
     [SerializeField] PFEntity entity;
@@ -21,7 +21,9 @@ public class ExplodingEnemyController : MonoBehaviour
 
     EnemyStateIdle idle;
     EnemyStatePatrol patrol;
-    EnemyStateExplode explode;
+    EnemyStateChase chase;
+    EnemyStateAttack attack;
+    EnemyStateShoot shoot;
     EnemyStateRunAway runAway;
 
     ItreeNode root;
@@ -37,18 +39,31 @@ public class ExplodingEnemyController : MonoBehaviour
 
         patrol = new EnemyStatePatrol(controller,entity);
         idle = new EnemyStateIdle(controller,this,patrol);
-        explode = new EnemyStateExplode(enemy,controller,patrol,idle);
+        shoot = new EnemyStateShoot(controller, enemy);
         runAway = new EnemyStateRunAway(controller,patrol);
+        chase = new EnemyStateChase(controller,patrol);
+        attack = new EnemyStateAttack(enemy, controller,chase,patrol,idle);
+
 
         // Transiciones
         patrol.AddTransition(States.Idle, idle);
-        patrol.AddTransition(States.Explode, explode);
         patrol.AddTransition(States.RunAway, runAway);
+        patrol.AddTransition(States.Chase, chase);
+        patrol.AddTransition(States.Shoot, shoot);
+
+
+        chase.AddTransition(States.Attack, attack);
+        chase.AddTransition(States.Idle, idle);
+
 
         idle.AddTransition(States.Patrol, patrol);
-        idle.AddTransition(States.Explode,explode);
-        idle.AddTransition(States.RunAway, runAway);
+        idle.AddTransition(States.Chase, chase);
+        idle.AddTransition(States.Shoot, shoot);
 
+        shoot.AddTransition(States.Patrol, patrol);
+        shoot.AddTransition(States.RunAway, runAway);
+
+        attack.AddTransition(States.Patrol, patrol);
 
         runAway.AddTransition(States.Idle, idle);
         runAway.AddTransition(States.Patrol, patrol);
@@ -62,15 +77,17 @@ public class ExplodingEnemyController : MonoBehaviour
         //Ejecuta los estados.
         var patrol = new ActionTree(() => fsm.OnTransition(States.Patrol));
         var idle = new ActionTree(() => fsm.OnTransition(States.Idle));
-        var explode = new ActionTree(() => fsm.OnTransition(States.Explode));
         var runAway = new ActionTree(() => fsm.OnTransition(States.RunAway));
-
+        var shoot = new ActionTree(() => fsm.OnTransition(States.Shoot));
+        var attack = new ActionTree(() => fsm.OnTransition(States.Attack));
+        var chase = new ActionTree(() => fsm.OnTransition(States.Chase));
         //Cambia entre estados.
         var waitorcontinuepatrolling = new QuestionTree(() => waitorcontinue(), idle, patrol);
 
         var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway);
-
-        var qChooseAction = new QuestionTree(() => ChooseWise(), lostplayerr, explode);   
+        var qdistance = new QuestionTree(CanAttack, attack, chase); //Si el enemigo esta muy cerca del jugador, lo ataca.
+        var Gotorelaod = new QuestionTree(() => bullets(), runAway, shoot);
+        var qChooseAction = new QuestionTree(() => ChooseWise(), Gotorelaod, idle);   
 
         var qgoingtodestination = new QuestionTree(() => entity.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol);
 
@@ -81,6 +98,20 @@ public class ExplodingEnemyController : MonoBehaviour
         var qplayerexist = new QuestionTree(() => player != null, qisidle, null);
 
         root = qplayerexist; //Root inicial.
+    }
+
+    private bool bullets()
+    {
+        var random = generateRandom();
+        if (random + enemy.CurrentBullets / 10 < 0.6f)
+        {
+            return true;
+        }
+        return false;
+    }
+    bool CanAttack()
+    {
+        return Vector3.Distance(player.transform.position, transform.position) <= enemy.AttackLOS.detectionRange;
     }
 
     private bool waitorcontinue()
@@ -107,7 +138,7 @@ public class ExplodingEnemyController : MonoBehaviour
     bool  ChooseWise()
     {
         var random =  generateRandom();
-        if (random < 0.7f)
+        if (random + enemy.CurrentBullets/10 > 0.6f)
         {
            return true;
          
