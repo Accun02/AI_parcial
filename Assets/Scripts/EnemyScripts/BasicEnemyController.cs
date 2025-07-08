@@ -164,10 +164,7 @@ public class BasicEnemyController : MonoBehaviour
         return checkplayer;
     }
 
-    /*bool Attack()
-    {
-        
-    }*/
+
 
     void Update()
     {

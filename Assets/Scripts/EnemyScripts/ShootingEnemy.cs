@@ -24,6 +24,11 @@ public class ShootingEnemy : BaseClassEnemy
         return lastAttackTime >= attackCooldown;
     }
 
+    private void Update()
+    {
+        CanAttack();
+
+    }
     //Ataque del enemigo.
 
     public override void Attack()
@@ -52,18 +57,26 @@ public class ShootingEnemy : BaseClassEnemy
     }
     public override void RangeAttack()
     {
-
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, LOS.detectionRange,layerMask))
+        if (CanAttack() ) 
         {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, LOS.detectionRange, layerMask))
+            {
 
-            Debug.Log(hit.collider.name);
-              hit.collider.gameObject.GetComponent<PlayerController>().TakeDamage(damage); 
-               
-            
+                Debug.Log(hit.collider.name);
+                hit.collider.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+
+
+                CurrentBullets--;
+            }
+            else
+            {
+                CurrentBullets--;
+            }
+         
 
         }
-        CurrentBullets--;
+    
     }
     public override void TakeDamage(int amount)
     {

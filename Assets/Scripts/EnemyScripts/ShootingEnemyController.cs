@@ -87,7 +87,7 @@ public class ShootingEnemyController : MonoBehaviour
         var lostplayerr = new QuestionTree(() => LOS.LosePlayer(player), waitorcontinuepatrolling, runAway);
         var qdistance = new QuestionTree(CanAttack, attack, chase); //Si el enemigo esta muy cerca del jugador, lo ataca.
         var Gotorelaod = new QuestionTree(() => bullets(), runAway, shoot);
-        var qChooseAction = new QuestionTree(() => ChooseWise(), Gotorelaod, idle);   
+        var qChooseAction = new QuestionTree(() => ChooseWise(), Gotorelaod, qdistance);   
 
         var qgoingtodestination = new QuestionTree(() => entity.checkdistancetowaypoint(), waitorcontinuepatrolling, patrol);
 
@@ -137,8 +137,8 @@ public class ShootingEnemyController : MonoBehaviour
 
     bool  ChooseWise()
     {
-        var random =  generateRandom();
-        if (random + enemy.CurrentBullets/10 > 0.6f)
+        var random = UnityEngine.Random.Range(0f, 0.3f);
+        if (random + enemy.CurrentBullets/10 > 0.7f)
         {
            return true;
          
