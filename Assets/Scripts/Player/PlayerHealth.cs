@@ -6,11 +6,25 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public Image healthBarFill;
+    public GameObject gameOverPanel;
+
+    [SerializeField] private float smoothSpeed = 5f;
+    private float targetFill = 1f;
 
     void Start()
     {
         currentHealth = maxHealth;
+        targetFill = 1f;
+        gameOverPanel.SetActive(false);
         UpdateHealthBar();
+    }
+
+    void Update()
+    {
+        if (healthBarFill.fillAmount != targetFill)
+        {
+            healthBarFill.fillAmount = Mathf.Lerp(healthBarFill.fillAmount, targetFill, Time.deltaTime * smoothSpeed);
+        }
     }
 
     public void TakeDamage(int amount)
@@ -21,18 +35,14 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("Jugador muerto");
-            // lógica de muerte
+            gameOverPanel.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
 
     void UpdateHealthBar()
     {
-        float fillAmount = (float)currentHealth / maxHealth;
-        healthBarFill.fillAmount = fillAmount;
-
-        if (fillAmount <= 0.4f)
-            healthBarFill.color = Color.red;
-        else
-            healthBarFill.color = Color.green;
+        targetFill = (float)currentHealth / maxHealth;
+        healthBarFill.color = targetFill <= 0.4f ? Color.red : Color.green;
     }
 }
