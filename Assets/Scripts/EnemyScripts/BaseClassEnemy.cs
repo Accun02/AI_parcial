@@ -17,7 +17,7 @@ public class BaseClassEnemy : MonoBehaviour
 
     public virtual void Attack() { }
 
-    public virtual void RangeAttack() { }
+    public virtual void RangeAttack(Transform player) { }
     public void Look(Vector3 lookdir) // Hacia donde mira el enemigo (dirección de dónde tiene que ir).
     {
        transform.forward = lookdir;

@@ -39,7 +39,7 @@ public class ShootingEnemyController : MonoBehaviour
 
         patrol = new EnemyStatePatrol(controller,entity);
         idle = new EnemyStateIdle(controller,this,patrol);
-        shoot = new EnemyStateShoot(controller, enemy);
+        shoot = new EnemyStateShoot(controller, enemy,player);
         runAway = new EnemyStateRunAway(controller,patrol);
         chase = new EnemyStateChase(controller,patrol);
         attack = new EnemyStateAttack(enemy, controller,chase,patrol,idle);

@@ -41,7 +41,7 @@ public class BasicEnemyController : MonoBehaviour
         idle = new EnemyStateIdle(controller, this, chase, patrol);
         attack = new EnemyStateAttack(enemy, controller, chase, patrol, idle);
         runAway = new EnemyStateRunAway(controller, patrol);
-        shoot = new EnemyStateShoot(controller, enemy); //nuevo estado
+
 
         // Transiciones
         patrol.AddTransition(States.Idle, idle);
@@ -54,7 +54,6 @@ public class BasicEnemyController : MonoBehaviour
         attack.AddTransition(States.Patrol, patrol);
         attack.AddTransition(States.Chase, chase);
 
-        shoot.AddTransition(States.Patrol, patrol);
      
 
         chase.AddTransition(States.Idle, idle);
@@ -67,7 +66,6 @@ public class BasicEnemyController : MonoBehaviour
         fsm = new FSM<States>(patrol);
 
     }
-
     private void OnInin()
     {
         //Ejecuta los estados.
@@ -141,7 +139,6 @@ public class BasicEnemyController : MonoBehaviour
         else return false;
     }
 
-    //Genera número aleatorio.
     float generateRandom()
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);

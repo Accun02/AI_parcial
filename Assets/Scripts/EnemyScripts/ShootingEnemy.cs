@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,7 +7,7 @@ using static UnityEditor.ShaderData;
 public class ShootingEnemy : BaseClassEnemy
 {
  
-    public float radius =  10; //Determina quÅEtan lejos llega el daÒo.
+    public float radius =  10; //Determina qu„Éªtan lejos llega el daÓÉ´.
 
     public int maxBullets = 6;
     public float CurrentBullets = 7;
@@ -16,7 +16,7 @@ public class ShootingEnemy : BaseClassEnemy
     public lineofsight AttackLOS;
     [SerializeField] lineofsight  LOS;
 
-    //Define quÅEpasa cuando el enemigo "ataca" (explota).
+    //Define qu„Éªpasa cuando el enemigo "ataca" (explota).
     private bool CanAttack()
     {
         lastAttackTime += Time.deltaTime;
@@ -55,10 +55,11 @@ public class ShootingEnemy : BaseClassEnemy
         }
 
     }
-    public override void RangeAttack()
+    public override void RangeAttack(Transform player)
     {
         if (CanAttack() ) 
         {
+            transform.LookAt(player.position);
             RaycastHit hit;
             if (Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, LOS.detectionRange, layerMask))
             {
@@ -81,7 +82,7 @@ public class ShootingEnemy : BaseClassEnemy
     public override void TakeDamage(int amount)
     {
         Health = Mathf.Max(0, Health - amount);
-
+        Debug.Log("recibio da√±o");
         if (Health <= 0)
         {
             Destroy(gameObject);

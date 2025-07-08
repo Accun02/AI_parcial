@@ -36,7 +36,7 @@ public class PFEntity : MonoBehaviour
                 node++;
             }
 
-            if (node == path.Count)
+            if (node == path.Count -1 )
             {
                 SetNewPath();
                 node = 0;
@@ -49,7 +49,7 @@ public class PFEntity : MonoBehaviour
         if (Vector3.Distance(transform.position, path[node].transform.position) <= reachDistance)
         {
         //cambia al prox waypoint según la dirección
-            return true; //está en el rango
+            return true; //estEen el rango
         }
 
         else { return false; } //no llego aún
@@ -93,7 +93,7 @@ public class PFEntity : MonoBehaviour
     {
         PFNodes startNode = endNode;
           
-         endNode = PFManager.Instance.grid.nodeGrid[Random.Range(20, 80)];
+         endNode = PFManager.Instance.grid.nodeGrid[Random.Range(10, 90)];
          var path = new List<PFNodes>();
       
           path = PathFinding.Astar(startNode, endNode, Obsmask);
