@@ -17,20 +17,21 @@ public class WalkState : State<States> //estado de caminata
 
     public override void OnEnter() //cuando entro al estado walk
     {
-      
-         //habilita el movimiento
-      
+        Debug.Log("WALK State Activated");
+        controller.canMove = true; //habilita el movimiento
+        SFX.clip = playerWalking;
+        SFX.Play();
     }
 
-
-    public override void FixedExecute()
+    public override void Execute()
     {
-        controller.Movement();
+
     }
+
     public override void OnExit() //cuando salgo del estado walk
     {
-
-         //se detiene el mov y el efecto de sonido
+        Debug.Log("No More WALK State");
+        controller.canMove = false; //se detiene el mov y el efecto de sonido
         SFX.Stop();
     }
 }

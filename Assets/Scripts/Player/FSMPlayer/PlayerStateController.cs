@@ -7,8 +7,8 @@ public class PlayerStateController : MonoBehaviour //gestiona los estados del ju
     public FSM<States> fsm; 
     private IdleState idle; 
     private WalkState walk;
-    [SerializeField] PlayerController playerController;
-    [SerializeField] private FPScontroller controller; //compnenete fps controller
+
+    private FPScontroller controller; //compnenete fps controller
 
     [SerializeField] private AudioSource SFX;
     [SerializeField] private AudioClip playerWalking;
@@ -31,29 +31,25 @@ public class PlayerStateController : MonoBehaviour //gestiona los estados del ju
 
     private void Update()
     {
-        //ejecuta el estado actual
-        fsm.OnExecute();
-        fsm.OnFixedExecute();
+        fsm.OnExecute(); //ejecuta el estado actual
+
         //cambios de estados según el input del jugador
         if (IsMoving())
         {
             fsm.OnTransition(States.Walk);
-        
         }
         else
         {
             fsm.OnTransition(States.Idle);
         }
-        controller.Rotate();
-        playerController.Shoot();
     }
 
     private bool IsMoving() //inputs para detectar cuando el jugador se mueve
     {
-        return (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0);
-
-
-
+        return Input.GetKey(KeyCode.UpArrow) ||
+               Input.GetKey(KeyCode.DownArrow) ||
+               Input.GetKey(KeyCode.LeftArrow) ||
+               Input.GetKey(KeyCode.RightArrow);
     }
 }
 

@@ -168,12 +168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {fileID: 428568294985091945}
-  los: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 8
-  maxBullets: 6
-  CurrentBullets: 7
   AttackLOS: {fileID: 5598727917867966454}
 --- !u!114 &8858630172005497234
 MonoBehaviour:
@@ -477,10 +474,6 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f1d7a415ae9875a45922714c52f68e0b, type: 3}
       propertyPath: m_Name
       value: Paladin J Nordstrom
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: f1d7a415ae9875a45922714c52f68e0b, type: 3}
-      propertyPath: m_Layer
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

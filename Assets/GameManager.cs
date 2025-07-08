@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void Dead()
     {
-        if ( PlayerController.currentHealth == 0)
+        if ( PlayerController.Health == 0)
         SceneManager.LoadScene("Gameplay");
     }
 
