@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 [RequireComponent(typeof(CharacterController))] //necesita que el game object tenga un character controller
 public class FPScontroller : MonoBehaviour //controla el mov y rotacion del personaje en primera persona
@@ -32,15 +35,14 @@ public class FPScontroller : MonoBehaviour //controla el mov y rotacion del pers
         Cursor.visible = false;
     }
 
-    void Update() 
+    public void Movement()
     {
-        if (Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") != 0)
-        {
 
-            //reproduce el sonido de caminar del jugador cuando la condicion de caminar es verdadera
-            SFX.Play();
-         
-        }
+
+        //reproduce el sonido de caminar del jugador cuando la condicion de caminar es verdadera
+
+
+
         #region Handles Movment //para que sea mas comoda la lectura en el inspector
         // movimiento del jugador
         Vector3 forward = transform.TransformDirection(Vector3.forward);
@@ -55,24 +57,23 @@ public class FPScontroller : MonoBehaviour //controla el mov y rotacion del pers
         float movementDirectionY = moveDirection.y;
 
         moveDirection = (forward * curSpeedX) + (right * curSpeedY); //calcula nueva direccion de mov
-
-       
-       
-            #endregion //termina la region de mov del personaje
+        SFX.Play();
 
 
-            #region Handles Rotation //rotacion del personaje
-            characterController.Move(moveDirection * Time.deltaTime);
+        #endregion //termina la region de mov del personaje
 
-        if (canMove)
-        {
-            //si el persoanje se mueve, me permite rotar, mirar de arriba a abajo
-            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
-            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0); //girar izq a der
-        }
 
-        #endregion
+        characterController.Move(moveDirection * Time.deltaTime);  //rotacion del personaje
+
+
+    }
+
+    public void Rotate()
+    {
+        //si el persoanje se mueve, me permite rotar, mirar de arriba a abajo
+        rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+        rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0); //girar izq a der
     }
 }
